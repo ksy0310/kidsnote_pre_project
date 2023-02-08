@@ -15,6 +15,8 @@
 		0C3805AC29937D8C007E72DD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C3805AA29937D8C007E72DD /* LaunchScreen.storyboard */; };
 		0C3805B729937D8C007E72DD /* GooglePlayBook_PreProjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3805B629937D8C007E72DD /* GooglePlayBook_PreProjectTests.swift */; };
 		0C3805C229937D8C007E72DD /* GooglePlayBook_PreProjectUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3805C129937D8C007E72DD /* GooglePlayBook_PreProjectUITests.swift */; };
+		0C3805D2299396FC007E72DD /* MenuBarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3805D1299396FC007E72DD /* MenuBarCollectionViewCell.swift */; };
+		0C3805D429939D16007E72DD /* MenuBarCollectionViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3805D329939D16007E72DD /* MenuBarCollectionViewData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +51,8 @@
 		0C3805BD29937D8C007E72DD /* GooglePlayBook_PreProjectUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GooglePlayBook_PreProjectUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C3805C129937D8C007E72DD /* GooglePlayBook_PreProjectUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GooglePlayBook_PreProjectUITests.swift; sourceTree = "<group>"; };
 		0C3805C329937D8C007E72DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0C3805D1299396FC007E72DD /* MenuBarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarCollectionViewCell.swift; sourceTree = "<group>"; };
+		0C3805D329939D16007E72DD /* MenuBarCollectionViewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarCollectionViewData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +110,8 @@
 				0C3805A829937D8C007E72DD /* Assets.xcassets */,
 				0C3805AA29937D8C007E72DD /* LaunchScreen.storyboard */,
 				0C3805AD29937D8C007E72DD /* Info.plist */,
+				0C3805D1299396FC007E72DD /* MenuBarCollectionViewCell.swift */,
+				0C3805D329939D16007E72DD /* MenuBarCollectionViewData.swift */,
 			);
 			path = GooglePlayBook_PreProject;
 			sourceTree = "<group>";
@@ -262,6 +268,8 @@
 				0C3805A429937D8A007E72DD /* ViewController.swift in Sources */,
 				0C3805A029937D8A007E72DD /* AppDelegate.swift in Sources */,
 				0C3805A229937D8A007E72DD /* SceneDelegate.swift in Sources */,
+				0C3805D2299396FC007E72DD /* MenuBarCollectionViewCell.swift in Sources */,
+				0C3805D429939D16007E72DD /* MenuBarCollectionViewData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
