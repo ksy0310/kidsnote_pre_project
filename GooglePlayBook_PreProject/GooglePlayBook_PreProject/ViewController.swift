@@ -30,6 +30,9 @@ class ViewController: UIViewController {
     // 메뉴 탭 데이터
     private let menudata = MenuBarCollectionViewData.menuList
 
+    // containerView
+    private var containerView: UIView = UIView()
+    private var mainLabel: UILabel = UILabel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +42,8 @@ class ViewController: UIViewController {
         setupMenuBarCollectionViewLayout()
         configureCollectionView()
         setFirstIndexIsSelected()
+        setupcontainerViewLayout()
+        
     }
 
     // 메인화면 구성 - 상단 네비게이션 바
@@ -111,6 +116,31 @@ class ViewController: UIViewController {
         lineView.heightAnchor.constraint(equalToConstant: 1).isActive = true
         lineView.backgroundColor = .gray
         
+    }
+    
+    // 메인화면 구성 - 하단 컨테이너 뷰
+    private func setupcontainerViewLayout() {
+        view.addSubview(containerView)
+        containerView.translatesAutoresizingMaskIntoConstraints = false
+        
+        containerView.topAnchor.constraint(equalTo: menuBarView.bottomAnchor, constant: 0).isActive = true
+        containerView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        containerView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+        containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
+        containerView.backgroundColor = .clear
+        
+        containerView.addSubview(mainLabel)
+        mainLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        mainLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 0).isActive = true
+        mainLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20).isActive = true
+        mainLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: 20).isActive = true
+        mainLabel.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        mainLabel.textAlignment = .left
+        mainLabel.font = UIFont.boldSystemFont(ofSize: 20)
+        mainLabel.textColor = .white
+        mainLabel.text = "Google Play 검색결과" 
+        mainLabel.backgroundColor = .clear
     }
 }
 
