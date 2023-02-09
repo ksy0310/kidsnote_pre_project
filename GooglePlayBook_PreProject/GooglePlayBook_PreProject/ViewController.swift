@@ -32,7 +32,15 @@ class ViewController: UIViewController {
 
     // containerView
     private var containerView: UIView = UIView()
-    private var mainLabel: UILabel = UILabel()
+    
+    let eBookCollectionView:  UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        layout.minimumLineSpacing = 20
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.backgroundColor = .clear
+        return collectionView
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,6 +51,7 @@ class ViewController: UIViewController {
         configureCollectionView()
         setFirstIndexIsSelected()
         setupcontainerViewLayout()
+        setupeBookCollectionViewLayout()
         
     }
 
@@ -128,37 +137,35 @@ class ViewController: UIViewController {
         containerView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
         containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
         containerView.backgroundColor = .clear
-        
-        containerView.addSubview(mainLabel)
-        mainLabel.translatesAutoresizingMaskIntoConstraints = false
-        
-        mainLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 0).isActive = true
-        mainLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20).isActive = true
-        mainLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: 20).isActive = true
-        mainLabel.heightAnchor.constraint(equalToConstant: 60).isActive = true
-        mainLabel.textAlignment = .left
-        mainLabel.font = UIFont.boldSystemFont(ofSize: 20)
-        mainLabel.textColor = .white
-        mainLabel.text = "Google Play 검색결과" 
-        mainLabel.backgroundColor = .clear
     }
 }
 
-// 메뉴 탭 바 -> collectionView
+// collectionView
 extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
-    // 0번째 Index로
+    // 메뉴 바 - 0번째 Index로
     func setFirstIndexIsSelected() {
         let selectedIndexPath = IndexPath(item: 0, section: 0)
         menuBarCollectionView.selectItem(at: selectedIndexPath, animated: false, scrollPosition: .bottom)
     }
     
     func configureCollectionView() {
+        // 메뉴 바 collectionview
         menuBarCollectionView.register(MenuBarCollectionViewCell.self, forCellWithReuseIdentifier: MenuBarCollectionViewCell.id)
         menuBarCollectionView.delegate = self
         menuBarCollectionView.dataSource = self
+        
+        // eBook collectionView
+        eBookCollectionView.register(EBookCollectionViewCell.self, forCellWithReuseIdentifier: EBookCollectionViewCell.id)
+        eBookCollectionView.delegate = self
+        eBookCollectionView.dataSource = self
+        
+        // headerview
+        eBookCollectionView.register(EBookCollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader , withReuseIdentifier: EBookCollectionReusableView.id)
+        
     }
     
+    // 메뉴 바 collectionview layout
     func setupMenuBarCollectionViewLayout() {
         menuBarView.addSubview(menuBarCollectionView)
 
@@ -170,23 +177,41 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
         
     }
     
+    // eBook collectionview layout
+    func setupeBookCollectionViewLayout() {
+        containerView.addSubview(eBookCollectionView)
+
+        eBookCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        eBookCollectionView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 10).isActive = true
+        eBookCollectionView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: 0).isActive = true
+        eBookCollectionView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = true
+        eBookCollectionView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
+        
+    }
+    
     // collectionView cell count
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if (collectionView == menuBarCollectionView){
             return menudata.count
         }else{
-            return 0
+            return 30
         }
     }
     
     // collectionView cell UI
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = menuBarCollectionView.dequeueReusableCell(withReuseIdentifier: MenuBarCollectionViewCell.id, for: indexPath) as! MenuBarCollectionViewCell
+        if (collectionView == menuBarCollectionView){
+            let cell = menuBarCollectionView.dequeueReusableCell(withReuseIdentifier: MenuBarCollectionViewCell.id, for: indexPath) as! MenuBarCollectionViewCell
         
             cell.menuTitle.text = menudata[indexPath.item]
         
-        return cell
+            return cell
+        }else{
+            let cell = eBookCollectionView.dequeueReusableCell(withReuseIdentifier: EBookCollectionViewCell.id, for: indexPath) as! EBookCollectionViewCell
+            
+                return cell
+        }
     }
     
     // collectionView cell size
@@ -197,7 +222,30 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
              let height = collectionView.bounds.height
              return CGSize(width: width, height: height)
         }else{
+            let width = collectionView.bounds.width
+            let height = collectionView.bounds.height / 6
+            return CGSize(width: width, height: height)
+        }
+    }
+    
+    // headerview
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        if (collectionView == menuBarCollectionView){
+            return UICollectionReusableView.init()
+        }else{
+            let headerView = eBookCollectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: EBookCollectionReusableView.id, for: indexPath) as! EBookCollectionReusableView
+
+            return headerView
+        }
+    }
+
+    // headerview size
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        if (collectionView == menuBarCollectionView){
             return CGSize(width: 0, height: 0)
+        }else{
+            let width = collectionView.bounds.width
+            return CGSize(width: width, height: 80)
         }
     }
 }

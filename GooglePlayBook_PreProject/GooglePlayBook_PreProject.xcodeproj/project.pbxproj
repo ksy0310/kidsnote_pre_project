@@ -17,6 +17,8 @@
 		0C3805C229937D8C007E72DD /* GooglePlayBook_PreProjectUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3805C129937D8C007E72DD /* GooglePlayBook_PreProjectUITests.swift */; };
 		0C3805D2299396FC007E72DD /* MenuBarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3805D1299396FC007E72DD /* MenuBarCollectionViewCell.swift */; };
 		0C3805D429939D16007E72DD /* MenuBarCollectionViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3805D329939D16007E72DD /* MenuBarCollectionViewData.swift */; };
+		0C3805D62994D5FA007E72DD /* EBookCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3805D52994D5FA007E72DD /* EBookCollectionViewCell.swift */; };
+		0C3805D82994E7B0007E72DD /* EBookCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3805D72994E7B0007E72DD /* EBookCollectionReusableView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +55,8 @@
 		0C3805C329937D8C007E72DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0C3805D1299396FC007E72DD /* MenuBarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarCollectionViewCell.swift; sourceTree = "<group>"; };
 		0C3805D329939D16007E72DD /* MenuBarCollectionViewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarCollectionViewData.swift; sourceTree = "<group>"; };
+		0C3805D52994D5FA007E72DD /* EBookCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EBookCollectionViewCell.swift; sourceTree = "<group>"; };
+		0C3805D72994E7B0007E72DD /* EBookCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EBookCollectionReusableView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +116,8 @@
 				0C3805AD29937D8C007E72DD /* Info.plist */,
 				0C3805D1299396FC007E72DD /* MenuBarCollectionViewCell.swift */,
 				0C3805D329939D16007E72DD /* MenuBarCollectionViewData.swift */,
+				0C3805D52994D5FA007E72DD /* EBookCollectionViewCell.swift */,
+				0C3805D72994E7B0007E72DD /* EBookCollectionReusableView.swift */,
 			);
 			path = GooglePlayBook_PreProject;
 			sourceTree = "<group>";
@@ -270,6 +276,8 @@
 				0C3805A229937D8A007E72DD /* SceneDelegate.swift in Sources */,
 				0C3805D2299396FC007E72DD /* MenuBarCollectionViewCell.swift in Sources */,
 				0C3805D429939D16007E72DD /* MenuBarCollectionViewData.swift in Sources */,
+				0C3805D62994D5FA007E72DD /* EBookCollectionViewCell.swift in Sources */,
+				0C3805D82994E7B0007E72DD /* EBookCollectionReusableView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
