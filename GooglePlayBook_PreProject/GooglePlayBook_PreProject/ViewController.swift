@@ -72,7 +72,7 @@ class ViewController: UIViewController {
         backButton.widthAnchor.constraint(equalToConstant: 44).isActive = true
         
         backButton.setImage(UIImage(named: "left_arrow.png"), for: .normal)
-        backButton.imageEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+        backButton.imageEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         backButton.backgroundColor = .clear
         
         // 검색 텍스트 필드
