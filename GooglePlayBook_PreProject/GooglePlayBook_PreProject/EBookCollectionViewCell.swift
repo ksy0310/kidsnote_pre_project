@@ -85,14 +85,13 @@ class EBookCollectionViewCell: UICollectionViewCell {
         eBookKindLabel.font = UIFont.systemFont(ofSize: 14)
         eBookKindLabel.textColor = UIColor(named: "mainTextColor")
         eBookKindLabel.textAlignment = .left
-        eBookAuthorsLabel.text = "eBook"
+        eBookKindLabel.text = "eBook"
         
         // eBook AverageRating
         contentView.addSubview(eBookAverageRatingLabel)
         eBookAverageRatingLabel.translatesAutoresizingMaskIntoConstraints = false
-        
+
         eBookAverageRatingLabel.leadingAnchor.constraint(equalTo: eBookKindLabel.trailingAnchor, constant: 5).isActive = true
-        eBookAverageRatingLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20).isActive = true
         eBookAverageRatingLabel.topAnchor.constraint(equalTo: eBookKindLabel.topAnchor, constant: 0).isActive = true
         eBookAverageRatingLabel.backgroundColor = .clear
         eBookAverageRatingLabel.font = UIFont.systemFont(ofSize: 14)
