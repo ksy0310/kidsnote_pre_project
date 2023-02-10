@@ -19,6 +19,8 @@
 		0C3805D429939D16007E72DD /* MenuBarCollectionViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3805D329939D16007E72DD /* MenuBarCollectionViewData.swift */; };
 		0C3805D62994D5FA007E72DD /* EBookCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3805D52994D5FA007E72DD /* EBookCollectionViewCell.swift */; };
 		0C3805D82994E7B0007E72DD /* EBookCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3805D72994E7B0007E72DD /* EBookCollectionReusableView.swift */; };
+		0C3805DA2994F402007E72DD /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3805D92994F402007E72DD /* DetailViewController.swift */; };
+		0C3805E0299624B7007E72DD /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3805DF299624B7007E72DD /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +59,8 @@
 		0C3805D329939D16007E72DD /* MenuBarCollectionViewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarCollectionViewData.swift; sourceTree = "<group>"; };
 		0C3805D52994D5FA007E72DD /* EBookCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EBookCollectionViewCell.swift; sourceTree = "<group>"; };
 		0C3805D72994E7B0007E72DD /* EBookCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EBookCollectionReusableView.swift; sourceTree = "<group>"; };
+		0C3805D92994F402007E72DD /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		0C3805DF299624B7007E72DD /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,17 +111,15 @@
 		0C38059E29937D8A007E72DD /* GooglePlayBook_PreProject */ = {
 			isa = PBXGroup;
 			children = (
+				0C3805DD29962482007E72DD /* Common */,
+				0C3805DC2996245F007E72DD /* Detail */,
+				0C3805DB2996243D007E72DD /* Main */,
 				0C38059F29937D8A007E72DD /* AppDelegate.swift */,
 				0C3805A129937D8A007E72DD /* SceneDelegate.swift */,
-				0C3805A329937D8A007E72DD /* ViewController.swift */,
 				0C3805A529937D8A007E72DD /* Main.storyboard */,
 				0C3805A829937D8C007E72DD /* Assets.xcassets */,
 				0C3805AA29937D8C007E72DD /* LaunchScreen.storyboard */,
 				0C3805AD29937D8C007E72DD /* Info.plist */,
-				0C3805D1299396FC007E72DD /* MenuBarCollectionViewCell.swift */,
-				0C3805D329939D16007E72DD /* MenuBarCollectionViewData.swift */,
-				0C3805D52994D5FA007E72DD /* EBookCollectionViewCell.swift */,
-				0C3805D72994E7B0007E72DD /* EBookCollectionReusableView.swift */,
 			);
 			path = GooglePlayBook_PreProject;
 			sourceTree = "<group>";
@@ -138,6 +140,42 @@
 				0C3805C329937D8C007E72DD /* Info.plist */,
 			);
 			path = GooglePlayBook_PreProjectUITests;
+			sourceTree = "<group>";
+		};
+		0C3805DB2996243D007E72DD /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				0C3805A329937D8A007E72DD /* ViewController.swift */,
+				0C3805D1299396FC007E72DD /* MenuBarCollectionViewCell.swift */,
+				0C3805D329939D16007E72DD /* MenuBarCollectionViewData.swift */,
+				0C3805D52994D5FA007E72DD /* EBookCollectionViewCell.swift */,
+				0C3805D72994E7B0007E72DD /* EBookCollectionReusableView.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		0C3805DC2996245F007E72DD /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				0C3805D92994F402007E72DD /* DetailViewController.swift */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
+		0C3805DD29962482007E72DD /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				0C3805DE29962497007E72DD /* Network */,
+				0C3805DF299624B7007E72DD /* Extensions.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		0C3805DE29962497007E72DD /* Network */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -272,12 +310,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				0C3805A429937D8A007E72DD /* ViewController.swift in Sources */,
+				0C3805E0299624B7007E72DD /* Extensions.swift in Sources */,
 				0C3805A029937D8A007E72DD /* AppDelegate.swift in Sources */,
 				0C3805A229937D8A007E72DD /* SceneDelegate.swift in Sources */,
 				0C3805D2299396FC007E72DD /* MenuBarCollectionViewCell.swift in Sources */,
 				0C3805D429939D16007E72DD /* MenuBarCollectionViewData.swift in Sources */,
 				0C3805D62994D5FA007E72DD /* EBookCollectionViewCell.swift in Sources */,
 				0C3805D82994E7B0007E72DD /* EBookCollectionReusableView.swift in Sources */,
+				0C3805DA2994F402007E72DD /* DetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

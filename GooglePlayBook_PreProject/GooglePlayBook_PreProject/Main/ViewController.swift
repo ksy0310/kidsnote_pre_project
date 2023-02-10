@@ -84,6 +84,8 @@ class ViewController: UIViewController {
         backButton.imageEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         backButton.backgroundColor = .clear
         
+        backButton.addTarget(self, action: #selector(backButtonAction), for: .touchUpInside)
+        
         // 검색 텍스트 필드
         navigationBarView.addSubview(searchField)
         searchField.translatesAutoresizingMaskIntoConstraints = false
@@ -138,6 +140,19 @@ class ViewController: UIViewController {
         containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
         containerView.backgroundColor = .clear
     }
+    
+    // action - back Button
+    @objc func backButtonAction(sender: UIButton!) {
+        // 이전 페이지가 없다.
+        // 알럿 띄우기
+        let alert = UIAlertController(title: "알림", message: "이전 페이지가 없습니다.", preferredStyle: UIAlertController.Style.alert)
+        let okAction = UIAlertAction(title: "확인", style: .default) { (action) in
+
+        }
+        alert.addAction(okAction)
+        present(alert, animated: false, completion: nil)
+    }
+    
 }
 
 // collectionView
@@ -247,5 +262,20 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
             let width = collectionView.bounds.width
             return CGSize(width: width, height: 80)
         }
+    }
+    
+    // select cell
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print(indexPath.row)
+        
+        if (collectionView == menuBarCollectionView){
+            
+        } else {
+            let detailViewController: DetailViewController = DetailViewController()
+            detailViewController.modalPresentationStyle = UIModalPresentationStyle.fullScreen
+
+            self.presentDetail(detailViewController)
+        }
+
     }
 }
