@@ -35,6 +35,7 @@ class DetailViewController: UIViewController {
     private var functionView: UIView = UIView()
     private var sampleButton: UIButton = UIButton()
     private var wishListButton: UIButton = UIButton()
+    var whishListFlag: Bool = false
     private var infoView: UIView = UIView()
     private var infoImageView: UIImageView = UIImageView()
     private var infoLabel: UILabel = UILabel()
@@ -150,6 +151,7 @@ class DetailViewController: UIViewController {
                     contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
                     contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
         ])
+        
         
     }
     
@@ -297,6 +299,8 @@ class DetailViewController: UIViewController {
         sampleButton.layer.borderColor = UIColor.gray.cgColor
         sampleButton.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         
+        sampleButton.addTarget(self, action: #selector(sampleButtonAction), for: .touchUpInside)
+        
         // wishList Button
         functionView.addSubview(wishListButton)
         
@@ -316,12 +320,16 @@ class DetailViewController: UIViewController {
         wishListButton.layer.cornerRadius = 5
         wishListButton.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         
-        wishListButton.setImage(UIImage(named: "bookmark.png")! as UIImage, for: .normal)
+        wishListButton.setImage(UIImage(named: "add_bookmark.png")! as UIImage, for: .normal)
         wishListButton.imageView?.contentMode = .scaleAspectFit
         wishListButton.contentVerticalAlignment = .fill
         wishListButton.contentHorizontalAlignment = .fill
         wishListButton.imageEdgeInsets = UIEdgeInsets(top: 10, left: -30, bottom: 10, right: 10)
         wishListButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: -210, bottom: 0, right: 0)
+        
+        whishListFlag = false
+        
+        wishListButton.addTarget(self, action: #selector(wishListButtonAction), for: .touchUpInside)
         
         // infoView
         functionView.addSubview(infoView)
@@ -443,18 +451,18 @@ class DetailViewController: UIViewController {
         descriptionLabel.text = "책 소개, 책 설명, 책책책책 소개, 책 설명, 책책책책 소개, 책 설명, 책책책책 소개, 책 설명, 책책책책 소개, 책 설명, 책책책책 소개, 책 설명, 책책책책 소개, 책 설명, 책책책책 소개, 책 설명, 책책책책 소개, 책 설명, 책책책책 소개, 책 설명, 책책책책 소개, 책 설명, 책책책"
         
         // bookdescription 전체를 버튼으로
-        bookdescriptionView.addSubview(bookdescriptionButton)
-        bookdescriptionButton.translatesAutoresizingMaskIntoConstraints = false
-         NSLayoutConstraint.activate([
-                 bookdescriptionButton.topAnchor.constraint(equalTo: bookdescriptionView.topAnchor, constant: 0),
-                 bookdescriptionButton.leadingAnchor.constraint(equalTo: bookdescriptionView.leadingAnchor, constant: 0),
-                 bookdescriptionButton.trailingAnchor.constraint(equalTo: bookdescriptionView.trailingAnchor, constant: 0),
-                 bookdescriptionButton.bottomAnchor.constraint(equalTo: bookdescriptionView.bottomAnchor, constant: 0),
-         ])
-        bookdescriptionButton.backgroundColor = .clear
-        bookdescriptionButton.setTitle("",for:.normal)
-        
-        bookdescriptionButton.addTarget(self, action: #selector(bookdescriptionButtonAction), for: .touchUpInside)
+//        bookdescriptionView.addSubview(bookdescriptionButton)
+//        bookdescriptionButton.translatesAutoresizingMaskIntoConstraints = false
+//         NSLayoutConstraint.activate([
+//                 bookdescriptionButton.topAnchor.constraint(equalTo: bookdescriptionView.topAnchor, constant: 0),
+//                 bookdescriptionButton.leadingAnchor.constraint(equalTo: bookdescriptionView.leadingAnchor, constant: 0),
+//                 bookdescriptionButton.trailingAnchor.constraint(equalTo: bookdescriptionView.trailingAnchor, constant: 0),
+//                 bookdescriptionButton.bottomAnchor.constraint(equalTo: bookdescriptionView.bottomAnchor, constant: 0),
+//         ])
+//        bookdescriptionButton.backgroundColor = .clear
+//        bookdescriptionButton.setTitle("",for:.normal)
+//
+//        bookdescriptionButton.addTarget(self, action: #selector(bookdescriptionButtonAction), for: .touchUpInside)
         
         // 평점 및 리뷰
         contentView.addSubview(ratingCountView)
@@ -501,6 +509,27 @@ class DetailViewController: UIViewController {
         self.present(activityViewController, animated: true, completion: nil)
     }
     
+    // action - sample Button
+    @objc func sampleButtonAction(sender: UIButton!) {
+        print("sampleButtonAction click!!")
+    }
+    
+    // action - wishList Button
+    @objc func wishListButtonAction(sender: UIButton!) {
+        print("wishListButtonAction click!!")
+        if whishListFlag {
+            //False로
+            wishListButton.setImage(UIImage(named: "delete_bookmark.png")! as UIImage, for: .normal)
+            wishListButton.setTitle("위시리스트에서 삭제",for:.normal)
+            whishListFlag = false
+        }else{
+            //True로
+            wishListButton.setImage(UIImage(named: "add_bookmark.png")! as UIImage, for: .normal)
+            wishListButton.setTitle("위시리스트에 추가",for:.normal)
+            whishListFlag = true
+        }
+    }
+    
     // action - bookdescription Button
     @objc func bookdescriptionButtonAction(sender: UIButton!) {
         print("bookdescriptionButtonAction click!!")
@@ -509,4 +538,5 @@ class DetailViewController: UIViewController {
 
         self.presentDetail(infoViewController)
     }
+    
 }
