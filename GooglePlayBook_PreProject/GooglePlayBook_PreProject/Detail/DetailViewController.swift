@@ -428,8 +428,8 @@ class DetailViewController: UIViewController {
         NSLayoutConstraint.activate([
             descriptionDetailImageView.topAnchor.constraint(equalTo: bookdescriptionView.topAnchor, constant: 20),
             descriptionDetailImageView.trailingAnchor.constraint(equalTo: bookdescriptionView.trailingAnchor, constant: -20),
-            descriptionDetailImageView.widthAnchor.constraint(equalToConstant: 20),
-            descriptionDetailImageView.heightAnchor.constraint(equalToConstant: 20),
+            descriptionDetailImageView.widthAnchor.constraint(equalToConstant: 18),
+            descriptionDetailImageView.heightAnchor.constraint(equalToConstant: 18),
         ])
         
         descriptionDetailImageView.image = UIImage(named: "right_arrow")
@@ -451,44 +451,117 @@ class DetailViewController: UIViewController {
         descriptionLabel.text = "책 소개, 책 설명, 책책책책 소개, 책 설명, 책책책책 소개, 책 설명, 책책책책 소개, 책 설명, 책책책책 소개, 책 설명, 책책책책 소개, 책 설명, 책책책책 소개, 책 설명, 책책책책 소개, 책 설명, 책책책책 소개, 책 설명, 책책책책 소개, 책 설명, 책책책책 소개, 책 설명, 책책책"
         
         // bookdescription 전체를 버튼으로
-//        bookdescriptionView.addSubview(bookdescriptionButton)
-//        bookdescriptionButton.translatesAutoresizingMaskIntoConstraints = false
-//         NSLayoutConstraint.activate([
-//                 bookdescriptionButton.topAnchor.constraint(equalTo: bookdescriptionView.topAnchor, constant: 0),
-//                 bookdescriptionButton.leadingAnchor.constraint(equalTo: bookdescriptionView.leadingAnchor, constant: 0),
-//                 bookdescriptionButton.trailingAnchor.constraint(equalTo: bookdescriptionView.trailingAnchor, constant: 0),
-//                 bookdescriptionButton.bottomAnchor.constraint(equalTo: bookdescriptionView.bottomAnchor, constant: 0),
-//         ])
-//        bookdescriptionButton.backgroundColor = .clear
-//        bookdescriptionButton.setTitle("",for:.normal)
-//
-//        bookdescriptionButton.addTarget(self, action: #selector(bookdescriptionButtonAction), for: .touchUpInside)
+        bookdescriptionView.addSubview(bookdescriptionButton)
+        bookdescriptionButton.translatesAutoresizingMaskIntoConstraints = false
+         NSLayoutConstraint.activate([
+                 bookdescriptionButton.topAnchor.constraint(equalTo: bookdescriptionView.topAnchor, constant: 0),
+                 bookdescriptionButton.leadingAnchor.constraint(equalTo: bookdescriptionView.leadingAnchor, constant: 0),
+                 bookdescriptionButton.trailingAnchor.constraint(equalTo: bookdescriptionView.trailingAnchor, constant: 0),
+                 bookdescriptionButton.bottomAnchor.constraint(equalTo: bookdescriptionView.bottomAnchor, constant: 0),
+         ])
+        bookdescriptionButton.backgroundColor = .clear
+        bookdescriptionButton.setTitle("",for:.normal)
+
+        bookdescriptionButton.addTarget(self, action: #selector(bookdescriptionButtonAction), for: .touchUpInside)
         
         // 평점 및 리뷰
         contentView.addSubview(ratingCountView)
         ratingCountView.translatesAutoresizingMaskIntoConstraints = false
-        ratingCountView.backgroundColor = .red
-        
+        ratingCountView.backgroundColor = .clear
+
         NSLayoutConstraint.activate([
-            
+
             ratingCountView.topAnchor.constraint(equalTo: bookdescriptionView.bottomAnchor),
             ratingCountView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             ratingCountView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             ratingCountView.heightAnchor.constraint(equalToConstant: 200),
         ])
         
+        // ratingCountTitle
+        ratingCountView.addSubview(ratingCountTitleLabel)
+        ratingCountTitleLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+                ratingCountTitleLabel.topAnchor.constraint(equalTo: ratingCountView.topAnchor, constant: 20),
+                ratingCountTitleLabel.leadingAnchor.constraint(equalTo: ratingCountView.leadingAnchor, constant: 20),
+                ratingCountTitleLabel.trailingAnchor.constraint(equalTo: ratingCountView.trailingAnchor, constant: -20),
+                
+        ])
+        ratingCountTitleLabel.backgroundColor = .clear
+        ratingCountTitleLabel.font = UIFont.boldSystemFont(ofSize: 20)
+        ratingCountTitleLabel.textColor = .white
+        ratingCountTitleLabel.textAlignment = .left
+        ratingCountTitleLabel.text = "평점 및 리뷰"
+        
+        // ratingCountDetailImage
+        ratingCountView.addSubview(ratingCountDetailImageView)
+        ratingCountDetailImageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            ratingCountDetailImageView.topAnchor.constraint(equalTo: ratingCountView.topAnchor, constant: 20),
+            ratingCountDetailImageView.trailingAnchor.constraint(equalTo: ratingCountView.trailingAnchor, constant: -20),
+            ratingCountDetailImageView.widthAnchor.constraint(equalToConstant: 18),
+            ratingCountDetailImageView.heightAnchor.constraint(equalToConstant: 18),
+        ])
+        
+        ratingCountDetailImageView.image = UIImage(named: "right_arrow")
+        ratingCountDetailImageView.backgroundColor = .clear
+        
         // 게시일
         contentView.addSubview(publishedDateView)
         publishedDateView.translatesAutoresizingMaskIntoConstraints = false
-        publishedDateView.backgroundColor = .yellow
+        publishedDateView.backgroundColor = .clear
         
         NSLayoutConstraint.activate([
             
             publishedDateView.topAnchor.constraint(equalTo: ratingCountView.bottomAnchor),
             publishedDateView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             publishedDateView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            publishedDateView.heightAnchor.constraint(equalToConstant: 60),
+            publishedDateView.heightAnchor.constraint(equalToConstant: 80),
         ])
+        
+        // publishedDateTitle
+        publishedDateView.addSubview(publishedDateTitleLabel)
+        publishedDateTitleLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+                publishedDateTitleLabel.topAnchor.constraint(equalTo: publishedDateView.topAnchor, constant: 20),
+                publishedDateTitleLabel.leadingAnchor.constraint(equalTo: publishedDateView.leadingAnchor, constant: 20),
+                publishedDateTitleLabel.trailingAnchor.constraint(equalTo: publishedDateView.trailingAnchor, constant: -20),
+                
+        ])
+        publishedDateTitleLabel.backgroundColor = .clear
+        publishedDateTitleLabel.font = UIFont.boldSystemFont(ofSize: 20)
+        publishedDateTitleLabel.textColor = .white
+        publishedDateTitleLabel.textAlignment = .left
+        publishedDateTitleLabel.text = "게시일"
+        
+        // publishedDate
+        publishedDateView.addSubview(publishedDateLabel)
+        publishedDateLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+                publishedDateLabel.topAnchor.constraint(equalTo: publishedDateTitleLabel.bottomAnchor, constant: 10),
+                publishedDateLabel.leadingAnchor.constraint(equalTo: publishedDateView.leadingAnchor, constant: 20),
+                publishedDateLabel.bottomAnchor.constraint(equalTo: publishedDateView.bottomAnchor, constant: -20),
+        ])
+        publishedDateLabel.backgroundColor = .clear
+        publishedDateLabel.font = UIFont.systemFont(ofSize: 14)
+        publishedDateLabel.textColor = UIColor(named: "mainTextColor")
+        publishedDateLabel.text = "2013년 3월 21일 ·"
+        
+        // publisher
+        publishedDateView.addSubview(publisherLabel)
+        publisherLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+                publisherLabel.topAnchor.constraint(equalTo: publishedDateLabel.topAnchor, constant: 0),
+                publisherLabel.leadingAnchor.constraint(equalTo: publishedDateLabel.trailingAnchor, constant: 5),
+                publisherLabel.trailingAnchor.constraint(equalTo: publishedDateView.trailingAnchor, constant: -20),
+                publisherLabel.bottomAnchor.constraint(equalTo: publishedDateView.bottomAnchor, constant: -20),
+        ])
+        publisherLabel.backgroundColor = .clear
+        publisherLabel.font = UIFont.systemFont(ofSize: 14)
+        publisherLabel.textColor = UIColor(named: "mainTextColor")
+        publisherLabel.text = "아라크네"
     }
     
     // action - back Button
