@@ -34,9 +34,11 @@ class MenuBarCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(menuTitle)
         menuTitle.translatesAutoresizingMaskIntoConstraints = false
         
-        menuTitle.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-        menuTitle.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
-                
+        NSLayoutConstraint.activate([
+            menuTitle.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            menuTitle.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+        ])
+        
         menuTitle.backgroundColor = .clear
         menuTitle.font = UIFont.systemFont(ofSize: 17)
         menuTitle.textColor = UIColor(named: "mainTextColor")
@@ -46,12 +48,15 @@ class MenuBarCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(bottomView)
         bottomView.translatesAutoresizingMaskIntoConstraints = false
         
-        bottomView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 0).isActive = true
-        bottomView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-        bottomView.widthAnchor.constraint(equalTo: menuTitle.widthAnchor).isActive = true
-        bottomView.heightAnchor.constraint(equalToConstant: 1).isActive = true
-        bottomView.backgroundColor = UIColor(named: "pointBlueColor")
+        NSLayoutConstraint.activate([
+            bottomView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 0),
+            bottomView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            bottomView.widthAnchor.constraint(equalTo: menuTitle.widthAnchor),
+            bottomView.heightAnchor.constraint(equalToConstant: 1),
+        ])
         
+        bottomView.backgroundColor = UIColor(named: "pointBlueColor")
+
         bottomView.clipsToBounds = true
         bottomView.layer.cornerRadius = 3
         bottomView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]

@@ -44,8 +44,9 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setupNavigationBarLayout()
+        configuereSearch()
         setupMenuBarLayout()
         setupMenuBarCollectionViewLayout()
         configureCollectionView()
@@ -65,20 +66,26 @@ class ViewController: UIViewController {
         view.addSubview(navigationBarView)
         navigationBarView.translatesAutoresizingMaskIntoConstraints = false
         
-        navigationBarView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0).isActive = true
-        navigationBarView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
-        navigationBarView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
-        navigationBarView.heightAnchor.constraint(equalToConstant: 44).isActive = true
+        NSLayoutConstraint.activate([
+            navigationBarView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0),
+            navigationBarView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            navigationBarView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            navigationBarView.heightAnchor.constraint(equalToConstant: 44),
+        ])
+        
         navigationBarView.backgroundColor = .clear
         
         // 이전 버튼
         navigationBarView.addSubview(backButton)
         backButton.translatesAutoresizingMaskIntoConstraints = false
         
-        backButton.topAnchor.constraint(equalTo: navigationBarView.topAnchor, constant: 0).isActive = true
-        backButton.bottomAnchor.constraint(equalTo: navigationBarView.bottomAnchor, constant: 0).isActive = true
-        backButton.leadingAnchor.constraint(equalTo: navigationBarView.leadingAnchor).isActive = true
-        backButton.widthAnchor.constraint(equalToConstant: 44).isActive = true
+        NSLayoutConstraint.activate([
+            backButton.topAnchor.constraint(equalTo: navigationBarView.topAnchor, constant: 0),
+            backButton.bottomAnchor.constraint(equalTo: navigationBarView.bottomAnchor, constant: 0),
+            backButton.leadingAnchor.constraint(equalTo: navigationBarView.leadingAnchor),
+            backButton.widthAnchor.constraint(equalToConstant: 44),
+        ])
+        
         
         backButton.setImage(UIImage(named: "left_arrow.png"), for: .normal)
         backButton.imageEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
@@ -90,10 +97,13 @@ class ViewController: UIViewController {
         navigationBarView.addSubview(searchField)
         searchField.translatesAutoresizingMaskIntoConstraints = false
         
-        searchField.topAnchor.constraint(equalTo: navigationBarView.topAnchor, constant: 0).isActive = true
-        searchField.bottomAnchor.constraint(equalTo: navigationBarView.bottomAnchor, constant: 0).isActive = true
-        searchField.leadingAnchor.constraint(equalTo: backButton.trailingAnchor).isActive = true
-        searchField.trailingAnchor.constraint(equalTo: navigationBarView.trailingAnchor, constant: -10).isActive = true
+        NSLayoutConstraint.activate([
+            searchField.topAnchor.constraint(equalTo: navigationBarView.topAnchor, constant: 0),
+            searchField.bottomAnchor.constraint(equalTo: navigationBarView.bottomAnchor, constant: 0),
+            searchField.leadingAnchor.constraint(equalTo: backButton.trailingAnchor),
+            searchField.trailingAnchor.constraint(equalTo: navigationBarView.trailingAnchor, constant: -10),
+        ])
+        
         
         searchField.backgroundColor = .clear
         searchField.attributedPlaceholder = NSAttributedString(
@@ -111,20 +121,26 @@ class ViewController: UIViewController {
         view.addSubview(menuBarView)
         menuBarView.translatesAutoresizingMaskIntoConstraints = false
         
-        menuBarView.topAnchor.constraint(equalTo: navigationBarView.bottomAnchor, constant: 0).isActive = true
-        menuBarView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
-        menuBarView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
-        menuBarView.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        NSLayoutConstraint.activate([
+            menuBarView.topAnchor.constraint(equalTo: navigationBarView.bottomAnchor, constant: 0),
+            menuBarView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            menuBarView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            menuBarView.heightAnchor.constraint(equalToConstant: 60),
+        ])
+        
         menuBarView.backgroundColor = .clear
         
         // 메뉴바 하단 라인
         menuBarView.addSubview(lineView)
         lineView.translatesAutoresizingMaskIntoConstraints = false
         
-        lineView.bottomAnchor.constraint(equalTo: menuBarView.bottomAnchor, constant: 0).isActive = true
-        lineView.leadingAnchor.constraint(equalTo: menuBarView.leadingAnchor).isActive = true
-        lineView.trailingAnchor.constraint(equalTo: menuBarView.trailingAnchor).isActive = true
-        lineView.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        NSLayoutConstraint.activate([
+            lineView.bottomAnchor.constraint(equalTo: menuBarView.bottomAnchor, constant: 0),
+            lineView.leadingAnchor.constraint(equalTo: menuBarView.leadingAnchor),
+            lineView.trailingAnchor.constraint(equalTo: menuBarView.trailingAnchor),
+            lineView.heightAnchor.constraint(equalToConstant: 1),
+        ])
+        
         lineView.backgroundColor = .gray
         
     }
@@ -134,10 +150,13 @@ class ViewController: UIViewController {
         view.addSubview(containerView)
         containerView.translatesAutoresizingMaskIntoConstraints = false
         
-        containerView.topAnchor.constraint(equalTo: menuBarView.bottomAnchor, constant: 0).isActive = true
-        containerView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
-        containerView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
-        containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
+        NSLayoutConstraint.activate([
+            containerView.topAnchor.constraint(equalTo: menuBarView.bottomAnchor, constant: 0),
+            containerView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            containerView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0),
+        ])
+        
         containerView.backgroundColor = .clear
     }
     
@@ -185,11 +204,13 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
         menuBarView.addSubview(menuBarCollectionView)
 
         menuBarCollectionView.translatesAutoresizingMaskIntoConstraints = false
-        menuBarCollectionView.topAnchor.constraint(equalTo: menuBarView.topAnchor, constant: 0).isActive = true
-        menuBarCollectionView.bottomAnchor.constraint(equalTo: lineView.topAnchor, constant: 0).isActive = true
-        menuBarCollectionView.leadingAnchor.constraint(equalTo: menuBarView.leadingAnchor).isActive = true
-        menuBarCollectionView.trailingAnchor.constraint(equalTo: menuBarView.trailingAnchor).isActive = true
         
+        NSLayoutConstraint.activate([
+            menuBarCollectionView.topAnchor.constraint(equalTo: menuBarView.topAnchor, constant: 0),
+            menuBarCollectionView.bottomAnchor.constraint(equalTo: lineView.topAnchor, constant: 0),
+            menuBarCollectionView.leadingAnchor.constraint(equalTo: menuBarView.leadingAnchor),
+            menuBarCollectionView.trailingAnchor.constraint(equalTo: menuBarView.trailingAnchor),
+        ])
     }
     
     // eBook collectionview layout
@@ -197,11 +218,13 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
         containerView.addSubview(eBookCollectionView)
 
         eBookCollectionView.translatesAutoresizingMaskIntoConstraints = false
-        eBookCollectionView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 10).isActive = true
-        eBookCollectionView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: 0).isActive = true
-        eBookCollectionView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = true
-        eBookCollectionView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
         
+        NSLayoutConstraint.activate([
+            eBookCollectionView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 10),
+            eBookCollectionView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: 0),
+            eBookCollectionView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+            eBookCollectionView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
+        ])
     }
     
     // collectionView cell count
@@ -277,5 +300,32 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
             self.presentDetail(detailViewController)
         }
 
+    }
+}
+
+// textField -> 검색
+extension ViewController: UITextFieldDelegate {
+    
+    
+    func configuereSearch() {
+        searchField.delegate = self
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+    textField.resignFirstResponder()
+        
+    if textField.text != nil {
+        let alert = UIAlertController(title: "알림", message: textField.text, preferredStyle: UIAlertController.Style.alert)
+        let okAction = UIAlertAction(title: "확인", style: .default) { (action) in
+
+        }
+        alert.addAction(okAction)
+        present(alert, animated: false, completion: nil)
+    }else{
+            
+    }
+        
+    return true
     }
 }

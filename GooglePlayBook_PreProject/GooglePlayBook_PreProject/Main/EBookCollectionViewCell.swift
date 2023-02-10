@@ -38,11 +38,14 @@ class EBookCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(eBookThumbnailImageView)
         eBookThumbnailImageView.translatesAutoresizingMaskIntoConstraints = false
         
-        eBookThumbnailImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
-        eBookThumbnailImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10).isActive = true
-        eBookThumbnailImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 10).isActive = true
-        eBookThumbnailImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20).isActive = true
-        eBookThumbnailImageView.widthAnchor.constraint(equalToConstant: 65).isActive = true
+        NSLayoutConstraint.activate([
+            eBookThumbnailImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            eBookThumbnailImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
+            eBookThumbnailImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 10),
+            eBookThumbnailImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            eBookThumbnailImageView.widthAnchor.constraint(equalToConstant: 65),
+        ])
+        
         eBookThumbnailImageView.image = UIImage(named: "noimage")
         eBookThumbnailImageView.backgroundColor = .white
         eBookThumbnailImageView.clipsToBounds = true
@@ -52,9 +55,12 @@ class EBookCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(eBookTitleLabel)
         eBookTitleLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        eBookTitleLabel.leadingAnchor.constraint(equalTo: eBookThumbnailImageView.trailingAnchor, constant: 10).isActive = true
-        eBookTitleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20).isActive = true
-        eBookTitleLabel.topAnchor.constraint(equalTo: eBookThumbnailImageView.topAnchor, constant: 0).isActive = true
+        NSLayoutConstraint.activate([
+            eBookTitleLabel.leadingAnchor.constraint(equalTo: eBookThumbnailImageView.trailingAnchor, constant: 10),
+            eBookTitleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            eBookTitleLabel.topAnchor.constraint(equalTo: eBookThumbnailImageView.topAnchor, constant: 0),
+        ])
+        
         eBookTitleLabel.backgroundColor = .clear
         eBookTitleLabel.font = UIFont.systemFont(ofSize: 16)
         eBookTitleLabel.textColor = .white
@@ -66,9 +72,12 @@ class EBookCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(eBookAuthorsLabel)
         eBookAuthorsLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        eBookAuthorsLabel.leadingAnchor.constraint(equalTo: eBookThumbnailImageView.trailingAnchor, constant: 10).isActive = true
-        eBookAuthorsLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20).isActive = true
-        eBookAuthorsLabel.topAnchor.constraint(equalTo: eBookTitleLabel.bottomAnchor, constant: 5).isActive = true
+        NSLayoutConstraint.activate([
+            eBookAuthorsLabel.leadingAnchor.constraint(equalTo: eBookThumbnailImageView.trailingAnchor, constant: 10),
+            eBookAuthorsLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            eBookAuthorsLabel.topAnchor.constraint(equalTo: eBookTitleLabel.bottomAnchor, constant: 5),
+        ])
+        
         eBookAuthorsLabel.backgroundColor = .clear
         eBookAuthorsLabel.font = UIFont.systemFont(ofSize: 14)
         eBookAuthorsLabel.textColor = UIColor(named: "mainTextColor")
@@ -79,8 +88,11 @@ class EBookCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(eBookKindLabel)
         eBookKindLabel.translatesAutoresizingMaskIntoConstraints = false
 
-        eBookKindLabel.leadingAnchor.constraint(equalTo: eBookThumbnailImageView.trailingAnchor, constant: 10).isActive = true
-        eBookKindLabel.topAnchor.constraint(equalTo: eBookAuthorsLabel.bottomAnchor, constant: 3).isActive = true
+        NSLayoutConstraint.activate([
+            eBookKindLabel.leadingAnchor.constraint(equalTo: eBookThumbnailImageView.trailingAnchor, constant: 10),
+            eBookKindLabel.topAnchor.constraint(equalTo: eBookAuthorsLabel.bottomAnchor, constant: 3),
+        ])
+
         eBookKindLabel.backgroundColor = .clear
         eBookKindLabel.font = UIFont.systemFont(ofSize: 14)
         eBookKindLabel.textColor = UIColor(named: "mainTextColor")
@@ -91,8 +103,11 @@ class EBookCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(eBookAverageRatingLabel)
         eBookAverageRatingLabel.translatesAutoresizingMaskIntoConstraints = false
 
-        eBookAverageRatingLabel.leadingAnchor.constraint(equalTo: eBookKindLabel.trailingAnchor, constant: 5).isActive = true
-        eBookAverageRatingLabel.topAnchor.constraint(equalTo: eBookKindLabel.topAnchor, constant: 0).isActive = true
+        NSLayoutConstraint.activate([
+            eBookAverageRatingLabel.leadingAnchor.constraint(equalTo: eBookKindLabel.trailingAnchor, constant: 5),
+            eBookAverageRatingLabel.topAnchor.constraint(equalTo: eBookKindLabel.topAnchor, constant: 0),
+        ])
+        
         eBookAverageRatingLabel.backgroundColor = .clear
         eBookAverageRatingLabel.font = UIFont.systemFont(ofSize: 14)
         eBookAverageRatingLabel.textColor = UIColor(named: "mainTextColor")

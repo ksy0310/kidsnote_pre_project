@@ -33,17 +33,24 @@ class EBookCollectionReusableView: UICollectionReusableView {
         
         self.addSubview(headerView)
         headerView.translatesAutoresizingMaskIntoConstraints = false
-        headerView.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
-        headerView.heightAnchor.constraint(equalToConstant: 80).isActive = true
+        
+        NSLayoutConstraint.activate([
+            headerView.widthAnchor.constraint(equalTo: self.widthAnchor),
+            headerView.heightAnchor.constraint(equalToConstant: 80),
+        ])
+        
         headerView.backgroundColor = .clear
         
         headerView.addSubview(headerLabel)
         headerLabel.translatesAutoresizingMaskIntoConstraints = false
 
-        headerLabel.topAnchor.constraint(equalTo: headerView.topAnchor, constant: 0).isActive = true
-        headerLabel.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 20).isActive = true
-        headerLabel.trailingAnchor.constraint(equalTo: headerView.trailingAnchor, constant: 20).isActive = true
-        headerLabel.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        NSLayoutConstraint.activate([
+            headerLabel.topAnchor.constraint(equalTo: headerView.topAnchor, constant: 0),
+            headerLabel.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 20),
+            headerLabel.trailingAnchor.constraint(equalTo: headerView.trailingAnchor, constant: 20),
+            headerLabel.heightAnchor.constraint(equalToConstant: 60),
+        ])
+        
         headerLabel.textAlignment = .left
         headerLabel.font = UIFont.boldSystemFont(ofSize: 20)
         headerLabel.textColor = .white
