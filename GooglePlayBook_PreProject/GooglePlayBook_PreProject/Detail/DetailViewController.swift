@@ -65,6 +65,8 @@ class DetailViewController: UIViewController {
     private var publishedDateLabel: UILabel = UILabel()
     private var publisherLabel: UILabel = UILabel()
     
+    private var emptyLabel: UILabel = UILabel()
+    
     override func viewDidLoad() {
            super.viewDidLoad()
 
@@ -153,8 +155,7 @@ class DetailViewController: UIViewController {
                     contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
                     contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
         ])
-        
-        
+    
     }
     
     // 디테일화면 구성 - bookInfoView
@@ -266,6 +267,7 @@ class DetailViewController: UIViewController {
         ])
         
         bookInfoLineView.backgroundColor = .gray
+        
         
         // 2.버튼 뷰
         contentView.addSubview(functionView)
@@ -534,7 +536,7 @@ class DetailViewController: UIViewController {
         publishedDateTitleLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-                publishedDateTitleLabel.topAnchor.constraint(equalTo: publishedDateView.topAnchor, constant: 20),
+                publishedDateTitleLabel.topAnchor.constraint(equalTo: publishedDateView.topAnchor, constant: 10),
                 publishedDateTitleLabel.leadingAnchor.constraint(equalTo: publishedDateView.leadingAnchor, constant: 20),
                 publishedDateTitleLabel.trailingAnchor.constraint(equalTo: publishedDateView.trailingAnchor, constant: -20),
                 
@@ -571,6 +573,26 @@ class DetailViewController: UIViewController {
         publisherLabel.font = UIFont.systemFont(ofSize: 14)
         publisherLabel.textColor = UIColor(named: "mainTextColor")
         publisherLabel.text = "아라크네"
+        
+        // bottom empty label
+        emptyLabel.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(emptyLabel)
+        
+        NSLayoutConstraint.activate([
+            emptyLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            emptyLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            emptyLabel.topAnchor.constraint(equalTo: publishedDateView.bottomAnchor, constant: 20),
+            emptyLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20),
+        ])
+        
+        emptyLabel.backgroundColor = .clear
+        emptyLabel.font = UIFont.boldSystemFont(ofSize: 16)
+        emptyLabel.textColor = UIColor(named: "mainTextColor")
+        emptyLabel.textAlignment = .left
+        emptyLabel.numberOfLines = 0
+        emptyLabel.text = ""
+        
+        
     }
     
     // action - back Button
