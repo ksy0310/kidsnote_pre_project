@@ -993,6 +993,7 @@ class DetailViewController: UIViewController {
     // action - wishList Button
     @objc func wishListButtonAction(sender: UIButton!) {
         print("wishListButtonAction click!!")
+        
         if whishListFlag {
             //False로
             wishListButton.setImage(UIImage(named: "delete_bookmark.png")! as UIImage, for: .normal)

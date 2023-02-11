@@ -17,6 +17,7 @@ class ViewController: UIViewController {
     
     // 메뉴 탭
     private var menuBarView: UIView = UIView()
+    private var selectBarView: UIView = UIView()
     private var lineView: UIView = UIView()
     let menuBarCollectionView:  UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -130,6 +131,7 @@ class ViewController: UIViewController {
         
         menuBarView.backgroundColor = .clear
         
+        
         // 메뉴바 하단 라인
         menuBarView.addSubview(lineView)
         lineView.translatesAutoresizingMaskIntoConstraints = false
@@ -142,6 +144,23 @@ class ViewController: UIViewController {
         ])
         
         lineView.backgroundColor = .gray
+        
+        // 메뉴 select Bar
+        view.addSubview(selectBarView)
+        selectBarView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            selectBarView.bottomAnchor.constraint(equalTo: lineView.topAnchor, constant: 0),
+            selectBarView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 70),
+            selectBarView.heightAnchor.constraint(equalToConstant: 5),
+            selectBarView.widthAnchor.constraint(equalToConstant: 50),
+        ])
+        
+        selectBarView.backgroundColor = UIColor(named: "pointBlueColor")
+        
+        selectBarView.clipsToBounds = true
+        selectBarView.layer.cornerRadius = 5
+        selectBarView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
         
     }
     
@@ -293,7 +312,17 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
         print(indexPath.row)
         
         if (collectionView == menuBarCollectionView){
-            
+            if indexPath.row == 0 {
+                // eBook 위치로 이동, 사이즈 줄이기
+                UIView.animate(withDuration: 0.5, animations: {
+                    self.selectBarView.transform = CGAffineTransform.init(translationX: 0, y: 0).concatenating(CGAffineTransform.init(scaleX: 1, y: 1))
+                })
+            } else {
+                // 오디오북 위치로 이동, 사이즈 늘리기
+                UIView.animate(withDuration: 0.5, animations: {
+                    self.selectBarView.transform = CGAffineTransform.init(translationX: 125, y: 0).concatenating(CGAffineTransform.init(scaleX: 1.5, y: 1))
+                })
+            }
         } else {
             let detailViewController: DetailViewController = DetailViewController()
             detailViewController.modalPresentationStyle = UIModalPresentationStyle.fullScreen

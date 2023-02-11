@@ -10,7 +10,7 @@ import UIKit
 
 class MenuBarCollectionViewCell: UICollectionViewCell {
     var menuTitle: UILabel = UILabel()
-    var bottomView: UIView = UIView()
+//    var bottomView: UIView = UIView()
     
     // cell의 id값 정의
     static var id: String {
@@ -45,21 +45,21 @@ class MenuBarCollectionViewCell: UICollectionViewCell {
         menuTitle.textAlignment = .center
         
         // 하단 뷰
-        contentView.addSubview(bottomView)
-        bottomView.translatesAutoresizingMaskIntoConstraints = false
+//        contentView.addSubview(bottomView)
+//        bottomView.translatesAutoresizingMaskIntoConstraints = false
         
-        NSLayoutConstraint.activate([
-            bottomView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 0),
-            bottomView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            bottomView.widthAnchor.constraint(equalTo: menuTitle.widthAnchor),
-            bottomView.heightAnchor.constraint(equalToConstant: 1),
-        ])
-        
-        bottomView.backgroundColor = UIColor(named: "pointBlueColor")
-
-        bottomView.clipsToBounds = true
-        bottomView.layer.cornerRadius = 3
-        bottomView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
+//        NSLayoutConstraint.activate([
+//            bottomView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 0),
+//            bottomView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+//            bottomView.widthAnchor.constraint(equalTo: menuTitle.widthAnchor),
+//            bottomView.heightAnchor.constraint(equalToConstant: 1),
+//        ])
+//
+//        bottomView.backgroundColor = UIColor(named: "pointBlueColor")
+//
+//        bottomView.clipsToBounds = true
+//        bottomView.layer.cornerRadius = 3
+//        bottomView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
     }
     
     // 선택시 UI 변경
@@ -67,11 +67,11 @@ class MenuBarCollectionViewCell: UICollectionViewCell {
         didSet {
             if isSelected {
                 menuTitle.textColor = UIColor(named: "pointBlueColor")
-                bottomView.isHidden = false
+//                bottomView.isHidden = false
             }
             else {
                 menuTitle.textColor = UIColor(named: "mainTextColor")
-                bottomView.isHidden = true
+//                bottomView.isHidden = true
             }
         }
     }
@@ -80,11 +80,11 @@ class MenuBarCollectionViewCell: UICollectionViewCell {
         didSet {
             if isSelected {
                 menuTitle.textColor = UIColor(named: "pointBlueColor")
-                bottomView.isHidden = false
+//                bottomView.isHidden = false
             }
             else {
                 menuTitle.textColor = UIColor(named: "mainTextColor")
-                bottomView.isHidden = true
+//                bottomView.isHidden = true
             }
         }
     }
