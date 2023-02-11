@@ -25,7 +25,7 @@ class ReviewViewController: UIViewController {
     private var leftLayoutView: UIView = UIView()
     
     // ratingCountLabel
-    private var ratingCountView: UIView = UIView()
+    private var ratingCountContentView: UIView = UIView()
     private var ratingCountLabel: UILabel = UILabel()
     // reviewCountLabel
     private var reviewCountLabel: UILabel = UILabel()
@@ -320,23 +320,23 @@ class ReviewViewController: UIViewController {
         ])
         
         // ratingCountView
-        leftLayoutView.addSubview(ratingCountView)
-        ratingCountView.translatesAutoresizingMaskIntoConstraints = false
-        ratingCountView.backgroundColor = .clear
+        leftLayoutView.addSubview(ratingCountContentView)
+        ratingCountContentView.translatesAutoresizingMaskIntoConstraints = false
+        ratingCountContentView.backgroundColor = .clear
         NSLayoutConstraint.activate([
-            ratingCountView.topAnchor.constraint(equalTo: leftLayoutView.topAnchor),
-            ratingCountView.leadingAnchor.constraint(equalTo: leftLayoutView.leadingAnchor, constant: 0),
-            ratingCountView.trailingAnchor.constraint(equalTo: leftLayoutView.trailingAnchor, constant: 0),
-            ratingCountView.heightAnchor.constraint(equalToConstant: 80),
+            ratingCountContentView.topAnchor.constraint(equalTo: leftLayoutView.topAnchor),
+            ratingCountContentView.leadingAnchor.constraint(equalTo: leftLayoutView.leadingAnchor, constant: 0),
+            ratingCountContentView.trailingAnchor.constraint(equalTo: leftLayoutView.trailingAnchor, constant: 0),
+            ratingCountContentView.heightAnchor.constraint(equalToConstant: 80),
         ])
         
         // ratingCountLabel
-        ratingCountView.addSubview(ratingCountLabel)
+        ratingCountContentView.addSubview(ratingCountLabel)
         ratingCountLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            ratingCountLabel.centerYAnchor.constraint(equalTo: ratingCountView.centerYAnchor),
-            ratingCountLabel.centerXAnchor.constraint(equalTo: ratingCountView.centerXAnchor),
+            ratingCountLabel.centerYAnchor.constraint(equalTo: ratingCountContentView.centerYAnchor),
+            ratingCountLabel.centerXAnchor.constraint(equalTo: ratingCountContentView.centerXAnchor),
         ])
 
         ratingCountLabel.backgroundColor = .clear
@@ -352,7 +352,7 @@ class ReviewViewController: UIViewController {
         NSLayoutConstraint.activate([
             starImageStackView.leadingAnchor.constraint(equalTo: leftLayoutView.leadingAnchor, constant: 20),
             starImageStackView.trailingAnchor.constraint(equalTo: leftLayoutView.trailingAnchor, constant: -20),
-            starImageStackView.topAnchor.constraint(equalTo: ratingCountView.bottomAnchor),
+            starImageStackView.topAnchor.constraint(equalTo: ratingCountContentView.bottomAnchor),
         ])
         
         // reviewCountLabel

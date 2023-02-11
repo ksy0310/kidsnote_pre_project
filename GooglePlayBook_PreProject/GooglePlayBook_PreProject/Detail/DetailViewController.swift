@@ -53,11 +53,222 @@ class DetailViewController: UIViewController {
     private var ratingCountView: UIView = UIView()
     private var ratingCountTitleLabel: UILabel = UILabel()
     private var ratingCountDetailImageView: UIImageView = UIImageView()
-    private var ratingCountLabel: UILabel = UILabel()
-    private var ratingCountInfoButton: UIButton = UIButton()
+    
     private var ratingCountButton: UIButton = UIButton()
-    // --- 스택뷰로 별 표시, 별 개수 별 그래프 표시 ---
-   
+    
+    // -------
+    // leftLayoutView
+    private var leftLayoutView: UIView = UIView()
+    
+    // ratingCountLabel
+    private var ratingCountContentView: UIView = UIView()
+    private var ratingCountLabel: UILabel = UILabel()
+    // reviewCountLabel
+    private var reviewCountLabel: UILabel = UILabel()
+    
+    // rightLayoutView
+    private var rightLayoutView: UIView = UIView()
+    
+    // graph view
+    lazy var oneGraphView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .darkGray
+        view.clipsToBounds = true
+        view.layer.cornerRadius = 8
+        NSLayoutConstraint.activate([
+            view.heightAnchor.constraint(equalToConstant: 3)
+        ])
+        return view
+    }()
+    lazy var twoGraphView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .darkGray
+        view.clipsToBounds = true
+        view.layer.cornerRadius = 8
+        NSLayoutConstraint.activate([
+            view.heightAnchor.constraint(equalToConstant: 3)
+        ])
+        return view
+    }()
+    lazy var threeGraphView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(named: "pointBlueColor")
+        view.clipsToBounds = true
+        view.layer.cornerRadius = 8
+        NSLayoutConstraint.activate([
+            view.heightAnchor.constraint(equalToConstant: 3)
+        ])
+        return view
+    }()
+    lazy var fourGraphView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .darkGray
+        view.clipsToBounds = true
+        view.layer.cornerRadius = 8
+        NSLayoutConstraint.activate([
+            view.heightAnchor.constraint(equalToConstant: 3)
+        ])
+        return view
+    }()
+    lazy var fiveGraphView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .darkGray
+        view.clipsToBounds = true
+        view.layer.cornerRadius = 8
+        NSLayoutConstraint.activate([
+            view.heightAnchor.constraint(equalToConstant: 3)
+        ])
+        return view
+    }()
+    
+    // graphStackView
+    lazy var graphStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [oneGraphView, twoGraphView, threeGraphView, fourGraphView,fiveGraphView])
+            stackView.axis = .vertical
+            stackView.distribution = .fillEqually
+            stackView.alignment = .fill
+            stackView.spacing = 10
+            stackView.backgroundColor = .clear
+            view.addSubview(stackView)
+
+            NSLayoutConstraint.activate([
+                stackView.heightAnchor.constraint(equalToConstant: 100)
+            ])
+        return stackView
+    }()
+    
+    // count label
+    lazy var oneLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .white
+        label.backgroundColor = .clear
+        label.textAlignment = .center
+        label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.text = "1"
+        return label
+    }()
+    lazy var twoLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .white
+        label.backgroundColor = .clear
+        label.textAlignment = .center
+        label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.text = "2"
+        return label
+    }()
+    lazy var threeLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .white
+        label.backgroundColor = .clear
+        label.textAlignment = .center
+        label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.text = "3"
+        return label
+    }()
+    lazy var fourLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .white
+        label.backgroundColor = .clear
+        label.textAlignment = .center
+        label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.text = "4"
+        return label
+    }()
+    lazy var fiveLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .white
+        label.backgroundColor = .clear
+        label.textAlignment = .center
+        label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.text = "5"
+        return label
+    }()
+    
+    //countlabelStackView
+    lazy var countLabelStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [fiveLabel,fourLabel,threeLabel,twoLabel,oneLabel])
+            stackView.axis = .vertical
+            stackView.distribution = .fillEqually
+            stackView.alignment = .fill
+            stackView.spacing = 10
+            stackView.backgroundColor = .clear
+            view.addSubview(stackView)
+
+            NSLayoutConstraint.activate([
+                stackView.heightAnchor.constraint(equalToConstant: 100)
+            ])
+            return stackView
+    }()
+    
+    
+    // star imageView stack
+    lazy var one_starImageView: UIImageView = {
+        let view = UIImageView()
+        view.image = UIImage(named: "star_blue")
+        view.backgroundColor = .clear
+        NSLayoutConstraint.activate([
+            view.widthAnchor.constraint(equalToConstant: 20)
+        ])
+        return view
+    }()
+    lazy var two_starImageView: UIImageView = {
+        let view = UIImageView()
+        view.image = UIImage(named: "star_blue")
+        view.backgroundColor = .clear
+        NSLayoutConstraint.activate([
+            view.widthAnchor.constraint(equalToConstant: 20)
+        ])
+        return view
+    }()
+    lazy var three_starImageView: UIImageView = {
+        let view = UIImageView()
+        view.image = UIImage(named: "star_blue")
+        view.backgroundColor = .clear
+        NSLayoutConstraint.activate([
+            view.widthAnchor.constraint(equalToConstant: 20)
+        ])
+        return view
+    }()
+    lazy var four_starImageView: UIImageView = {
+        let view = UIImageView()
+        view.image = UIImage(named: "star")
+        view.backgroundColor = .clear
+        NSLayoutConstraint.activate([
+            view.widthAnchor.constraint(equalToConstant: 20)
+        ])
+        return view
+    }()
+    lazy var five_starImageView: UIImageView = {
+        let view = UIImageView()
+        view.image = UIImage(named: "star")
+        view.backgroundColor = .clear
+        NSLayoutConstraint.activate([
+            view.widthAnchor.constraint(equalToConstant: 20)
+        ])
+        return view
+    }()
+    
+    lazy var starImageStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [one_starImageView, two_starImageView, three_starImageView, four_starImageView,five_starImageView])
+            stackView.axis = .horizontal
+            stackView.distribution = .fillEqually
+            stackView.alignment = .fill
+            stackView.backgroundColor = .clear
+            view.addSubview(stackView)
+
+            NSLayoutConstraint.activate([
+                stackView.heightAnchor.constraint(equalToConstant: 20)
+            ])
+        return stackView
+    }()
+    
+    // -------
+    
+    // ratingCountInfo
+    private var ratingCountInfoView: UIView = UIView()
+    private var ratingCountInfoLabel: UILabel = UILabel()
+    private var ratingCountInfoImageView: UIImageView = UIImageView()
+    private var ratingCountInfoButton: UIButton = UIButton()
     
     // publishedDateView
     private var publishedDateView: UIView = UIView()
@@ -509,6 +720,103 @@ class DetailViewController: UIViewController {
         ratingCountDetailImageView.backgroundColor = .clear
         
         //  ------------------------
+        // leftLayoutView
+        leftLayoutView.translatesAutoresizingMaskIntoConstraints = false
+        ratingCountView.addSubview(leftLayoutView)
+        leftLayoutView.backgroundColor = .clear
+        
+        NSLayoutConstraint.activate([
+            leftLayoutView.topAnchor.constraint(equalTo: ratingCountTitleLabel.bottomAnchor, constant: 10),
+            leftLayoutView.heightAnchor.constraint(equalToConstant: 130),
+            leftLayoutView.widthAnchor.constraint(equalToConstant: 140),
+            leftLayoutView.leadingAnchor.constraint(equalTo: ratingCountView.leadingAnchor, constant: 0),
+        ])
+        
+        // ratingCountView
+        leftLayoutView.addSubview(ratingCountContentView)
+        ratingCountContentView.translatesAutoresizingMaskIntoConstraints = false
+        ratingCountContentView.backgroundColor = .clear
+        NSLayoutConstraint.activate([
+            ratingCountContentView.topAnchor.constraint(equalTo: leftLayoutView.topAnchor),
+            ratingCountContentView.leadingAnchor.constraint(equalTo: leftLayoutView.leadingAnchor, constant: 0),
+            ratingCountContentView.trailingAnchor.constraint(equalTo: leftLayoutView.trailingAnchor, constant: 0),
+            ratingCountContentView.heightAnchor.constraint(equalToConstant: 80),
+        ])
+        
+        // ratingCountLabel
+        ratingCountContentView.addSubview(ratingCountLabel)
+        ratingCountLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            ratingCountLabel.centerYAnchor.constraint(equalTo: ratingCountContentView.centerYAnchor),
+            ratingCountLabel.centerXAnchor.constraint(equalTo: ratingCountContentView.centerXAnchor),
+        ])
+
+        ratingCountLabel.backgroundColor = .clear
+        ratingCountLabel.font = UIFont.boldSystemFont(ofSize: 60)
+        ratingCountLabel.textColor = .white
+        ratingCountLabel.textAlignment = .center
+        ratingCountLabel.text = "3.0"
+        
+        // starImageStackView
+        starImageStackView.translatesAutoresizingMaskIntoConstraints = false
+        leftLayoutView.addSubview(starImageStackView)
+
+        NSLayoutConstraint.activate([
+            starImageStackView.leadingAnchor.constraint(equalTo: leftLayoutView.leadingAnchor, constant: 20),
+            starImageStackView.trailingAnchor.constraint(equalTo: leftLayoutView.trailingAnchor, constant: -20),
+            starImageStackView.topAnchor.constraint(equalTo: ratingCountContentView.bottomAnchor),
+        ])
+        
+        // reviewCountLabel
+        leftLayoutView.addSubview(reviewCountLabel)
+        reviewCountLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            reviewCountLabel.leadingAnchor.constraint(equalTo: leftLayoutView.leadingAnchor, constant: 0),
+            reviewCountLabel.trailingAnchor.constraint(equalTo: leftLayoutView.trailingAnchor, constant: 0),
+            reviewCountLabel.topAnchor.constraint(equalTo: starImageStackView.bottomAnchor, constant: 5),
+        ])
+
+        reviewCountLabel.backgroundColor = .clear
+        reviewCountLabel.font = UIFont.systemFont(ofSize: 16)
+        reviewCountLabel.textColor = UIColor(named: "mainTextColor")
+        reviewCountLabel.textAlignment = .center
+        reviewCountLabel.text = "평점 1개"
+        
+        
+        // rightLayoutView
+        rightLayoutView.translatesAutoresizingMaskIntoConstraints = false
+        ratingCountView.addSubview(rightLayoutView)
+        rightLayoutView.backgroundColor = .clear
+        
+        NSLayoutConstraint.activate([
+            rightLayoutView.topAnchor.constraint(equalTo: ratingCountTitleLabel.bottomAnchor, constant: 10),
+            rightLayoutView.heightAnchor.constraint(equalToConstant: 130),
+            rightLayoutView.leadingAnchor.constraint(equalTo: leftLayoutView.trailingAnchor, constant: 0),
+            rightLayoutView.trailingAnchor.constraint(equalTo: ratingCountView.trailingAnchor, constant: 0),
+        ])
+        
+        // countLabelStackView
+        countLabelStackView.translatesAutoresizingMaskIntoConstraints = false
+        rightLayoutView.addSubview(countLabelStackView)
+
+        NSLayoutConstraint.activate([
+            countLabelStackView.leadingAnchor.constraint(equalTo: rightLayoutView.leadingAnchor, constant: 0),
+            countLabelStackView.topAnchor.constraint(equalTo: rightLayoutView.topAnchor, constant: 10),
+            countLabelStackView.bottomAnchor.constraint(equalTo: rightLayoutView.bottomAnchor, constant: -10),
+        ])
+        
+        // graphStackView
+        graphStackView.translatesAutoresizingMaskIntoConstraints = false
+        rightLayoutView.addSubview(graphStackView)
+
+        NSLayoutConstraint.activate([
+            graphStackView.leadingAnchor.constraint(equalTo: countLabelStackView.trailingAnchor, constant: 10),
+            graphStackView.trailingAnchor.constraint(equalTo: rightLayoutView.trailingAnchor, constant: -20),
+            graphStackView.topAnchor.constraint(equalTo: rightLayoutView.topAnchor, constant: 10),
+            graphStackView.bottomAnchor.constraint(equalTo: rightLayoutView.bottomAnchor, constant: -10),
+        ])
         
         
         //  ------------------------
@@ -527,6 +835,61 @@ class DetailViewController: UIViewController {
 
         ratingCountButton.addTarget(self, action: #selector(ratingCountButtonAction), for: .touchUpInside)
         
+        // 평점 및 리뷰 정보
+        contentView.addSubview(ratingCountInfoView)
+        ratingCountInfoView.translatesAutoresizingMaskIntoConstraints = false
+        ratingCountInfoView.backgroundColor = .clear
+        
+        NSLayoutConstraint.activate([
+            ratingCountInfoView.topAnchor.constraint(equalTo: ratingCountView.bottomAnchor),
+            ratingCountInfoView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            ratingCountInfoView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            ratingCountInfoView.heightAnchor.constraint(equalToConstant: 40),
+        ])
+        
+        // ratingCountInfoLabel
+        ratingCountInfoView.addSubview(ratingCountInfoLabel)
+        ratingCountInfoLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            ratingCountInfoLabel.centerYAnchor.constraint(equalTo: ratingCountInfoView.centerYAnchor),
+            ratingCountInfoLabel.leadingAnchor.constraint(equalTo: ratingCountInfoView.leadingAnchor, constant: 20),
+        ])
+        ratingCountInfoLabel.backgroundColor = .clear
+        ratingCountInfoLabel.font = UIFont.systemFont(ofSize: 14)
+        ratingCountInfoLabel.textColor = .white
+        ratingCountInfoLabel.text = "평점 및 리뷰 정보"
+        
+        //ratingCountInfoImageView
+        ratingCountInfoView.addSubview(ratingCountInfoImageView)
+        ratingCountInfoImageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            ratingCountInfoImageView.centerYAnchor.constraint(equalTo: ratingCountInfoView.centerYAnchor),
+            ratingCountInfoImageView.leadingAnchor.constraint(equalTo: ratingCountInfoLabel.trailingAnchor, constant: 5),
+            ratingCountInfoImageView.widthAnchor.constraint(equalToConstant: 12),
+            ratingCountInfoImageView.heightAnchor.constraint(equalToConstant: 12),
+        ])
+        
+        ratingCountInfoImageView.image = UIImage(named: "information_white")
+        ratingCountInfoImageView.backgroundColor = .clear
+        
+        // 평점 및 리뷰 정보 뷰 전체를 버튼으로
+        // ratingCountInfoButton
+        ratingCountInfoView.addSubview(ratingCountInfoButton)
+        ratingCountInfoButton.translatesAutoresizingMaskIntoConstraints = false
+         NSLayoutConstraint.activate([
+            ratingCountInfoButton.topAnchor.constraint(equalTo: ratingCountInfoView.topAnchor, constant: 0),
+            ratingCountInfoButton.leadingAnchor.constraint(equalTo: ratingCountInfoView.leadingAnchor, constant: 0),
+            ratingCountInfoButton.trailingAnchor.constraint(equalTo: ratingCountInfoView.trailingAnchor, constant: 0),
+            ratingCountInfoButton.bottomAnchor.constraint(equalTo: ratingCountInfoView.bottomAnchor, constant: 0),
+         ])
+        ratingCountInfoButton.backgroundColor = .clear
+        ratingCountInfoButton.setTitle("",for:.normal)
+
+        ratingCountInfoButton.addTarget(self, action: #selector(ratingCountInfoButtonAction), for: .touchUpInside)
+        
+        
+        
         // 게시일
         contentView.addSubview(publishedDateView)
         publishedDateView.translatesAutoresizingMaskIntoConstraints = false
@@ -534,7 +897,7 @@ class DetailViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             
-            publishedDateView.topAnchor.constraint(equalTo: ratingCountView.bottomAnchor),
+            publishedDateView.topAnchor.constraint(equalTo: ratingCountInfoView.bottomAnchor, constant: 10),
             publishedDateView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             publishedDateView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             publishedDateView.heightAnchor.constraint(equalToConstant: 80),
@@ -660,5 +1023,25 @@ class DetailViewController: UIViewController {
         reviewViewController.modalPresentationStyle = UIModalPresentationStyle.fullScreen
 
         self.presentDetail(reviewViewController)
+    }
+    
+    // action - ratingCountInfoButton
+    @objc func ratingCountInfoButtonAction(sender: UIButton!) {
+        print("ratingCountInfoButtonAction click!!")
+        
+        let actionsheetController = UIAlertController(title: "평점 및 리뷰 정보", message: "평점은 지역 내 사용자의 최근 평점을 토대로 합니다.", preferredStyle: .actionSheet)
+        
+        let detailAction = UIAlertAction(title: "자세히 알아보기", style: .default) { (action) in
+            if let url = URL(string: "https://play.google.com/about/comment-posting-policy/") {
+                UIApplication.shared.open(url, options: [:])
+            }
+
+        }
+        let okAction = UIAlertAction(title: "확인", style: .default) { (action) in
+        }
+
+        actionsheetController.addAction(detailAction)
+        actionsheetController.addAction(okAction)
+        present(actionsheetController, animated: true, completion: nil)
     }
 }
