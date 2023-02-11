@@ -22,6 +22,8 @@
 		0C3805DA2994F402007E72DD /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3805D92994F402007E72DD /* DetailViewController.swift */; };
 		0C3805E0299624B7007E72DD /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3805DF299624B7007E72DD /* Extensions.swift */; };
 		0C3805E229966676007E72DD /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3805E129966676007E72DD /* InfoViewController.swift */; };
+		0CABE33C29975CC300A28C15 /* ApiRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CABE33B29975CC300A28C15 /* ApiRequest.swift */; };
+		0CABE35D299799F900A28C15 /* ApiResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CABE35C299799F900A28C15 /* ApiResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +65,8 @@
 		0C3805D92994F402007E72DD /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		0C3805DF299624B7007E72DD /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		0C3805E129966676007E72DD /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
+		0CABE33B29975CC300A28C15 /* ApiRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiRequest.swift; sourceTree = "<group>"; };
+		0CABE35C299799F900A28C15 /* ApiResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiResponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,6 +181,8 @@
 		0C3805DE29962497007E72DD /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				0CABE33B29975CC300A28C15 /* ApiRequest.swift */,
+				0CABE35C299799F900A28C15 /* ApiResponse.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -321,6 +327,8 @@
 				0C3805D429939D16007E72DD /* MenuBarCollectionViewData.swift in Sources */,
 				0C3805D62994D5FA007E72DD /* EBookCollectionViewCell.swift in Sources */,
 				0C3805D82994E7B0007E72DD /* EBookCollectionReusableView.swift in Sources */,
+				0CABE35D299799F900A28C15 /* ApiResponse.swift in Sources */,
+				0CABE33C29975CC300A28C15 /* ApiRequest.swift in Sources */,
 				0C3805DA2994F402007E72DD /* DetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

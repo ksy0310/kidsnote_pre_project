@@ -29,7 +29,7 @@ class ViewController: UIViewController {
     
     // 메뉴 탭 데이터
     private let menudata = MenuBarCollectionViewData.menuList
-
+    
     // containerView
     private var containerView: UIView = UIView()
     
@@ -247,8 +247,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
             return cell
         }else{
             let cell = eBookCollectionView.dequeueReusableCell(withReuseIdentifier: EBookCollectionViewCell.id, for: indexPath) as! EBookCollectionViewCell
-            
-                return cell
+            return cell
         }
     }
     

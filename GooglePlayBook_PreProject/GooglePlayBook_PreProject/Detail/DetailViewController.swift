@@ -57,6 +57,7 @@ class DetailViewController: UIViewController {
     private var ratingCountInfoButton: UIButton = UIButton()
     
     // --- 스택뷰로 별 표시, 별 개수 별 그래프 표시 ---
+   
     
     // publishedDateView
     private var publishedDateView: UIView = UIView()
@@ -130,7 +131,8 @@ class DetailViewController: UIViewController {
         
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.backgroundColor = UIColor(named: "mainBackgroundColor")
-        scrollView.showsVerticalScrollIndicator = true
+//        scrollView.showsVerticalScrollIndicator = true
+        scrollView.isScrollEnabled = true
         
         NSLayoutConstraint.activate([
                     scrollView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -143,7 +145,7 @@ class DetailViewController: UIViewController {
         //contentView
         scrollView.addSubview(contentView)
         contentView.translatesAutoresizingMaskIntoConstraints = false
-        contentView.backgroundColor = .clear
+        contentView.backgroundColor = UIColor(named: "mainBackgroundColor")
         
         NSLayoutConstraint.activate([
                     contentView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
@@ -506,6 +508,13 @@ class DetailViewController: UIViewController {
         
         ratingCountDetailImageView.image = UIImage(named: "right_arrow")
         ratingCountDetailImageView.backgroundColor = .clear
+        
+        //  ------------------------
+        
+        
+        //  ------------------------
+        
+        
         
         // 게시일
         contentView.addSubview(publishedDateView)
