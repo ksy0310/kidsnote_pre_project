@@ -55,7 +55,7 @@ class DetailViewController: UIViewController {
     private var ratingCountDetailImageView: UIImageView = UIImageView()
     private var ratingCountLabel: UILabel = UILabel()
     private var ratingCountInfoButton: UIButton = UIButton()
-    
+    private var ratingCountButton: UIButton = UIButton()
     // --- 스택뷰로 별 표시, 별 개수 별 그래프 표시 ---
    
     
@@ -133,16 +133,13 @@ class DetailViewController: UIViewController {
         
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.backgroundColor = UIColor(named: "mainBackgroundColor")
-//        scrollView.showsVerticalScrollIndicator = true
-        scrollView.isScrollEnabled = true
-        
+                
         NSLayoutConstraint.activate([
                     scrollView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
                     scrollView.widthAnchor.constraint(equalTo: view.widthAnchor),
                     scrollView.topAnchor.constraint(equalTo: navigationBarView.bottomAnchor),
                     scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
-        
         
         //contentView
         scrollView.addSubview(contentView)
@@ -516,7 +513,19 @@ class DetailViewController: UIViewController {
         
         //  ------------------------
         
-        
+        // 평점 및 리뷰 뷰 전체를 버튼으로
+        ratingCountView.addSubview(ratingCountButton)
+        ratingCountButton.translatesAutoresizingMaskIntoConstraints = false
+         NSLayoutConstraint.activate([
+            ratingCountButton.topAnchor.constraint(equalTo: ratingCountView.topAnchor, constant: 0),
+            ratingCountButton.leadingAnchor.constraint(equalTo: ratingCountView.leadingAnchor, constant: 0),
+            ratingCountButton.trailingAnchor.constraint(equalTo: ratingCountView.trailingAnchor, constant: 0),
+            ratingCountButton.bottomAnchor.constraint(equalTo: ratingCountView.bottomAnchor, constant: 0),
+         ])
+        ratingCountButton.backgroundColor = .clear
+        ratingCountButton.setTitle("",for:.normal)
+
+        ratingCountButton.addTarget(self, action: #selector(ratingCountButtonAction), for: .touchUpInside)
         
         // 게시일
         contentView.addSubview(publishedDateView)
@@ -643,4 +652,13 @@ class DetailViewController: UIViewController {
         self.presentDetail(infoViewController)
     }
     
+    
+    // action - ratingCount Button
+    @objc func ratingCountButtonAction(sender: UIButton!) {
+        print("ratingCountButtonAction click!!")
+        let reviewViewController: ReviewViewController = ReviewViewController()
+        reviewViewController.modalPresentationStyle = UIModalPresentationStyle.fullScreen
+
+        self.presentDetail(reviewViewController)
+    }
 }

@@ -193,6 +193,8 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
         eBookCollectionView.register(EBookCollectionViewCell.self, forCellWithReuseIdentifier: EBookCollectionViewCell.id)
         eBookCollectionView.delegate = self
         eBookCollectionView.dataSource = self
+
+        eBookCollectionView.showsHorizontalScrollIndicator = false
         
         // headerview
         eBookCollectionView.register(EBookCollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader , withReuseIdentifier: EBookCollectionReusableView.id)

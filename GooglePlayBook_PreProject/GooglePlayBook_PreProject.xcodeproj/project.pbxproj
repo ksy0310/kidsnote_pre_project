@@ -24,6 +24,7 @@
 		0C3805E229966676007E72DD /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3805E129966676007E72DD /* InfoViewController.swift */; };
 		0CABE33C29975CC300A28C15 /* ApiRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CABE33B29975CC300A28C15 /* ApiRequest.swift */; };
 		0CABE35D299799F900A28C15 /* ApiResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CABE35C299799F900A28C15 /* ApiResponse.swift */; };
+		0CABE3622997A55A00A28C15 /* ReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CABE3612997A55A00A28C15 /* ReviewViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,7 @@
 		0C3805E129966676007E72DD /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		0CABE33B29975CC300A28C15 /* ApiRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiRequest.swift; sourceTree = "<group>"; };
 		0CABE35C299799F900A28C15 /* ApiResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiResponse.swift; sourceTree = "<group>"; };
+		0CABE3612997A55A00A28C15 /* ReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,6 +167,7 @@
 			children = (
 				0C3805D92994F402007E72DD /* DetailViewController.swift */,
 				0C3805E129966676007E72DD /* InfoViewController.swift */,
+				0CABE3612997A55A00A28C15 /* ReviewViewController.swift */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -320,6 +323,7 @@
 			files = (
 				0C3805A429937D8A007E72DD /* ViewController.swift in Sources */,
 				0C3805E0299624B7007E72DD /* Extensions.swift in Sources */,
+				0CABE3622997A55A00A28C15 /* ReviewViewController.swift in Sources */,
 				0C3805A029937D8A007E72DD /* AppDelegate.swift in Sources */,
 				0C3805A229937D8A007E72DD /* SceneDelegate.swift in Sources */,
 				0C3805E229966676007E72DD /* InfoViewController.swift in Sources */,
