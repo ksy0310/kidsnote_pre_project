@@ -30,5 +30,34 @@ class GooglePlayBook_PreProjectTests: XCTestCase {
             // Put the code you want to measure the time of here.
         }
     }
+    
+    // 검색 text test "" -> "+"
+    func testSearchText() throws {
+        let searchString = "This is my string"
+        let newString = searchString.replacingOccurrences(of: " ", with: "+", options: .literal, range: nil)
+        
+        XCTAssertEqual(newString, "This+is+my+string", "공백을 +로 변경 완료.")
+    }
+    
+    // 네트워크 연결 Test/ JSONDecoder Test
+    var bookInfo = [Book]()
+    func testNetwork() throws {
+        if let url = URL(string: "https://www.googleapis.com/books/v1/volumes?q=harry+potter") {
+                URLSession.shared.dataTask(with: url) { data, response, error in
+                    if let data = data {
+                        do {
+                            XCTAssertNotNil(response,"통신 성공")
+                            
+                            let response = try JSONDecoder().decode(ApiResponse.self, from: data)
+                            self.bookInfo = response.items
+                            XCTAssertEqual(self.bookInfo.count, 10, "JSONDecoder 성공! 총 10개의 item이 있다.")
+                            
+                        } catch {
+                            print(error)
+                        }
+                    }
+                }.resume()
+            }
+    }
 
 }

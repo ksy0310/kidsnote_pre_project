@@ -47,3 +47,26 @@ extension UIImageView {
         }
     }
 }
+
+// 검색 TextField clear button
+extension UITextField {
+    func clearButtonCustom() {
+
+        clearButtonMode = .never
+        rightViewMode   = .whileEditing
+        
+        let clearButton = UIButton(frame: rightViewRect(forBounds: bounds))
+        clearButton.frame.size = CGSize(width: 10, height: 10)
+            //UIButton(frame: CGRect.init(x:0, y:0, width:10, height:10))
+            //UIButton(frame: rightViewRect(forBounds: bounds))//UIButton(frame: CGRectMake(0, 0, 16, 16))
+        clearButton.setImage(UIImage(named: "cancel"), for: .normal)
+        clearButton.addTarget(self, action: #selector(UITextField.clear(sender:)), for: .touchUpInside)
+        
+        rightView = clearButton
+    }
+
+    @objc func clear(sender : AnyObject) {
+        self.text = ""
+        sendActions(for: .editingChanged)
+    }
+}

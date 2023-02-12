@@ -30,6 +30,8 @@ class ViewController: UIViewController {
     
     // 메뉴 탭 데이터
     private let menudata = MenuBarCollectionViewData.menuList
+    // book 데이터
+    var bookInfo = [Book]()
     
     // containerView
     private var containerView: UIView = UIView()
@@ -45,6 +47,8 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setNetwork(searchText: "flowers")
         
         setupNavigationBarLayout()
         configuereSearch()
@@ -112,7 +116,12 @@ class ViewController: UIViewController {
             attributes: [NSAttributedString.Key.foregroundColor: UIColor(named: "mainTextColor")!]
         )
         searchField.clearButtonMode = .whileEditing
+//        searchField.clearButtonCustom()
+
         searchField.textColor = UIColor(named: "mainTextColor")
+        
+        // 키보드 리턴 키 변경
+        searchField.returnKeyType = .search
     }
     
     // 메인화면 구성 - 메뉴 탭
@@ -191,6 +200,24 @@ class ViewController: UIViewController {
         present(alert, animated: false, completion: nil)
     }
     
+    // 통신 - get BookInfo
+    func setNetwork(searchText: String) {
+
+        EBookNetworkManager.shared.getEBookData(searchText: searchText) { (response) in
+            switch response {
+            case .success(let data):
+                if let decodedData = data as? ApiResponse {
+                    self.bookInfo = decodedData.items
+                    DispatchQueue.main.async {
+                        self.eBookCollectionView.reloadData()
+                    }
+                    return
+                }
+            case .failure(let data):
+                print("Network fail", data)
+            }
+        }
+    }
 }
 
 // collectionView
@@ -253,7 +280,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
         if (collectionView == menuBarCollectionView){
             return menudata.count
         }else{
-            return 30
+            return self.bookInfo.count
         }
     }
     
@@ -268,6 +295,42 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
             return cell
         }else{
             let cell = eBookCollectionView.dequeueReusableCell(withReuseIdentifier: EBookCollectionViewCell.id, for: indexPath) as! EBookCollectionViewCell
+            
+            cell.eBookTitleLabel.text = self.bookInfo[indexPath.row].volumeInfo.title
+            
+            let authors = self.bookInfo[indexPath.row].volumeInfo.authors ?? ["..."]
+            var author = ""
+            
+            for j in authors {
+                author += "\(j)"
+            }
+            cell.eBookAuthorsLabel.text = author
+            
+            
+            let thumbnailImg = self.bookInfo[indexPath.row].volumeInfo.imageLinks?.thumbnail
+            let smallImg = self.bookInfo[indexPath.row].volumeInfo.imageLinks?.smallThumbnail
+            if thumbnailImg != nil {
+                cell.eBookThumbnailImageView.load(urlString: thumbnailImg!)
+                cell.eBookThumbnailImageView.contentMode = .scaleAspectFill
+            }else {
+                if smallImg != nil {
+                    cell.eBookThumbnailImageView.load(urlString: smallImg!)
+                    cell.eBookThumbnailImageView.contentMode = .scaleAspectFill
+                }else{
+                    cell.eBookThumbnailImageView.image = UIImage(named: "noimage")
+                }
+            }
+            
+            cell.eBookKindLabel.text = "eBook"
+            
+            let averageRating = self.bookInfo[indexPath.row].volumeInfo.averageRating ?? nil
+            if averageRating != nil {
+                cell.eBookAverageRatingLabel.text = String(averageRating!) + "★"
+            }else{
+                cell.eBookAverageRatingLabel.text = " "
+            }
+            
+            
             return cell
         }
     }
@@ -346,14 +409,14 @@ extension ViewController: UITextFieldDelegate {
     textField.resignFirstResponder()
         
     if textField.text != nil {
-        let alert = UIAlertController(title: "알림", message: textField.text, preferredStyle: UIAlertController.Style.alert)
+        setNetwork(searchText: textField.text!)
+    }else{
+        let alert = UIAlertController(title: "알림", message: "검색어를 입력하세요.", preferredStyle: UIAlertController.Style.alert)
         let okAction = UIAlertAction(title: "확인", style: .default) { (action) in
 
         }
         alert.addAction(okAction)
         present(alert, animated: false, completion: nil)
-    }else{
-            
     }
         
     return true

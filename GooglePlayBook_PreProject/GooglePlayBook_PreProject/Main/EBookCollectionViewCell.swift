@@ -47,7 +47,8 @@ class EBookCollectionViewCell: UICollectionViewCell {
         ])
         
         eBookThumbnailImageView.image = UIImage(named: "noimage")
-        eBookThumbnailImageView.backgroundColor = .white
+        eBookThumbnailImageView.contentMode = .scaleAspectFit
+        eBookThumbnailImageView.backgroundColor = .darkGray
         eBookThumbnailImageView.clipsToBounds = true
         eBookThumbnailImageView.layer.cornerRadius = 10
         

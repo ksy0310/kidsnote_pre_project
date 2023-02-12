@@ -1,5 +1,5 @@
 //
-//  ApiResponse.swift
+//  BookInfo.swift
 //  GooglePlayBook_PreProject
 //
 //  Created by 김소영 on 2023/02/11.
@@ -17,7 +17,7 @@ struct VolumeInfo: Codable {
     let title: String
     let subtitle: String?
     let previewLink: String?
-    let publishedDate: String
+    let publishedDate: String!
     let publisher: String?
     let authors: [String]?
     let description: String?
@@ -25,6 +25,7 @@ struct VolumeInfo: Codable {
     let averageRating: Double?
     let ratingsCount: Double?
     let imageLinks: imageUrl?
+    let pageCount: Double?
 }
 struct imageUrl: Codable {
     let smallThumbnail: String?
