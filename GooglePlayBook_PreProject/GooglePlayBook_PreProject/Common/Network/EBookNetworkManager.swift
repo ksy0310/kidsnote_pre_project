@@ -12,9 +12,8 @@ struct EBookNetworkManager {
     
     static let shared = EBookNetworkManager()
     
-    let key = "&key="+"AIzaSyBoI-yYk3uxUGbhTk8MJZAQ6m_3cVGdccQ"
+    let key = "&key=" + Bundle.main.apiKey
     let baseUrl = "https://www.googleapis.com/books/v1/volumes?q="
-    
     
     func getEBookData(searchText: String,completion: @escaping (Result<Any, Error>) -> ()) {
         
