@@ -123,17 +123,12 @@
 		0C38059E29937D8A007E72DD /* GooglePlayBook_PreProject */ = {
 			isa = PBXGroup;
 			children = (
+				0CABE3A02998F61900A28C15 /* Resource */,
 				0C3805DD29962482007E72DD /* Common */,
 				0C3805DC2996245F007E72DD /* Detail */,
 				0C3805DB2996243D007E72DD /* Main */,
-				0C38059F29937D8A007E72DD /* AppDelegate.swift */,
-				0C3805A129937D8A007E72DD /* SceneDelegate.swift */,
-				0C3805A529937D8A007E72DD /* Main.storyboard */,
 				0C3805A829937D8C007E72DD /* Assets.xcassets */,
-				0C3805AA29937D8C007E72DD /* LaunchScreen.storyboard */,
 				0C3805AD29937D8C007E72DD /* Info.plist */,
-				0CABE3962998F1FE00A28C15 /* GooglePlayBookInfo.plist */,
-				0CABE39B2998F27300A28C15 /* GooglePlayBook_PreProject++ Bundle.swift */,
 			);
 			path = GooglePlayBook_PreProject;
 			sourceTree = "<group>";
@@ -194,6 +189,27 @@
 				0CABE38E2998EDE000A28C15 /* EBookNetworkManager.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		0CABE3A02998F61900A28C15 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				0CABE3A42998F63800A28C15 /* Storyboard */,
+				0C3805A129937D8A007E72DD /* SceneDelegate.swift */,
+				0C38059F29937D8A007E72DD /* AppDelegate.swift */,
+				0CABE39B2998F27300A28C15 /* GooglePlayBook_PreProject++ Bundle.swift */,
+				0CABE3962998F1FE00A28C15 /* GooglePlayBookInfo.plist */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		0CABE3A42998F63800A28C15 /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				0C3805A529937D8A007E72DD /* Main.storyboard */,
+				0C3805AA29937D8C007E72DD /* LaunchScreen.storyboard */,
+			);
+			path = Storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -10,6 +10,10 @@ import UIKit
 
 class ReviewViewController: UIViewController {
     
+    // 데이터
+    var reviewCount = ""
+    var ratingCount = ""
+    
     // 네비게이션
     private var navigationBarView: UIView = UIView()
     private var backButton: UIButton = UIButton()
@@ -229,9 +233,9 @@ class ReviewViewController: UIViewController {
     override func viewDidLoad() {
            super.viewDidLoad()
 
-           setupNavigationBarLayout()
-           setupContentViewLayout()
-        
+        setupNavigationBarLayout()
+        setupContentViewLayout()
+        setData()
     }
     // 상단 네비게이션 바
     private func setupNavigationBarLayout() {
@@ -405,6 +409,11 @@ class ReviewViewController: UIViewController {
             graphStackView.bottomAnchor.constraint(equalTo: rightLayoutView.bottomAnchor, constant: -10),
         ])
         
+    }
+    
+    private func setData() {
+        reviewCountLabel.text = "평점 " + reviewCount + "개"
+        ratingCountLabel.text = ratingCount
     }
     
     // action - back Button

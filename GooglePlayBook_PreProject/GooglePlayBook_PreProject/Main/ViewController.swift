@@ -302,7 +302,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
             var author = ""
             
             for j in authors {
-                author += "\(j)"
+                author += "\(j) "
             }
             cell.eBookAuthorsLabel.text = author
             
@@ -389,7 +389,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
         } else {
             let detailViewController: DetailViewController = DetailViewController()
             detailViewController.modalPresentationStyle = UIModalPresentationStyle.fullScreen
-
+            detailViewController.ebookInfo = self.bookInfo[indexPath.row]
             self.presentDetail(detailViewController)
         }
 

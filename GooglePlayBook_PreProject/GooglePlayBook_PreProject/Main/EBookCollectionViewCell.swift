@@ -83,6 +83,7 @@ class EBookCollectionViewCell: UICollectionViewCell {
         eBookAuthorsLabel.font = UIFont.systemFont(ofSize: 14)
         eBookAuthorsLabel.textColor = UIColor(named: "mainTextColor")
         eBookAuthorsLabel.textAlignment = .left
+        eBookTitleLabel.numberOfLines = 2
         eBookAuthorsLabel.text = "이북 책 작가"
         
         // eBook Kind

@@ -10,6 +10,9 @@ import UIKit
 
 class DetailViewController: UIViewController {
 
+    // 데이터
+    var ebookInfo:Book!
+    
     // 네비게이션
     private var navigationBarView: UIView = UIView()
     private var backButton: UIButton = UIButton()
@@ -281,8 +284,10 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
            super.viewDidLoad()
 
-           setupNavigationBarLayout()
-           setupContentViewLayout()
+        setupNavigationBarLayout()
+        setupContentViewLayout()
+        
+        setBookData()
         
     }
     
@@ -431,6 +436,7 @@ class DetailViewController: UIViewController {
         bookAuthorsLabel.font = UIFont.systemFont(ofSize: 16)
         bookAuthorsLabel.textColor = UIColor(named: "mainTextColor")
         bookAuthorsLabel.textAlignment = .left
+        bookAuthorsLabel.numberOfLines = 2
         bookAuthorsLabel.text = "이북 책 작가"
         
         // book Kind
@@ -967,6 +973,66 @@ class DetailViewController: UIViewController {
         
     }
     
+    // 데이터
+    private func setBookData() {
+    
+        let authors = ebookInfo.volumeInfo.authors ?? ["..."]
+        var author = ""
+        
+        for j in authors {
+            author += "\(j) "
+        }
+        bookAuthorsLabel.text = author
+        
+        
+        let thumbnailImg = ebookInfo.volumeInfo.imageLinks?.thumbnail
+        let smallImg = ebookInfo.volumeInfo.imageLinks?.smallThumbnail
+        if thumbnailImg != nil {
+            bookThumbnailImageView.load(urlString: thumbnailImg!)
+            bookThumbnailImageView.contentMode = .scaleAspectFill
+        }else {
+            if smallImg != nil {
+                bookThumbnailImageView.load(urlString: smallImg!)
+                bookThumbnailImageView.contentMode = .scaleAspectFill
+            }else{
+                bookThumbnailImageView.image = UIImage(named: "noimage")
+            }
+        }
+        bookTitleLabel.text = ebookInfo.volumeInfo.title
+        
+        bookKindLabel.text = "eBook ·"
+        bookPagesLabel.text = String(Int(ebookInfo.volumeInfo.pageCount ?? 0)) + "페이지"
+        
+        descriptionLabel.text = ebookInfo.volumeInfo.description
+        
+        if ebookInfo.volumeInfo.averageRating != nil {
+            ratingCountView.isHidden = false
+            ratingCountInfoView.isHidden = false
+            ratingCountLabel.text = String(ebookInfo.volumeInfo.averageRating!)
+            reviewCountLabel.text = "평점 " + String(Int(ebookInfo.volumeInfo.ratingsCount!)) + "개"
+            
+        } else {
+            publishedDateView.topAnchor.constraint(equalTo: bookdescriptionView.bottomAnchor, constant: 10).isActive = true
+            ratingCountInfoView.isHidden = true
+            ratingCountView.isHidden = true
+        }
+        
+        if ebookInfo.volumeInfo.publishedDate != nil {
+            let date = ebookInfo.volumeInfo.publishedDate
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd" // 2020-08-13 16:30
+                    
+            let convertDate = dateFormatter.date(from: date!) // Date 타입으로 변환
+            
+            let myDateFormatter = DateFormatter()
+            myDateFormatter.dateFormat = "yyyy년MM월dd일" // 2020.08.13 오후 04시 30분
+            let convertStr = myDateFormatter.string(from: convertDate!)
+            publishedDateLabel.text = convertStr + " ·"
+        }
+        publisherLabel.text = ebookInfo.volumeInfo.publisher
+    }
+    
+    
     // action - back Button
     @objc func backButtonAction(sender: UIButton!) {
         self.dismissDetail()
@@ -974,7 +1040,7 @@ class DetailViewController: UIViewController {
     
     // action - share Button
     @objc func shareButtonAction(sender: UIButton!) {
-        let bookLink: String = "www.naver.com"
+        let bookLink: String = ebookInfo.volumeInfo.infoLink!
         var shareObject = [Any]()
 
         shareObject.append(bookLink)
@@ -988,6 +1054,10 @@ class DetailViewController: UIViewController {
     // action - sample Button
     @objc func sampleButtonAction(sender: UIButton!) {
         print("sampleButtonAction click!!")
+        let bookLink: String = ebookInfo.volumeInfo.previewLink!
+        if let url = URL(string: bookLink) {
+            UIApplication.shared.open(url, options: [:])
+        }
     }
     
     // action - wishList Button
@@ -1012,7 +1082,8 @@ class DetailViewController: UIViewController {
         print("bookdescriptionButtonAction click!!")
         let infoViewController: InfoViewController = InfoViewController()
         infoViewController.modalPresentationStyle = UIModalPresentationStyle.fullScreen
-
+        infoViewController.bookTitle = ebookInfo.volumeInfo.title
+        infoViewController.bookdescription = ebookInfo.volumeInfo.description!
         self.presentDetail(infoViewController)
     }
     
@@ -1022,7 +1093,8 @@ class DetailViewController: UIViewController {
         print("ratingCountButtonAction click!!")
         let reviewViewController: ReviewViewController = ReviewViewController()
         reviewViewController.modalPresentationStyle = UIModalPresentationStyle.fullScreen
-
+        reviewViewController.ratingCount = String(ebookInfo.volumeInfo.averageRating!)
+        reviewViewController.reviewCount = String(Int(ebookInfo.volumeInfo.ratingsCount!))
         self.presentDetail(reviewViewController)
     }
     
@@ -1045,4 +1117,6 @@ class DetailViewController: UIViewController {
         actionsheetController.addAction(okAction)
         present(actionsheetController, animated: true, completion: nil)
     }
+    
+    
 }
