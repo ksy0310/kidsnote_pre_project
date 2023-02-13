@@ -30,8 +30,12 @@ class ViewController: UIViewController {
     
     // 메뉴 탭 데이터
     private let menudata = MenuBarCollectionViewData.menuList
+    var menuFlag:Bool = true
     // book 데이터
     var bookInfo = [Book]()
+    // youtube 데이터
+    var videoInfo = [Youtube]()
+    var videoid = [String]()
     
     // containerView
     private var containerView: UIView = UIView()
@@ -48,7 +52,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setNetwork(searchText: "flowers")
+        setNetwork(searchText: "flower")
         
         setupNavigationBarLayout()
         configuereSearch()
@@ -203,23 +207,43 @@ class ViewController: UIViewController {
     // 통신 - get BookInfo
     func setNetwork(searchText: String) {
 
-        EBookNetworkManager.shared.getEBookData(searchText: searchText) { (response) in
-            switch response {
-            case .success(let data):
-                if let decodedData = data as? ApiResponse {
-                    self.bookInfo = decodedData.items
-                    DispatchQueue.main.async {
-                        self.eBookCollectionView.reloadData()
+            if menuFlag {
+                // ebook 검색
+                EBookNetworkManager.shared.getEBookData(searchText: searchText) { (response) in
+                    switch response {
+                    case .success(let data):
+                        if let decodedData = data as? ApiResponse {
+                            self.bookInfo = decodedData.items
+                            print("!!!bookInfo!!!",decodedData.items)
+                            DispatchQueue.main.async {
+                                self.eBookCollectionView.reloadData()
+                            }
+                            return
+                        }
+                    case .failure(let data):
+                        print("Network fail", data)
                     }
-                    return
                 }
-            case .failure(let data):
-                print("Network fail", data)
+            }else{
+                // video 검색
+                YouTubeNetworkManager.shared.getVideoData(searchText: searchText) { (response) in
+                    switch response {
+                    case .success(let data):
+                        if let decodedData = data as? YouTubeApiResponse {
+                            self.videoInfo = decodedData.items
+                            print("!!!videoInfo!!!",decodedData.items)
+                            DispatchQueue.main.async {
+                                self.eBookCollectionView.reloadData()
+                            }
+                            return
+                        }
+                    case .failure(let data):
+                        print("Network fail", data)
+                }
             }
         }
     }
 }
-
 // collectionView
 extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
@@ -280,7 +304,11 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
         if (collectionView == menuBarCollectionView){
             return menudata.count
         }else{
-            return self.bookInfo.count
+            if menuFlag {
+                return self.bookInfo.count
+            }else{
+                return self.videoInfo.count
+            }
         }
     }
     
@@ -296,40 +324,58 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
         }else{
             let cell = eBookCollectionView.dequeueReusableCell(withReuseIdentifier: EBookCollectionViewCell.id, for: indexPath) as! EBookCollectionViewCell
             
-            cell.eBookTitleLabel.text = self.bookInfo[indexPath.row].volumeInfo.title
-            
-            let authors = self.bookInfo[indexPath.row].volumeInfo.authors ?? ["..."]
-            var author = ""
-            
-            for j in authors {
-                author += "\(j) "
-            }
-            cell.eBookAuthorsLabel.text = author
-            
-            
-            let thumbnailImg = self.bookInfo[indexPath.row].volumeInfo.imageLinks?.thumbnail
-            let smallImg = self.bookInfo[indexPath.row].volumeInfo.imageLinks?.smallThumbnail
-            if thumbnailImg != nil {
-                cell.eBookThumbnailImageView.load(urlString: thumbnailImg!)
-                cell.eBookThumbnailImageView.contentMode = .scaleAspectFill
-            }else {
-                if smallImg != nil {
-                    cell.eBookThumbnailImageView.load(urlString: smallImg!)
+            if menuFlag {
+                cell.eBookTitleLabel.text = self.bookInfo[indexPath.row].volumeInfo.title
+                
+                let authors = self.bookInfo[indexPath.row].volumeInfo.authors ?? ["..."]
+                var author = ""
+                
+                for j in authors {
+                    author += "\(j) "
+                }
+                cell.eBookAuthorsLabel.text = author
+                
+                
+                let thumbnailImg = self.bookInfo[indexPath.row].volumeInfo.imageLinks?.thumbnail
+                let smallImg = self.bookInfo[indexPath.row].volumeInfo.imageLinks?.smallThumbnail
+                if thumbnailImg != nil {
+                    cell.eBookThumbnailImageView.load(urlString: thumbnailImg!)
                     cell.eBookThumbnailImageView.contentMode = .scaleAspectFill
+                }else {
+                    if smallImg != nil {
+                        cell.eBookThumbnailImageView.load(urlString: smallImg!)
+                        cell.eBookThumbnailImageView.contentMode = .scaleAspectFill
+                    }else{
+                        cell.eBookThumbnailImageView.image = UIImage(named: "noimage")
+                    }
+                }
+                
+                cell.eBookKindLabel.text = "eBook"
+                
+                let averageRating = self.bookInfo[indexPath.row].volumeInfo.averageRating ?? nil
+                if averageRating != nil {
+                    cell.eBookAverageRatingLabel.text = String(averageRating!) + "★"
                 }else{
-                    cell.eBookThumbnailImageView.image = UIImage(named: "noimage")
+                    cell.eBookAverageRatingLabel.text = " "
+                }
+            } else {
+                cell.eBookTitleLabel.text = self.videoInfo[indexPath.row].snippet.title
+                cell.eBookAuthorsLabel.text = self.videoInfo[indexPath.row].snippet.channelTitle
+                cell.eBookKindLabel.text = "youTube"
+                let thumbnailImg = self.videoInfo[indexPath.row].snippet.thumbnails?.medium?.url
+                let highImg = self.videoInfo[indexPath.row].snippet.thumbnails?.high?.url
+                cell.eBookThumbnailImageView.contentMode = .scaleAspectFill
+                
+                if thumbnailImg != nil {
+                    cell.eBookThumbnailImageView.load(urlString: thumbnailImg!)
+                }else {
+                    if highImg != nil {
+                        cell.eBookThumbnailImageView.load(urlString: highImg!)
+                    }else{
+                        cell.eBookThumbnailImageView.image = UIImage(named: "noimage")
+                    }
                 }
             }
-            
-            cell.eBookKindLabel.text = "eBook"
-            
-            let averageRating = self.bookInfo[indexPath.row].volumeInfo.averageRating ?? nil
-            if averageRating != nil {
-                cell.eBookAverageRatingLabel.text = String(averageRating!) + "★"
-            }else{
-                cell.eBookAverageRatingLabel.text = " "
-            }
-            
             
             return cell
         }
@@ -374,23 +420,48 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print(indexPath.row)
         
+        var searchText = searchField.text
+        if searchText == nil {
+            searchText = "flower"
+        }
+        
         if (collectionView == menuBarCollectionView){
             if indexPath.row == 0 {
                 // eBook 위치로 이동, 사이즈 줄이기
+                
+                menuFlag = true
+                
                 UIView.animate(withDuration: 0.5, animations: {
                     self.selectBarView.transform = CGAffineTransform.init(translationX: 0, y: 0).concatenating(CGAffineTransform.init(scaleX: 1, y: 1))
                 })
+                
             } else {
                 // 오디오북 위치로 이동, 사이즈 늘리기
+                
+                menuFlag = false
+                
                 UIView.animate(withDuration: 0.5, animations: {
                     self.selectBarView.transform = CGAffineTransform.init(translationX: 125, y: 0).concatenating(CGAffineTransform.init(scaleX: 1.5, y: 1))
                 })
             }
+            setNetwork(searchText: searchText!)
+            
         } else {
-            let detailViewController: DetailViewController = DetailViewController()
-            detailViewController.modalPresentationStyle = UIModalPresentationStyle.fullScreen
-            detailViewController.ebookInfo = self.bookInfo[indexPath.row]
-            self.presentDetail(detailViewController)
+            if menuFlag {
+                let detailViewController: DetailViewController = DetailViewController()
+                detailViewController.modalPresentationStyle = UIModalPresentationStyle.fullScreen
+                detailViewController.isEBook = true
+                detailViewController.ebookInfo = self.bookInfo[indexPath.row]
+                self.presentDetail(detailViewController)
+            } else {
+                let detailViewController: DetailViewController = DetailViewController()
+                detailViewController.modalPresentationStyle = UIModalPresentationStyle.fullScreen
+                detailViewController.isEBook = false
+                detailViewController.videoInfo = self.videoInfo[indexPath.row]
+                detailViewController.videoId = self.videoInfo[indexPath.row].id?.videoId
+                self.presentDetail(detailViewController)
+            }
+            
         }
 
     }

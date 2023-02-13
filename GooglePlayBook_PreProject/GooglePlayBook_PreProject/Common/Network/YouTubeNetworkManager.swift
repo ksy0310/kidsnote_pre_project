@@ -1,5 +1,5 @@
 //
-//  EBookNetworkManager.swift
+//  YouTubeNetworkManager.swift
 //  GooglePlayBook_PreProject
 //
 //  Created by 김소영 on 2023/02/12.
@@ -8,20 +8,21 @@
 
 import Foundation
 
-struct EBookNetworkManager {
+struct YouTubeNetworkManager {
     
-    static let shared = EBookNetworkManager()
+    static let shared = YouTubeNetworkManager()
     
     let key = "&key=" + Bundle.main.apiKey
-    let baseUrl = "https://www.googleapis.com/books/v1/volumes?q="
+    let baseUrl = "https://www.googleapis.com/youtube/v3/search?q="
+    let param = "&part=snippet&type=video"
     let maxSize = "&maxResults=10"
     
-    func getEBookData(searchText: String,completion: @escaping (Result<Any, Error>) -> ()) {
+    func getVideoData(searchText: String,completion: @escaping (Result<Any, Error>) -> ()) {
         
         // 입력 텍스트가 공백이 있으면 +로 대체
         let searchString = searchText.replacingOccurrences(of: " ", with: "+", options: .literal, range: nil)
 
-        let urlString = baseUrl + searchString + maxSize + key
+        let urlString = baseUrl + searchString + param + maxSize + key
         // 한글 가능
         let encodedString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
 
@@ -39,7 +40,7 @@ struct EBookNetworkManager {
                 
                 if let data = data {
                     do {
-                        let decodedData = try JSONDecoder().decode(ApiResponse.self, from: data)
+                        let decodedData = try JSONDecoder().decode(YouTubeApiResponse.self, from: data)
                         completion(.success(decodedData))
                     } catch {
                         print(error.localizedDescription)
@@ -49,5 +50,6 @@ struct EBookNetworkManager {
             dataTask.resume()
         }
     }
+    
     
 }

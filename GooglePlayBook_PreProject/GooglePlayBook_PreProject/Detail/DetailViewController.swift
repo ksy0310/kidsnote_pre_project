@@ -12,6 +12,9 @@ class DetailViewController: UIViewController {
 
     // 데이터
     var ebookInfo:Book!
+    var isEBook:Bool = true
+    var videoInfo:Youtube!
+    var videoId:String!
     
     // 네비게이션
     private var navigationBarView: UIView = UIView()
@@ -287,7 +290,7 @@ class DetailViewController: UIViewController {
         setupNavigationBarLayout()
         setupContentViewLayout()
         
-        setBookData()
+        setData()
         
     }
     
@@ -974,62 +977,112 @@ class DetailViewController: UIViewController {
     }
     
     // 데이터
-    private func setBookData() {
-    
-        let authors = ebookInfo.volumeInfo.authors ?? ["..."]
-        var author = ""
-        
-        for j in authors {
-            author += "\(j) "
-        }
-        bookAuthorsLabel.text = author
-        
-        
-        let thumbnailImg = ebookInfo.volumeInfo.imageLinks?.thumbnail
-        let smallImg = ebookInfo.volumeInfo.imageLinks?.smallThumbnail
-        if thumbnailImg != nil {
-            bookThumbnailImageView.load(urlString: thumbnailImg!)
-            bookThumbnailImageView.contentMode = .scaleAspectFill
-        }else {
-            if smallImg != nil {
-                bookThumbnailImageView.load(urlString: smallImg!)
-                bookThumbnailImageView.contentMode = .scaleAspectFill
-            }else{
-                bookThumbnailImageView.image = UIImage(named: "noimage")
-            }
-        }
-        bookTitleLabel.text = ebookInfo.volumeInfo.title
-        
-        bookKindLabel.text = "eBook ·"
-        bookPagesLabel.text = String(Int(ebookInfo.volumeInfo.pageCount ?? 0)) + "페이지"
-        
-        descriptionLabel.text = ebookInfo.volumeInfo.description
-        
-        if ebookInfo.volumeInfo.averageRating != nil {
-            ratingCountView.isHidden = false
-            ratingCountInfoView.isHidden = false
-            ratingCountLabel.text = String(ebookInfo.volumeInfo.averageRating!)
-            reviewCountLabel.text = "평점 " + String(Int(ebookInfo.volumeInfo.ratingsCount!)) + "개"
+    private func setData() {
+        if isEBook {
+            let authors = ebookInfo.volumeInfo.authors ?? ["..."]
+            var author = ""
             
+            for j in authors {
+                author += "\(j) "
+            }
+            bookAuthorsLabel.text = author
+            
+            
+            let thumbnailImg = ebookInfo.volumeInfo.imageLinks?.thumbnail
+            let smallImg = ebookInfo.volumeInfo.imageLinks?.smallThumbnail
+            if thumbnailImg != nil {
+                bookThumbnailImageView.load(urlString: thumbnailImg!)
+                bookThumbnailImageView.contentMode = .scaleAspectFill
+            }else {
+                if smallImg != nil {
+                    bookThumbnailImageView.load(urlString: smallImg!)
+                    bookThumbnailImageView.contentMode = .scaleAspectFill
+                }else{
+                    bookThumbnailImageView.image = UIImage(named: "noimage")
+                }
+            }
+            bookTitleLabel.text = ebookInfo.volumeInfo.title
+            
+            bookKindLabel.text = "eBook ·"
+            bookPagesLabel.text = String(Int(ebookInfo.volumeInfo.pageCount ?? 0)) + "페이지"
+            
+            descriptionLabel.text = ebookInfo.volumeInfo.description
+            
+            if ebookInfo.volumeInfo.averageRating != nil {
+                ratingCountView.isHidden = false
+                ratingCountInfoView.isHidden = false
+                ratingCountLabel.text = String(ebookInfo.volumeInfo.averageRating!)
+                reviewCountLabel.text = "평점 " + String(Int(ebookInfo.volumeInfo.ratingsCount!)) + "개"
+                
+            } else {
+                publishedDateView.topAnchor.constraint(equalTo: bookdescriptionView.bottomAnchor, constant: 10).isActive = true
+                ratingCountInfoView.isHidden = true
+                ratingCountView.isHidden = true
+            }
+            
+            if ebookInfo.volumeInfo.publishedDate != nil {
+                let date = ebookInfo.volumeInfo.publishedDate
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "yyyy-MM-dd" // 2020-08-13
+                        
+                let convertDate = dateFormatter.date(from: date!) // Date 타입으로 변환
+                
+                let myDateFormatter = DateFormatter()
+                myDateFormatter.dateFormat = "yyyy년MM월dd일"
+                let convertStr = myDateFormatter.string(from: convertDate!)
+                publishedDateLabel.text = convertStr + " ·"
+            }
+            publisherLabel.text = ebookInfo.volumeInfo.publisher
         } else {
+            shareButton.isHidden = true
+            wishListButton.isHidden = true
+            sampleButton.setTitle("유투브 보기", for: .normal)
+            sampleButton.trailingAnchor.constraint(equalTo: functionView.trailingAnchor, constant: -20).isActive = true
+            
+            bookAuthorsLabel.text = videoInfo.snippet.channelTitle
+            let thumbnailImg = videoInfo.snippet.thumbnails?.medium?.url
+            let highlImg = videoInfo.snippet.thumbnails?.high?.url
+            bookThumbnailImageView.contentMode = .scaleAspectFill
+            
+            if thumbnailImg != nil {
+                bookThumbnailImageView.load(urlString: thumbnailImg!)
+            }else {
+                if highlImg != nil {
+                    bookThumbnailImageView.load(urlString: highlImg!)
+                }else{
+                    bookThumbnailImageView.image = UIImage(named: "noimage")
+                }
+            }
+            bookTitleLabel.text = videoInfo.snippet.title
+            
+            bookKindLabel.text = "YouTube"
+            bookPagesLabel.isHidden = true
+            
+            descriptionLabel.text = videoInfo.snippet.description
+            
             publishedDateView.topAnchor.constraint(equalTo: bookdescriptionView.bottomAnchor, constant: 10).isActive = true
             ratingCountInfoView.isHidden = true
             ratingCountView.isHidden = true
-        }
-        
-        if ebookInfo.volumeInfo.publishedDate != nil {
-            let date = ebookInfo.volumeInfo.publishedDate
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd" // 2020-08-13 16:30
-                    
-            let convertDate = dateFormatter.date(from: date!) // Date 타입으로 변환
             
-            let myDateFormatter = DateFormatter()
-            myDateFormatter.dateFormat = "yyyy년MM월dd일" // 2020.08.13 오후 04시 30분
-            let convertStr = myDateFormatter.string(from: convertDate!)
-            publishedDateLabel.text = convertStr + " ·"
+            if videoInfo.snippet.publishedAt != nil {
+                let date = String(videoInfo.snippet.publishedAt!)
+                let startIndex = date.index(date.startIndex, offsetBy: 0)// 사용자지정 시작인덱스
+                let endIndex = date.index(date.startIndex, offsetBy: 10)// 사용자지정 끝인덱스
+                let sliced_str = date[startIndex ..< endIndex]
+                print(sliced_str)
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "yyyy-MM-dd"
+
+                let convertDate = dateFormatter.date(from: String(sliced_str)) // Date 타입으로 변환
+
+                let myDateFormatter = DateFormatter()
+                myDateFormatter.dateFormat = "yyyy년MM월dd일"
+                let convertStr = myDateFormatter.string(from: convertDate!)
+                publishedDateLabel.text = convertStr
+            }
+            publisherLabel.isHidden = true
+            
         }
-        publisherLabel.text = ebookInfo.volumeInfo.publisher
     }
     
     
@@ -1040,23 +1093,33 @@ class DetailViewController: UIViewController {
     
     // action - share Button
     @objc func shareButtonAction(sender: UIButton!) {
-        let bookLink: String = ebookInfo.volumeInfo.infoLink!
-        var shareObject = [Any]()
+        if isEBook {
+            let bookLink: String = ebookInfo.volumeInfo.infoLink!
+            var shareObject = [Any]()
 
-        shareObject.append(bookLink)
+            shareObject.append(bookLink)
 
-        let activityViewController = UIActivityViewController(activityItems: shareObject, applicationActivities: nil)
-                activityViewController.popoverPresentationController?.sourceView = self.view
+            let activityViewController = UIActivityViewController(activityItems: shareObject, applicationActivities: nil)
+                    activityViewController.popoverPresentationController?.sourceView = self.view
 
-        self.present(activityViewController, animated: true, completion: nil)
+            self.present(activityViewController, animated: true, completion: nil)
+        }
     }
     
     // action - sample Button
     @objc func sampleButtonAction(sender: UIButton!) {
-        print("sampleButtonAction click!!")
-        let bookLink: String = ebookInfo.volumeInfo.previewLink!
-        if let url = URL(string: bookLink) {
-            UIApplication.shared.open(url, options: [:])
+        if isEBook {
+            print("sampleButtonAction click!!")
+            let bookLink: String = ebookInfo.volumeInfo.previewLink!
+            if let url = URL(string: bookLink) {
+                UIApplication.shared.open(url, options: [:])
+            }
+        } else {
+            print("youtubeAction click!!")
+            let youtubeLink: String = "https://www.youtube.com/watch?v="+videoId
+            if let url = URL(string: youtubeLink) {
+                UIApplication.shared.open(url, options: [:])
+            }
         }
     }
     
@@ -1082,8 +1145,13 @@ class DetailViewController: UIViewController {
         print("bookdescriptionButtonAction click!!")
         let infoViewController: InfoViewController = InfoViewController()
         infoViewController.modalPresentationStyle = UIModalPresentationStyle.fullScreen
-        infoViewController.bookTitle = ebookInfo.volumeInfo.title
-        infoViewController.bookdescription = ebookInfo.volumeInfo.description!
+        if isEBook {
+            infoViewController.bookTitle = ebookInfo.volumeInfo.title
+            infoViewController.bookdescription = ebookInfo.volumeInfo.description!
+        } else {
+            infoViewController.bookTitle = videoInfo.snippet.channelTitle!
+            infoViewController.bookdescription = videoInfo.snippet.description!
+        }
         self.presentDetail(infoViewController)
     }
     

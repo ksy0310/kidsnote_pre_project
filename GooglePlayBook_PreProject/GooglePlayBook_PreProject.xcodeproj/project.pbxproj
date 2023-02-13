@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C2BAF1929991CA9003F731B /* YouTubeInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2BAF1829991CA9003F731B /* YouTubeInfo.swift */; };
+		0C2BAF1E29991CD1003F731B /* YouTubeNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2BAF1D29991CD1003F731B /* YouTubeNetworkManager.swift */; };
 		0C3805A029937D8A007E72DD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C38059F29937D8A007E72DD /* AppDelegate.swift */; };
 		0C3805A229937D8A007E72DD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3805A129937D8A007E72DD /* SceneDelegate.swift */; };
 		0C3805A429937D8A007E72DD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3805A329937D8A007E72DD /* ViewController.swift */; };
@@ -47,6 +49,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0C2BAF1829991CA9003F731B /* YouTubeInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouTubeInfo.swift; sourceTree = "<group>"; };
+		0C2BAF1D29991CD1003F731B /* YouTubeNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouTubeNetworkManager.swift; sourceTree = "<group>"; };
 		0C38059C29937D8A007E72DD /* GooglePlayBook_PreProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GooglePlayBook_PreProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C38059F29937D8A007E72DD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0C3805A129937D8A007E72DD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -187,6 +191,8 @@
 			children = (
 				0CABE35C299799F900A28C15 /* BookInfo.swift */,
 				0CABE38E2998EDE000A28C15 /* EBookNetworkManager.swift */,
+				0C2BAF1829991CA9003F731B /* YouTubeInfo.swift */,
+				0C2BAF1D29991CD1003F731B /* YouTubeNetworkManager.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -348,9 +354,11 @@
 				0C3805A429937D8A007E72DD /* ViewController.swift in Sources */,
 				0C3805E0299624B7007E72DD /* Extensions.swift in Sources */,
 				0CABE3622997A55A00A28C15 /* ReviewViewController.swift in Sources */,
+				0C2BAF1929991CA9003F731B /* YouTubeInfo.swift in Sources */,
 				0C3805A029937D8A007E72DD /* AppDelegate.swift in Sources */,
 				0C3805A229937D8A007E72DD /* SceneDelegate.swift in Sources */,
 				0C3805E229966676007E72DD /* InfoViewController.swift in Sources */,
+				0C2BAF1E29991CD1003F731B /* YouTubeNetworkManager.swift in Sources */,
 				0C3805D2299396FC007E72DD /* MenuBarCollectionViewCell.swift in Sources */,
 				0C3805D429939D16007E72DD /* MenuBarCollectionViewData.swift in Sources */,
 				0C3805D62994D5FA007E72DD /* EBookCollectionViewCell.swift in Sources */,
