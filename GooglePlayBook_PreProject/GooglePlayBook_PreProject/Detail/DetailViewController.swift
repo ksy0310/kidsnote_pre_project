@@ -406,7 +406,8 @@ class DetailViewController: UIViewController {
         ])
         
         bookThumbnailImageView.image = UIImage(named: "noimage")
-        bookThumbnailImageView.backgroundColor = .white
+        bookThumbnailImageView.backgroundColor = .darkGray
+        bookThumbnailImageView.contentMode = .scaleAspectFit
         bookThumbnailImageView.clipsToBounds = true
         bookThumbnailImageView.layer.cornerRadius = 10
         

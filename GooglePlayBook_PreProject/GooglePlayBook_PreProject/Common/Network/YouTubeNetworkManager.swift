@@ -15,14 +15,18 @@ struct YouTubeNetworkManager {
     let key = "&key=" + Bundle.main.apiKey
     let baseUrl = "https://www.googleapis.com/youtube/v3/search?q="
     let param = "&part=snippet&type=video"
-    let maxSize = "&maxResults=10"
+    let indexString = "&startIndex="
+    let maxSizeInt = 20
+    let maxSize = "&maxResults=20"
     
-    func getVideoData(searchText: String,completion: @escaping (Result<Any, Error>) -> ()) {
+    func getVideoData(searchText: String,index: Int,completion: @escaping (Result<Any, Error>) -> ()) {
         
         // 입력 텍스트가 공백이 있으면 +로 대체
         let searchString = searchText.replacingOccurrences(of: " ", with: "+", options: .literal, range: nil)
-
-        let urlString = baseUrl + searchString + param + maxSize + key
+        
+        let indexCount = (maxSizeInt * index) + 1
+        
+        let urlString = baseUrl + searchString + param + indexString + String(indexCount) + maxSize + key
         // 한글 가능
         let encodedString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
 
@@ -50,6 +54,5 @@ struct YouTubeNetworkManager {
             dataTask.resume()
         }
     }
-    
     
 }

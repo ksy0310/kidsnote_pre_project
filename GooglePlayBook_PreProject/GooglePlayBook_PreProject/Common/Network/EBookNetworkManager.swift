@@ -14,14 +14,18 @@ struct EBookNetworkManager {
     
     let key = "&key=" + Bundle.main.apiKey
     let baseUrl = "https://www.googleapis.com/books/v1/volumes?q="
-    let maxSize = "&maxResults=10"
+    let indexString = "&startIndex="
+    let maxSizeInt = 20
+    let maxSize = "&maxResults=20"
     
-    func getEBookData(searchText: String,completion: @escaping (Result<Any, Error>) -> ()) {
+    func getEBookData(searchText: String,index: Int,completion: @escaping (Result<Any, Error>) -> ()) {
         
         // 입력 텍스트가 공백이 있으면 +로 대체
         let searchString = searchText.replacingOccurrences(of: " ", with: "+", options: .literal, range: nil)
 
-        let urlString = baseUrl + searchString + maxSize + key
+        let indexCount = (maxSizeInt * index) + 1
+        
+        let urlString = baseUrl + searchString + indexString + String(indexCount) + maxSize + key
         // 한글 가능
         let encodedString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
 

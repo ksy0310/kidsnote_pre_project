@@ -39,6 +39,9 @@ class ViewController: UIViewController {
     var videoInfo = [Youtube]()
     var videoid = [String]()
     
+    var bookIndex = 0
+    var videoIndex = 0
+    
     // containerView
     private var containerView: UIView = UIView()
     
@@ -216,14 +219,16 @@ class ViewController: UIViewController {
         }
             if isEBook {
                 // ebook 검색
+                bookIndex = 0
                 self.bookInfo.removeAll()
-                EBookNetworkManager.shared.getEBookData(searchText: string) { (response) in
+                EBookNetworkManager.shared.getEBookData(searchText: string, index: 0) { (response) in
                     switch response {
                     case .success(let data):
                         if let decodedData = data as? ApiResponse {
                             self.bookInfo = decodedData.items
                             print("!!!bookInfo!!!",decodedData.items)
                             DispatchQueue.main.async {
+                                self.eBookCollectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
                                 self.eBookCollectionView.reloadData()
                             }
                             return
@@ -234,14 +239,16 @@ class ViewController: UIViewController {
                 }
             }else{
                 // video 검색
+                videoIndex = 0
                 self.videoInfo.removeAll()
-                YouTubeNetworkManager.shared.getVideoData(searchText: string) { (response) in
+                YouTubeNetworkManager.shared.getVideoData(searchText: string,index: 0) { (response) in
                     switch response {
                     case .success(let data):
                         if let decodedData = data as? YouTubeApiResponse {
                             self.videoInfo = decodedData.items
                             print("!!!videoInfo!!!",decodedData.items)
                             DispatchQueue.main.async {
+                                self.eBookCollectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
                                 self.eBookCollectionView.reloadData()
                             }
                             return
@@ -252,6 +259,57 @@ class ViewController: UIViewController {
             }
         }
     }
+    
+    func loadMoreBookData(index:Int) {
+        let searchText = searchField.text
+        var string = ""
+        if searchText == "" {
+            string = baseSearchString
+        }else{
+            string = searchText!
+        }
+        // ebook 검색
+        EBookNetworkManager.shared.getEBookData(searchText: string, index: index) { (response) in
+            switch response {
+                case .success(let data):
+                    if let decodedData = data as? ApiResponse {
+                        self.bookInfo += decodedData.items
+                        DispatchQueue.main.async {
+                            self.eBookCollectionView.reloadData()
+                        }
+                        return
+                    }
+                case .failure(let data):
+                    print("Network fail", data)
+                }
+            }
+        }
+    
+    func loadMoreVideoData(index:Int) {
+        let searchText = searchField.text
+        var string = ""
+        if searchText == "" {
+            string = baseSearchString
+        }else{
+            string = searchText!
+        }
+        // video 검색
+        YouTubeNetworkManager.shared.getVideoData(searchText: string,index: index) { (response) in
+            switch response {
+                case .success(let data):
+                    if let decodedData = data as? YouTubeApiResponse {
+                        self.videoInfo += decodedData.items
+                        DispatchQueue.main.async {
+                            self.eBookCollectionView.reloadData()
+                        }
+                        return
+                    }
+                case .failure(let data):
+                    print("Network fail", data)
+            }
+        }
+    }
+    
 }
 // collectionView
 extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -478,6 +536,24 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
             
         }
 
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if (collectionView == menuBarCollectionView) {
+            
+        }else{
+            if indexPath.row == collectionView.numberOfItems(inSection: indexPath.section) - 1 {
+                if isEBook {
+                    bookIndex += 1
+                    print("!!bookIndex",bookIndex)
+                    loadMoreBookData(index: bookIndex)
+                } else {
+                    videoIndex += 1
+                    print("!!videoIndex",videoIndex)
+                    loadMoreVideoData(index: videoIndex)
+                }
+            }
+        }
     }
 }
 
