@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		0C2BAF1929991CA9003F731B /* YouTubeInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2BAF1829991CA9003F731B /* YouTubeInfo.swift */; };
 		0C2BAF1E29991CD1003F731B /* YouTubeNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2BAF1D29991CD1003F731B /* YouTubeNetworkManager.swift */; };
+		0C2BAF2F2999FDDE003F731B /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2BAF2E2999FDDE003F731B /* PlayerViewController.swift */; };
+		0C2BAF35299A00D8003F731B /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C2BAF34299A00D8003F731B /* WebKit.framework */; };
 		0C3805A029937D8A007E72DD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C38059F29937D8A007E72DD /* AppDelegate.swift */; };
 		0C3805A229937D8A007E72DD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3805A129937D8A007E72DD /* SceneDelegate.swift */; };
 		0C3805A429937D8A007E72DD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3805A329937D8A007E72DD /* ViewController.swift */; };
@@ -51,6 +53,8 @@
 /* Begin PBXFileReference section */
 		0C2BAF1829991CA9003F731B /* YouTubeInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouTubeInfo.swift; sourceTree = "<group>"; };
 		0C2BAF1D29991CD1003F731B /* YouTubeNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouTubeNetworkManager.swift; sourceTree = "<group>"; };
+		0C2BAF2E2999FDDE003F731B /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
+		0C2BAF34299A00D8003F731B /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		0C38059C29937D8A007E72DD /* GooglePlayBook_PreProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GooglePlayBook_PreProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C38059F29937D8A007E72DD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0C3805A129937D8A007E72DD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -84,6 +88,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C2BAF35299A00D8003F731B /* WebKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -104,6 +109,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0C2BAF33299A00D8003F731B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0C2BAF34299A00D8003F731B /* WebKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		0C38059329937D8A007E72DD = {
 			isa = PBXGroup;
 			children = (
@@ -111,6 +124,7 @@
 				0C3805B529937D8C007E72DD /* GooglePlayBook_PreProjectTests */,
 				0C3805C029937D8C007E72DD /* GooglePlayBook_PreProjectUITests */,
 				0C38059D29937D8A007E72DD /* Products */,
+				0C2BAF33299A00D8003F731B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -173,6 +187,7 @@
 				0C3805D92994F402007E72DD /* DetailViewController.swift */,
 				0C3805E129966676007E72DD /* InfoViewController.swift */,
 				0CABE3612997A55A00A28C15 /* ReviewViewController.swift */,
+				0C2BAF2E2999FDDE003F731B /* PlayerViewController.swift */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -366,6 +381,7 @@
 				0C3805D82994E7B0007E72DD /* EBookCollectionReusableView.swift in Sources */,
 				0CABE35D299799F900A28C15 /* BookInfo.swift in Sources */,
 				0C3805DA2994F402007E72DD /* DetailViewController.swift in Sources */,
+				0C2BAF2F2999FDDE003F731B /* PlayerViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

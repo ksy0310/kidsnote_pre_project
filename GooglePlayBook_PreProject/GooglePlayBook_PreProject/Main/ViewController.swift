@@ -362,6 +362,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
                 cell.eBookTitleLabel.text = self.videoInfo[indexPath.row].snippet.title
                 cell.eBookAuthorsLabel.text = self.videoInfo[indexPath.row].snippet.channelTitle
                 cell.eBookKindLabel.text = "youTube"
+                cell.eBookAverageRatingLabel.text = " "
                 let thumbnailImg = self.videoInfo[indexPath.row].snippet.thumbnails?.medium?.url
                 let highImg = self.videoInfo[indexPath.row].snippet.thumbnails?.high?.url
                 cell.eBookThumbnailImageView.contentMode = .scaleAspectFill

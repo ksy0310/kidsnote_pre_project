@@ -290,8 +290,9 @@ class DetailViewController: UIViewController {
         setupNavigationBarLayout()
         setupContentViewLayout()
         
-        setData()
         
+        setData()
+        setDataRatingGraphView()
     }
     
     // 디테일화면 구성 - 상단 네비게이션 바/ 하단 컨테이너 뷰/ scrollview
@@ -1084,7 +1085,104 @@ class DetailViewController: UIViewController {
             
         }
     }
-    
+    // 별점 데이터-그래프 UI
+    private func setDataRatingGraphView() {
+        let count = ebookInfo.volumeInfo.averageRating
+        
+        if count != nil {
+            switch Int(count!) {
+                case 5:
+                    //5점
+                    //별
+                    one_starImageView.image = UIImage(named: "star_blue")
+                    two_starImageView.image = UIImage(named: "star_blue")
+                    three_starImageView.image = UIImage(named: "star_blue")
+                    four_starImageView.image = UIImage(named: "star_blue")
+                    five_starImageView.image = UIImage(named: "star_blue")
+                    //그래프
+                    oneGraphView.backgroundColor = UIColor(named: "pointBlueColor")
+                    twoGraphView.backgroundColor = .darkGray
+                    threeGraphView.backgroundColor = .darkGray
+                    fourGraphView.backgroundColor = .darkGray
+                    fiveGraphView.backgroundColor = .darkGray
+                    
+                case 4:
+                    //4점
+                    //별
+                    one_starImageView.image = UIImage(named: "star_blue")
+                    two_starImageView.image = UIImage(named: "star_blue")
+                    three_starImageView.image = UIImage(named: "star_blue")
+                    four_starImageView.image = UIImage(named: "star_blue")
+                    five_starImageView.image = UIImage(named: "star")
+                    //그래프
+                    oneGraphView.backgroundColor = .darkGray
+                    twoGraphView.backgroundColor = UIColor(named: "pointBlueColor")
+                    threeGraphView.backgroundColor = .darkGray
+                    fourGraphView.backgroundColor = .darkGray
+                    fiveGraphView.backgroundColor = .darkGray
+                    
+                case 3:
+                    //3점
+                    //별
+                    one_starImageView.image = UIImage(named: "star_blue")
+                    two_starImageView.image = UIImage(named: "star_blue")
+                    three_starImageView.image = UIImage(named: "star_blue")
+                    four_starImageView.image = UIImage(named: "star")
+                    five_starImageView.image = UIImage(named: "star")
+                    //그래프
+                    oneGraphView.backgroundColor = .darkGray
+                    twoGraphView.backgroundColor = .darkGray
+                    threeGraphView.backgroundColor = UIColor(named: "pointBlueColor")
+                    fourGraphView.backgroundColor = .darkGray
+                    fiveGraphView.backgroundColor = .darkGray
+                    
+                case 2:
+                    //2점
+                    //별
+                    one_starImageView.image = UIImage(named: "star_blue")
+                    two_starImageView.image = UIImage(named: "star_blue")
+                    three_starImageView.image = UIImage(named: "star")
+                    four_starImageView.image = UIImage(named: "star")
+                    five_starImageView.image = UIImage(named: "star")
+                    //그래프
+                    oneGraphView.backgroundColor = .darkGray
+                    twoGraphView.backgroundColor = .darkGray
+                    threeGraphView.backgroundColor = .darkGray
+                    fourGraphView.backgroundColor = UIColor(named: "pointBlueColor")
+                    fiveGraphView.backgroundColor = .darkGray
+                    
+                case 1:
+                    //1점
+                    //별
+                    one_starImageView.image = UIImage(named: "star_blue")
+                    two_starImageView.image = UIImage(named: "star")
+                    three_starImageView.image = UIImage(named: "star")
+                    four_starImageView.image = UIImage(named: "star")
+                    five_starImageView.image = UIImage(named: "star")
+                    //그래프
+                    oneGraphView.backgroundColor = .darkGray
+                    twoGraphView.backgroundColor = .darkGray
+                    threeGraphView.backgroundColor = .darkGray
+                    fourGraphView.backgroundColor = .darkGray
+                    fiveGraphView.backgroundColor = UIColor(named: "pointBlueColor")
+                    
+                default:
+                    //0점,점수없음
+                    //별
+                    one_starImageView.image = UIImage(named: "star")
+                    two_starImageView.image = UIImage(named: "star")
+                    three_starImageView.image = UIImage(named: "star")
+                    four_starImageView.image = UIImage(named: "star")
+                    five_starImageView.image = UIImage(named: "star")
+                    //그래프
+                    oneGraphView.backgroundColor = .darkGray
+                    twoGraphView.backgroundColor = .darkGray
+                    threeGraphView.backgroundColor = .darkGray
+                    fourGraphView.backgroundColor = .darkGray
+                    fiveGraphView.backgroundColor = .darkGray
+            }
+        }
+    }
     
     // action - back Button
     @objc func backButtonAction(sender: UIButton!) {
@@ -1116,10 +1214,11 @@ class DetailViewController: UIViewController {
             }
         } else {
             print("youtubeAction click!!")
-            let youtubeLink: String = "https://www.youtube.com/watch?v="+videoId
-            if let url = URL(string: youtubeLink) {
-                UIApplication.shared.open(url, options: [:])
-            }
+            let playerViewController: PlayerViewController = PlayerViewController()
+            playerViewController.modalPresentationStyle = UIModalPresentationStyle.fullScreen
+            playerViewController.videoTitle = videoInfo.snippet.channelTitle!
+            playerViewController.videoId = videoId
+            self.presentDetail(playerViewController)
         }
     }
     
