@@ -28,9 +28,11 @@ class ViewController: UIViewController {
         return collectionView
     }()
     
+    // 처음 검색 string
+    var baseSearchString = "Harry Potter"
     // 메뉴 탭 데이터
     private let menudata = MenuBarCollectionViewData.menuList
-    var menuFlag:Bool = true
+    var isEBook:Bool = true
     // book 데이터
     var bookInfo = [Book]()
     // youtube 데이터
@@ -52,7 +54,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setNetwork(searchText: "flower")
+        setNetwork(searchText: baseSearchString)
         
         setupNavigationBarLayout()
         configuereSearch()
@@ -206,10 +208,16 @@ class ViewController: UIViewController {
     
     // 통신 - get BookInfo
     func setNetwork(searchText: String) {
-
-            if menuFlag {
+        var string = ""
+        if searchText == "" {
+            string = baseSearchString
+        }else{
+            string = searchText
+        }
+            if isEBook {
                 // ebook 검색
-                EBookNetworkManager.shared.getEBookData(searchText: searchText) { (response) in
+                self.bookInfo.removeAll()
+                EBookNetworkManager.shared.getEBookData(searchText: string) { (response) in
                     switch response {
                     case .success(let data):
                         if let decodedData = data as? ApiResponse {
@@ -226,7 +234,8 @@ class ViewController: UIViewController {
                 }
             }else{
                 // video 검색
-                YouTubeNetworkManager.shared.getVideoData(searchText: searchText) { (response) in
+                self.videoInfo.removeAll()
+                YouTubeNetworkManager.shared.getVideoData(searchText: string) { (response) in
                     switch response {
                     case .success(let data):
                         if let decodedData = data as? YouTubeApiResponse {
@@ -304,7 +313,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
         if (collectionView == menuBarCollectionView){
             return menudata.count
         }else{
-            if menuFlag {
+            if isEBook {
                 return self.bookInfo.count
             }else{
                 return self.videoInfo.count
@@ -324,7 +333,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
         }else{
             let cell = eBookCollectionView.dequeueReusableCell(withReuseIdentifier: EBookCollectionViewCell.id, for: indexPath) as! EBookCollectionViewCell
             
-            if menuFlag {
+            if isEBook {
                 cell.eBookTitleLabel.text = self.bookInfo[indexPath.row].volumeInfo.title
                 
                 let authors = self.bookInfo[indexPath.row].volumeInfo.authors ?? ["..."]
@@ -347,6 +356,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
                         cell.eBookThumbnailImageView.contentMode = .scaleAspectFill
                     }else{
                         cell.eBookThumbnailImageView.image = UIImage(named: "noimage")
+                        cell.eBookThumbnailImageView.contentMode = .scaleAspectFit
                     }
                 }
                 
@@ -374,6 +384,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
                         cell.eBookThumbnailImageView.load(urlString: highImg!)
                     }else{
                         cell.eBookThumbnailImageView.image = UIImage(named: "noimage")
+                        cell.eBookThumbnailImageView.contentMode = .scaleAspectFit
                     }
                 }
             }
@@ -390,9 +401,15 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
              let height = collectionView.bounds.height
              return CGSize(width: width, height: height)
         }else{
-            let width = collectionView.bounds.width
-            let height = collectionView.bounds.height / 6
-            return CGSize(width: width, height: height)
+            if isEBook {
+                let width = collectionView.bounds.width
+                let height = collectionView.bounds.height / 6
+                return CGSize(width: width, height: height)
+            } else {
+                let width = collectionView.bounds.width
+                let height = collectionView.bounds.height / 7
+                return CGSize(width: width, height: height)
+            }
         }
     }
     
@@ -402,7 +419,6 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
             return UICollectionReusableView.init()
         }else{
             let headerView = eBookCollectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: EBookCollectionReusableView.id, for: indexPath) as! EBookCollectionReusableView
-
             return headerView
         }
     }
@@ -420,35 +436,32 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
     // select cell
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print(indexPath.row)
-        
-        var searchText = searchField.text
-        if searchText == nil {
-            searchText = "flower"
-        }
+        let searchText = searchField.text
         
         if (collectionView == menuBarCollectionView){
             if indexPath.row == 0 {
                 // eBook 위치로 이동, 사이즈 줄이기
-                
-                menuFlag = true
+                isEBook = true
                 
                 UIView.animate(withDuration: 0.5, animations: {
                     self.selectBarView.transform = CGAffineTransform.init(translationX: 0, y: 0).concatenating(CGAffineTransform.init(scaleX: 1, y: 1))
                 })
+
+                setNetwork(searchText: searchText ?? "")
                 
             } else {
                 // 오디오북 위치로 이동, 사이즈 늘리기
-                
-                menuFlag = false
+                isEBook = false
                 
                 UIView.animate(withDuration: 0.5, animations: {
                     self.selectBarView.transform = CGAffineTransform.init(translationX: 125, y: 0).concatenating(CGAffineTransform.init(scaleX: 1.5, y: 1))
                 })
+
+                setNetwork(searchText: searchText ?? "")
             }
-            setNetwork(searchText: searchText!)
             
         } else {
-            if menuFlag {
+            if isEBook {
                 let detailViewController: DetailViewController = DetailViewController()
                 detailViewController.modalPresentationStyle = UIModalPresentationStyle.fullScreen
                 detailViewController.isEBook = true

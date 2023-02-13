@@ -414,7 +414,8 @@ class ReviewViewController: UIViewController {
     // 별점 데이터-그래프 UI
     private func setDataRatingGraphView() {
         let count = ratingCount
-        let countString = count.replacingOccurrences(of: ".0", with: "")
+        let countString = count[count.startIndex]
+        print("!!!",countString)
         switch countString {
             case "5":
                 //5점

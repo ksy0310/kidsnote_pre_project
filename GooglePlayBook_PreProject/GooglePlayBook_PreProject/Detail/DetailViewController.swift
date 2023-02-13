@@ -292,7 +292,9 @@ class DetailViewController: UIViewController {
         
         
         setData()
-        setDataRatingGraphView()
+        if isEBook {
+            setDataRatingGraphView()
+        }
     }
     
     // 디테일화면 구성 - 상단 네비게이션 바/ 하단 컨테이너 뷰/ scrollview
@@ -401,7 +403,6 @@ class DetailViewController: UIViewController {
                     bookThumbnailImageView.bottomAnchor.constraint(equalTo: bookInfoView.bottomAnchor, constant: -20),
                     bookThumbnailImageView.leadingAnchor.constraint(equalTo: bookInfoView.leadingAnchor, constant: 20),
                     bookThumbnailImageView.widthAnchor.constraint(equalToConstant: 100),
-                    
         ])
         
         bookThumbnailImageView.image = UIImage(named: "noimage")
@@ -1007,7 +1008,7 @@ class DetailViewController: UIViewController {
             bookKindLabel.text = "eBook ·"
             bookPagesLabel.text = String(Int(ebookInfo.volumeInfo.pageCount ?? 0)) + "페이지"
             
-            descriptionLabel.text = ebookInfo.volumeInfo.description
+            descriptionLabel.text = ebookInfo.volumeInfo.description ?? "..."
             
             if ebookInfo.volumeInfo.averageRating != nil {
                 ratingCountView.isHidden = false
@@ -1028,10 +1029,14 @@ class DetailViewController: UIViewController {
                         
                 let convertDate = dateFormatter.date(from: date!) // Date 타입으로 변환
                 
-                let myDateFormatter = DateFormatter()
-                myDateFormatter.dateFormat = "yyyy년MM월dd일"
-                let convertStr = myDateFormatter.string(from: convertDate!)
-                publishedDateLabel.text = convertStr + " ·"
+                if convertDate != nil {
+                    let myDateFormatter = DateFormatter()
+                    myDateFormatter.dateFormat = "yyyy년MM월dd일"
+                    let convertStr = myDateFormatter.string(from: convertDate!)
+                    publishedDateLabel.text = convertStr + " ·"
+                } else {
+                    publishedDateLabel.text = ""
+                }
             }
             publisherLabel.text = ebookInfo.volumeInfo.publisher
         } else {
@@ -1059,7 +1064,7 @@ class DetailViewController: UIViewController {
             bookKindLabel.text = "YouTube"
             bookPagesLabel.isHidden = true
             
-            descriptionLabel.text = videoInfo.snippet.description
+            descriptionLabel.text = videoInfo.snippet.description ?? "..."
             
             publishedDateView.topAnchor.constraint(equalTo: bookdescriptionView.bottomAnchor, constant: 10).isActive = true
             ratingCountInfoView.isHidden = true
@@ -1087,10 +1092,10 @@ class DetailViewController: UIViewController {
     }
     // 별점 데이터-그래프 UI
     private func setDataRatingGraphView() {
-        let count = ebookInfo.volumeInfo.averageRating
+        let count = ebookInfo.volumeInfo.averageRating ?? 0.0
         
         if count != nil {
-            switch Int(count!) {
+            switch Int(count) {
                 case 5:
                     //5점
                     //별
@@ -1246,10 +1251,10 @@ class DetailViewController: UIViewController {
         infoViewController.modalPresentationStyle = UIModalPresentationStyle.fullScreen
         if isEBook {
             infoViewController.bookTitle = ebookInfo.volumeInfo.title
-            infoViewController.bookdescription = ebookInfo.volumeInfo.description!
+            infoViewController.bookdescription = ebookInfo.volumeInfo.description ?? "..."
         } else {
             infoViewController.bookTitle = videoInfo.snippet.channelTitle!
-            infoViewController.bookdescription = videoInfo.snippet.description!
+            infoViewController.bookdescription = videoInfo.snippet.description ?? "..."
         }
         self.presentDetail(infoViewController)
     }
