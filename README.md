@@ -103,10 +103,10 @@ API_KEY = "Your Google API Key"
 
 
 ## :file_folder: 기능 목록
-<img width="705" alt="스크린샷 2023-02-14 오후 4 55 39" src="https://user-images.githubusercontent.com/124762147/218673878-089cc068-6ef3-4ccc-87fc-1f5f364482f1.png">
+<img width="704" alt="스크린샷 2023-02-14 오후 5 27 24" src="https://user-images.githubusercontent.com/124762147/218680377-4eaa7a7f-bb3f-4864-b2c5-6d5b279597b3.png">
 
 
-<img width="702" alt="스크린샷 2023-02-14 오후 4 55 49" src="https://user-images.githubusercontent.com/124762147/218674000-bd228ae8-e3fc-47b9-8669-a9163f9e0558.png">
+<img width="701" alt="스크린샷 2023-02-14 오후 5 27 36" src="https://user-images.githubusercontent.com/124762147/218680536-0412a84c-7c27-43ed-bf15-f0a7fa267115.png">
 
 
 ## :bar_chart: Color
