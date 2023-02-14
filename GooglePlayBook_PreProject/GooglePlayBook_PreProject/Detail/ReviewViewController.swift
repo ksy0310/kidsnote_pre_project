@@ -25,7 +25,7 @@ class ReviewViewController: UIViewController {
     // contentView
     private var contentView: UIView = UIView()
     
-    // ratingCountView
+    // 평점 및 리뷰
     let averageRatingGraphView = AverageRatingGraphView.view
         
     override func viewDidLoad() {
