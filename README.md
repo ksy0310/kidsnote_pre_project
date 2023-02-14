@@ -38,6 +38,7 @@ GoogleBooks API 와 YouTube Data API를 활용한 'Google북스'앱입니다.
 
 
 ## :blue_book: 데모영상
+[![Video Label](http://img.youtube.com/vi/_fNY-YBApbU/0.jpg)](https://youtu.be/_fNY-YBApbU)
 
 
 ## :notebook: 프로젝트 계획표
@@ -93,10 +94,19 @@ https://www.googleapis.com/youtube/v3/search?q=audiobook&part=snippet&type=video
 
 ## :key: API Key
 GooglePlayBookInfo.plist 파일에 아래와 같이 작성해주세요.
-    API_KEY = "Your Google API Key"
+
+
+```
+API_KEY = "Your Google API Key"
+```
+
 
 
 ## :file_folder: 기능 목록
+<img width="705" alt="스크린샷 2023-02-14 오후 4 55 39" src="https://user-images.githubusercontent.com/124762147/218673878-089cc068-6ef3-4ccc-87fc-1f5f364482f1.png">
+
+
+<img width="702" alt="스크린샷 2023-02-14 오후 4 55 49" src="https://user-images.githubusercontent.com/124762147/218674000-bd228ae8-e3fc-47b9-8669-a9163f9e0558.png">
 
 
 ## :bar_chart: Color
@@ -115,10 +125,6 @@ https://www.flaticon.com/
 ## :page_facing_up: 참조 사이트
 - https://rldd.tistory.com/m/232
 - https://velog.io/@leedool3003/iOS-API-Key-%EC%88%A8%EA%B8%B0%EA%B8%B0
-
-<!-- 
-## :email:
-## 과제 하면서 배운점/느낀점 -->
 
 
 ## :high_brightness: 개발자 연락처
