@@ -1,15 +1,17 @@
-# kidsnote_pre_project
+#:computer: kidsnote_pre_project
 
-## 프로젝트 기간
+##:closed_book: 프로젝트 기간
 * 2023/02/07 ~ 2023/02/14
 
 
-## 프로젝트 설명
-토이 프로젝트이며,
+##:orange_book: 프로젝트 설명
+- 토이 프로젝트이며,
+
+
 GoogleBooks API 와 YouTube Data API를 활용한 'Google북스'앱입니다.
 
 
-## 프로젝트 내용
+##:ledger: 프로젝트 내용
 * 구글 Play 북과 같은 앱을 작성하세요.
 	- 왼쪽 메뉴는 구현이 필요하지않습니다.
     - 검색 기능 + 디테일 페이지를 메인으로 구성합니다.
@@ -26,56 +28,69 @@ GoogleBooks API 와 YouTube Data API를 활용한 'Google북스'앱입니다.
 * Github Repository 명은 kidsnote_pre_project로 작성해 주세요.
 
 
-## 사용언어
+##:green_book: 사용언어
 ![Swift](https://img.shields.io/badge/swift-F54A2A?style=for-the-badge&logo=swift&logoColor=white)
 
 
 ![iOS](https://img.shields.io/badge/iOS-000000?style=for-the-badge&logo=ios&logoColor=white)
 
 
-## 데모영상
+##:blue_book: 데모영상
 
 
-## 프로젝트 계획표
+##:notebook: 프로젝트 계획표
 
 
-## 전체 앱 구성
+##:notebook_with_decorative_cover: 전체 앱 구성
 
 
-## 사용한 API
+##:open_file_folder: 사용한 API
 - Google Books API
 
-호출 예시) https://www.googleapis.com/books/v1/volumes?q=flower
+호출 예시) 
+
+
+https://www.googleapis.com/books/v1/volumes?q=flower
 
 
 - YouTube Data API 
 
-호출 예시) https://www.googleapis.com/youtube/v3/search?q=audiobook&part=snippet&type=video&key=+AIzaSyBoI-yYk3uxUGbhTk8MJZAQ6m_3cVGdccQ
+호출 예시) 
 
 
-## API Key
+https://www.googleapis.com/youtube/v3/search?q=audiobook&part=snippet&type=video&key=+AIzaSyBoI-yYk3uxUGbhTk8MJZAQ6m_3cVGdccQ
+
+
+##:key: API Key
 GooglePlayBookInfo.plist 파일에 아래와 같이 작성해주세요.
     API_KEY = "Your Google API Key"
 
 
 
-## 기능 목록
+##:file_folder: 기능 목록
 
 
-## Color
+##:bar_chart: Color
+- 포인트 컬러 : #6BB2EE
+- 백그라운드 컬러 : #212121
+- 아이콘 컬러 : #9E9E9E
+- 미니 텍스트 컬러 : #989898
 
-## icon 출처
+##:chart_with_upwards_trend: icon 출처
+https://www.flaticon.com/
 
-## 참조 사이트
+
+
+##:page_facing_up: 참조 사이트
 - https://rldd.tistory.com/m/232
 - https://velog.io/@leedool3003/iOS-API-Key-%EC%88%A8%EA%B8%B0%EA%B8%B0
 
 
-## 트러블 슈팅
+##:email: 과제 하면서 배운점/느낀점
 
-## 과제 하면서 배운점/느낀점
-
-## 개발자
+##:high_brightness: 개발자 연락처
 김소영 (ksy0310007@naver.com)
+
+
 010-8364-2095
 
