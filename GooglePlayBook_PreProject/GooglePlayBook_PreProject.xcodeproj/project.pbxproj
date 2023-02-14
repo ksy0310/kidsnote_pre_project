@@ -28,6 +28,7 @@
 		0C3805E229966676007E72DD /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3805E129966676007E72DD /* InfoViewController.swift */; };
 		0C55CAC1299AA20E005498BF /* LoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C55CAC0299AA20E005498BF /* LoadingIndicator.swift */; };
 		0C55CAC3299AA96C005498BF /* DeviceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C55CAC2299AA96B005498BF /* DeviceManager.swift */; };
+		0C55CAC9299B39D3005498BF /* AverageRatingGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C55CAC8299B39D3005498BF /* AverageRatingGraphView.swift */; };
 		0CABE35D299799F900A28C15 /* BookInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CABE35C299799F900A28C15 /* BookInfo.swift */; };
 		0CABE3622997A55A00A28C15 /* ReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CABE3612997A55A00A28C15 /* ReviewViewController.swift */; };
 		0CABE38F2998EDE000A28C15 /* EBookNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CABE38E2998EDE000A28C15 /* EBookNetworkManager.swift */; };
@@ -80,6 +81,7 @@
 		0C3805E129966676007E72DD /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		0C55CAC0299AA20E005498BF /* LoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicator.swift; sourceTree = "<group>"; };
 		0C55CAC2299AA96B005498BF /* DeviceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceManager.swift; sourceTree = "<group>"; };
+		0C55CAC8299B39D3005498BF /* AverageRatingGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AverageRatingGraphView.swift; sourceTree = "<group>"; };
 		0CABE35C299799F900A28C15 /* BookInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookInfo.swift; sourceTree = "<group>"; };
 		0CABE3612997A55A00A28C15 /* ReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewController.swift; sourceTree = "<group>"; };
 		0CABE38E2998EDE000A28C15 /* EBookNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EBookNetworkManager.swift; sourceTree = "<group>"; };
@@ -192,6 +194,7 @@
 				0C3805E129966676007E72DD /* InfoViewController.swift */,
 				0CABE3612997A55A00A28C15 /* ReviewViewController.swift */,
 				0C2BAF2E2999FDDE003F731B /* PlayerViewController.swift */,
+				0C55CAC8299B39D3005498BF /* AverageRatingGraphView.swift */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -375,6 +378,7 @@
 				0C55CAC3299AA96C005498BF /* DeviceManager.swift in Sources */,
 				0C3805A429937D8A007E72DD /* ViewController.swift in Sources */,
 				0C3805E0299624B7007E72DD /* Extensions.swift in Sources */,
+				0C55CAC9299B39D3005498BF /* AverageRatingGraphView.swift in Sources */,
 				0CABE3622997A55A00A28C15 /* ReviewViewController.swift in Sources */,
 				0C2BAF1929991CA9003F731B /* YouTubeInfo.swift in Sources */,
 				0C3805A029937D8A007E72DD /* AppDelegate.swift in Sources */,
