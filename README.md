@@ -1,5 +1,5 @@
-# :computer:
-# kidsnote_pre_project
+
+# :computer: kidsnote_pre_project
 
 
 ## :closed_book:
