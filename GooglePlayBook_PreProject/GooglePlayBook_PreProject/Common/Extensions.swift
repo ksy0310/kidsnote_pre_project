@@ -1,4 +1,6 @@
 //
+// 페이지 이동 애니메이션, 이미지string으로 load, textField clear button.
+//
 //  Extensions.swift
 //  GooglePlayBook_PreProject
 //
@@ -57,8 +59,6 @@ extension UITextField {
         
         let clearButton = UIButton(frame: rightViewRect(forBounds: bounds))
         clearButton.frame.size = CGSize(width: 10, height: 10)
-            //UIButton(frame: CGRect.init(x:0, y:0, width:10, height:10))
-            //UIButton(frame: rightViewRect(forBounds: bounds))//UIButton(frame: CGRectMake(0, 0, 16, 16))
         clearButton.setImage(UIImage(named: "cancel"), for: .normal)
         clearButton.addTarget(self, action: #selector(UITextField.clear(sender:)), for: .touchUpInside)
         

@@ -1,4 +1,6 @@
 //
+// 리뷰 페이지.
+//
 //  ReviewViewController.swift
 //  GooglePlayBook_PreProject
 //
@@ -36,6 +38,7 @@ class ReviewViewController: UIViewController {
 
         averageRatingGraphView.setDataRatingGraphView(reviewCountString: reviewCount, ratingCountString: ratingCount)
     }
+    
     // 상단 네비게이션 바
     private func setupNavigationBarLayout() {
         // 메인 배경화면 컬러
@@ -52,7 +55,6 @@ class ReviewViewController: UIViewController {
             navigationBarView.heightAnchor.constraint(equalToConstant: 44),
         ])
         navigationBarView.backgroundColor = .clear
-        
         
         // 이전 버튼
         navigationBarView.addSubview(backButton)

@@ -1,4 +1,6 @@
 //
+// Google Books API Response.
+//
 //  BookInfo.swift
 //  GooglePlayBook_PreProject
 //
@@ -27,10 +29,12 @@ struct VolumeInfo: Codable {
     let imageLinks: imageUrl?
     let pageCount: Double?
 }
+
 struct imageUrl: Codable {
     let smallThumbnail: String?
     let thumbnail: String?
 }
+
 struct ApiResponse: Codable {
     let kind: String
     let totalItems: Int

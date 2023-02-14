@@ -1,4 +1,6 @@
 //
+// 메인뷰에서 상단 메뉴 탭 데이터.
+//
 //  MenuBarCollectionViewData.swift
 //  GooglePlayBook_PreProject
 //

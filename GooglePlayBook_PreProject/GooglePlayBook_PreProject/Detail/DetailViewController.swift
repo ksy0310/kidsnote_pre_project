@@ -1,4 +1,6 @@
 //
+// 각 데이터 상세보기 페이지.
+//
 //  DetailViewController.swift
 //  GooglePlayBook_PreProject
 //
@@ -417,7 +419,6 @@ class DetailViewController: UIViewController {
         bookdescriptionView.backgroundColor = .clear
         
         NSLayoutConstraint.activate([
-            
             bookdescriptionView.topAnchor.constraint(equalTo: functionView.bottomAnchor),
             bookdescriptionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             bookdescriptionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
@@ -467,7 +468,7 @@ class DetailViewController: UIViewController {
         descriptionLabel.numberOfLines = 0
         descriptionLabel.font = UIFont.systemFont(ofSize: 16)
         descriptionLabel.textColor = UIColor(named: "mainTextColor")
-        descriptionLabel.text = "책 소개, 책 설명, 책책책책 소개, 책 설명, 책책책책 소개, 책 설명, 책책책책 소개, 책 설명, 책책책책 소개, 책 설명, 책책책책 소개, 책 설명, 책책책책 소개, 책 설명, 책책책책 소개, 책 설명, 책책책책 소개, 책 설명, 책책책책 소개, 책 설명, 책책책책 소개, 책 설명, 책책책"
+        descriptionLabel.text = "책 소개, 책 설명"
         
         // bookdescription 전체를 버튼으로
         bookdescriptionView.addSubview(bookdescriptionButton)
@@ -526,7 +527,7 @@ class DetailViewController: UIViewController {
         ratingCountDetailImageView.image = UIImage(named: "right_arrow")
         ratingCountDetailImageView.backgroundColor = .clear
         
-        //  ------------------------
+        // 그래프
         averageRatingGraphView.translatesAutoresizingMaskIntoConstraints = false
         ratingCountView.addSubview(averageRatingGraphView)
 
@@ -604,15 +605,12 @@ class DetailViewController: UIViewController {
 
         ratingCountInfoButton.addTarget(self, action: #selector(ratingCountInfoButtonAction), for: .touchUpInside)
         
-        
-        
         // 게시일
         contentView.addSubview(publishedDateView)
         publishedDateView.translatesAutoresizingMaskIntoConstraints = false
         publishedDateView.backgroundColor = .clear
         
         NSLayoutConstraint.activate([
-            
             publishedDateView.topAnchor.constraint(equalTo: ratingCountInfoView.bottomAnchor, constant: 10),
             publishedDateView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             publishedDateView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
@@ -680,21 +678,22 @@ class DetailViewController: UIViewController {
         emptyLabel.numberOfLines = 0
         emptyLabel.text = ""
         
-        
     }
     
     // 데이터
     private func setData() {
         if isEBook {
+            // eBook
+            
+            // 작가
             let authors = ebookInfo.volumeInfo.authors ?? ["..."]
             var author = ""
-            
             for j in authors {
                 author += "\(j) "
             }
             bookAuthorsLabel.text = author
             
-            
+            // 책 이미지
             let thumbnailImg = ebookInfo.volumeInfo.imageLinks?.thumbnail
             let smallImg = ebookInfo.volumeInfo.imageLinks?.smallThumbnail
             if thumbnailImg != nil {
@@ -708,17 +707,24 @@ class DetailViewController: UIViewController {
                     bookThumbnailImageView.image = UIImage(named: "noimage")
                 }
             }
+            
+            // 책 제목
             bookTitleLabel.text = ebookInfo.volumeInfo.title
             
+            // 분류
             bookKindLabel.text = "eBook ·"
+            
+            // 페이지 수
             bookPagesLabel.text = String(Int(ebookInfo.volumeInfo.pageCount ?? 0)) + "페이지"
             
+            // 내용
             descriptionLabel.text = ebookInfo.volumeInfo.description ?? "..."
             
+            // 평점 및 리뷰, 그래프
             if ebookInfo.volumeInfo.averageRating != nil {
                 ratingCountView.isHidden = false
                 ratingCountInfoView.isHidden = false
-                
+                // 그래프
                 averageRatingGraphView.setDataRatingGraphView(reviewCountString: String(ebookInfo.volumeInfo.ratingsCount!), ratingCountString: String(ebookInfo.volumeInfo.averageRating!))
                 
             } else {
@@ -727,6 +733,7 @@ class DetailViewController: UIViewController {
                 ratingCountView.isHidden = true
             }
             
+            // 발행일
             if ebookInfo.volumeInfo.publishedDate != nil {
                 let date = ebookInfo.volumeInfo.publishedDate
                 let dateFormatter = DateFormatter()
@@ -743,18 +750,20 @@ class DetailViewController: UIViewController {
                     publishedDateLabel.text = ""
                 }
             }
-            publisherLabel.text = ebookInfo.volumeInfo.publisher
-        } else {
-            shareButton.isHidden = true
-            wishListButton.isHidden = true
-            sampleButton.setTitle("유투브 보기", for: .normal)
-            sampleButton.trailingAnchor.constraint(equalTo: functionView.trailingAnchor, constant: -20).isActive = true
             
+            // 발행자
+            publisherLabel.text = ebookInfo.volumeInfo.publisher
+            
+        } else {
+            // youtube 데이터 - video
+            
+            // 채널명
             bookAuthorsLabel.text = videoInfo.snippet.channelTitle
+            
+            // 비디오 썸네일
             let thumbnailImg = videoInfo.snippet.thumbnails?.medium?.url
             let highlImg = videoInfo.snippet.thumbnails?.high?.url
             bookThumbnailImageView.contentMode = .scaleAspectFill
-            
             if thumbnailImg != nil {
                 bookThumbnailImageView.load(urlString: thumbnailImg!)
             }else {
@@ -764,17 +773,18 @@ class DetailViewController: UIViewController {
                     bookThumbnailImageView.image = UIImage(named: "noimage")
                 }
             }
+            
+            // 비디오 제목
             bookTitleLabel.text = videoInfo.snippet.title
             
+            // 분류
             bookKindLabel.text = "YouTube"
-            bookPagesLabel.isHidden = true
             
+            // 비디오 설명
             descriptionLabel.text = videoInfo.snippet.description ?? "..."
             
+            // 비디오 게시일
             publishedDateView.topAnchor.constraint(equalTo: bookdescriptionView.bottomAnchor, constant: 10).isActive = true
-            ratingCountInfoView.isHidden = true
-            ratingCountView.isHidden = true
-            
             if videoInfo.snippet.publishedAt != nil {
                 let date = String(videoInfo.snippet.publishedAt!)
                 let startIndex = date.index(date.startIndex, offsetBy: 0)// 사용자지정 시작인덱스
@@ -791,12 +801,19 @@ class DetailViewController: UIViewController {
                 let convertStr = myDateFormatter.string(from: convertDate!)
                 publishedDateLabel.text = convertStr
             }
-            publisherLabel.isHidden = true
             
+            // UI 변경
+            shareButton.isHidden = true
+            wishListButton.isHidden = true
+            bookPagesLabel.isHidden = true
+            ratingCountInfoView.isHidden = true
+            ratingCountView.isHidden = true
+            sampleButton.setTitle("유튜브 보기", for: .normal)
+            sampleButton.trailingAnchor.constraint(equalTo: functionView.trailingAnchor, constant: -20).isActive = true
+            publisherLabel.isHidden = true
         }
     }
 
-    
     // action - back Button
     @objc func backButtonAction(sender: UIButton!) {
         self.dismissDetail()
@@ -820,13 +837,13 @@ class DetailViewController: UIViewController {
     // action - sample Button
     @objc func sampleButtonAction(sender: UIButton!) {
         if isEBook {
-            print("sampleButtonAction click!!")
+            // 프리뷰 주소로 이동
             let bookLink: String = ebookInfo.volumeInfo.previewLink!
             if let url = URL(string: bookLink) {
                 UIApplication.shared.open(url, options: [:])
             }
         } else {
-            print("youtubeAction click!!")
+            // playView로 이동
             let playerViewController: PlayerViewController = PlayerViewController()
             playerViewController.modalPresentationStyle = UIModalPresentationStyle.fullScreen
             playerViewController.videoTitle = videoInfo.snippet.channelTitle!
@@ -837,8 +854,7 @@ class DetailViewController: UIViewController {
     
     // action - wishList Button
     @objc func wishListButtonAction(sender: UIButton!) {
-        print("wishListButtonAction click!!")
-        
+        // 위시리스트 추가/삭제 버튼
         if whishListFlag {
             //False로
             wishListButton.setImage(UIImage(named: "delete_bookmark.png")! as UIImage, for: .normal)
@@ -854,7 +870,7 @@ class DetailViewController: UIViewController {
     
     // action - bookdescription Button
     @objc func bookdescriptionButtonAction(sender: UIButton!) {
-        print("bookdescriptionButtonAction click!!")
+        // 상세 설명 페이지로 이동.
         let infoViewController: InfoViewController = InfoViewController()
         infoViewController.modalPresentationStyle = UIModalPresentationStyle.fullScreen
         if isEBook {
@@ -870,7 +886,7 @@ class DetailViewController: UIViewController {
     
     // action - ratingCount Button
     @objc func ratingCountButtonAction(sender: UIButton!) {
-        print("ratingCountButtonAction click!!")
+        // 상세 평가 및 리뷰 페이지로 이동
         let reviewViewController: ReviewViewController = ReviewViewController()
         reviewViewController.modalPresentationStyle = UIModalPresentationStyle.fullScreen
         reviewViewController.ratingCount = String(ebookInfo.volumeInfo.averageRating!)
@@ -880,15 +896,13 @@ class DetailViewController: UIViewController {
     
     // action - ratingCountInfoButton
     @objc func ratingCountInfoButtonAction(sender: UIButton!) {
-        print("ratingCountInfoButtonAction click!!")
-        
+        // actionsheet 띄우기
         let actionsheetController = UIAlertController(title: "평점 및 리뷰 정보", message: "평점은 지역 내 사용자의 최근 평점을 토대로 합니다.", preferredStyle: .actionSheet)
         
         let detailAction = UIAlertAction(title: "자세히 알아보기", style: .default) { (action) in
             if let url = URL(string: "https://play.google.com/about/comment-posting-policy/") {
                 UIApplication.shared.open(url, options: [:])
             }
-
         }
         let okAction = UIAlertAction(title: "확인", style: .default)
 
@@ -896,6 +910,4 @@ class DetailViewController: UIViewController {
         actionsheetController.addAction(okAction)
         present(actionsheetController, animated: true, completion: nil)
     }
-    
-    
 }

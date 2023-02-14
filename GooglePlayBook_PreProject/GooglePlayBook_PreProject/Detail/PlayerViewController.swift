@@ -1,4 +1,6 @@
 //
+// Youtube 데이터 - 유튜브 보기 player.
+//
 //  PlayerViewController.swift
 //  GooglePlayBook_PreProject
 //
@@ -96,7 +98,6 @@ class PlayerViewController: UIViewController, WKUIDelegate {
                 contentView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
                 contentView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
                 contentView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            
         ])
         
         // player
@@ -119,6 +120,8 @@ class PlayerViewController: UIViewController, WKUIDelegate {
         videoTitleLabel.text = videoTitle
         getVideo(videoKey: videoId)
     }
+    
+    // videoId 주소로 실행
     func getVideo(videoKey:String){
             guard let url = URL(string: "https://www.youtube.com/embed/\(videoKey)") else { return  }
             let urlRequest:URLRequest = URLRequest(url: url)

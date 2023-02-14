@@ -1,4 +1,6 @@
 //
+// Google Books API 연결 매니저.
+//
 //  EBookNetworkManager.swift
 //  GooglePlayBook_PreProject
 //
@@ -22,9 +24,7 @@ struct EBookNetworkManager {
         
         // 입력 텍스트가 공백이 있으면 +로 대체
         let searchString = searchText.replacingOccurrences(of: " ", with: "+", options: .literal, range: nil)
-
         let indexCount = (maxSizeInt * index) + 1
-        
         let urlString = baseUrl + searchString + indexString + String(indexCount) + maxSize + key
         // 한글 가능
         let encodedString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!

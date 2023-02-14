@@ -1,4 +1,6 @@
 //
+// 로딩 view.
+//
 //  LoadingIndicator.swift
 //  GooglePlayBook_PreProject
 //
@@ -27,7 +29,6 @@ public class LoadingIndicator {
 
     func showIndicator() {
         DispatchQueue.main.async( execute: {
-
             UIApplication.shared.keyWindow?.addSubview(self.blurImg)
             UIApplication.shared.keyWindow?.addSubview(self.indicator)
         })

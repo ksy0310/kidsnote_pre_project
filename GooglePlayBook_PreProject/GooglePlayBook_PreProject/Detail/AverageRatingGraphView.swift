@@ -1,4 +1,6 @@
 //
+// 디테일 뷰, 리뷰 뷰 -> 평가 및 리뷰 그래프.
+//
 //  AverageRatingGraphView.swift
 //  GooglePlayBook_PreProject
 //
@@ -329,11 +331,9 @@ class AverageRatingGraphView: UIView {
         reviewCountLabel.text = "평점 " + reviewCountString + "개"
         ratingCountLabel.text = ratingCountString
         
-        
         let count = ratingCountString
         let countString = count[count.startIndex]
-        print("!!!",countString)
-        
+
         switch countString {
             case "5":
                 //5점

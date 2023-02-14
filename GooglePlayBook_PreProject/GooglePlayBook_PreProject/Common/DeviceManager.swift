@@ -1,4 +1,6 @@
 //
+// 디바이스 매니저 - 인터넷 연결 확인.
+//
 //  DeviceManager.swift
 //  GooglePlayBook_PreProject
 //

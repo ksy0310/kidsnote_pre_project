@@ -1,4 +1,6 @@
 //
+// 메인뷰 하단 collectionview header.
+//
 //  EBookCollectionReusableView.swift
 //  GooglePlayBook_PreProject
 //

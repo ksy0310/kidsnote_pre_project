@@ -1,4 +1,6 @@
 //
+// 메인뷰에서 상단 메뉴 탭 cell.
+//
 //  MenuBarCollectionViewCell.swift
 //  GooglePlayBook_PreProject
 //
@@ -10,7 +12,6 @@ import UIKit
 
 class MenuBarCollectionViewCell: UICollectionViewCell {
     var menuTitle: UILabel = UILabel()
-//    var bottomView: UIView = UIView()
     
     // cell의 id값 정의
     static var id: String {
@@ -43,23 +44,6 @@ class MenuBarCollectionViewCell: UICollectionViewCell {
         menuTitle.font = UIFont.systemFont(ofSize: 17)
         menuTitle.textColor = UIColor(named: "mainTextColor")
         menuTitle.textAlignment = .center
-        
-        // 하단 뷰
-//        contentView.addSubview(bottomView)
-//        bottomView.translatesAutoresizingMaskIntoConstraints = false
-        
-//        NSLayoutConstraint.activate([
-//            bottomView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 0),
-//            bottomView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-//            bottomView.widthAnchor.constraint(equalTo: menuTitle.widthAnchor),
-//            bottomView.heightAnchor.constraint(equalToConstant: 1),
-//        ])
-//
-//        bottomView.backgroundColor = UIColor(named: "pointBlueColor")
-//
-//        bottomView.clipsToBounds = true
-//        bottomView.layer.cornerRadius = 3
-//        bottomView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
     }
     
     // 선택시 UI 변경
@@ -67,11 +51,9 @@ class MenuBarCollectionViewCell: UICollectionViewCell {
         didSet {
             if isSelected {
                 menuTitle.textColor = UIColor(named: "pointBlueColor")
-//                bottomView.isHidden = false
             }
             else {
                 menuTitle.textColor = UIColor(named: "mainTextColor")
-//                bottomView.isHidden = true
             }
         }
     }
@@ -80,11 +62,9 @@ class MenuBarCollectionViewCell: UICollectionViewCell {
         didSet {
             if isSelected {
                 menuTitle.textColor = UIColor(named: "pointBlueColor")
-//                bottomView.isHidden = false
             }
             else {
                 menuTitle.textColor = UIColor(named: "mainTextColor")
-//                bottomView.isHidden = true
             }
         }
     }

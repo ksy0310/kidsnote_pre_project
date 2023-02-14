@@ -1,4 +1,6 @@
 //
+// 메인뷰 하단 collectionview cell.
+//
 //  EBookCollectionViewCell.swift
 //  GooglePlayBook_PreProject
 //
