@@ -41,9 +41,37 @@ GoogleBooks API 와 YouTube Data API를 활용한 'Google북스'앱입니다.
 
 
 ## :notebook: 프로젝트 계획표
+<img width="669" alt="스크린샷 2023-02-14 오후 2 52 10" src="https://user-images.githubusercontent.com/124762147/218664357-1278e549-68ba-41c8-93b6-e321cef2ffdf.png">
 
 
 ## :notebook_with_decorative_cover: 전체 앱 구성
+- 메인화면
+
+<img width="1024" alt="스크린샷 2023-02-14 오후 3 23 42" src="https://user-images.githubusercontent.com/124762147/218664579-1bcfe907-78d5-4f4a-84bc-eb77b2c922c9.png">
+
+
+- 검색화면
+
+<img width="1024" alt="스크린샷 2023-02-14 오후 3 23 53" src="https://user-images.githubusercontent.com/124762147/218664714-ec96fc78-ee58-4040-b657-d1f97a677249.png">
+
+
+- 상세화면 (eBook)
+
+<img width="1025" alt="스크린샷 2023-02-14 오후 3 24 03" src="https://user-images.githubusercontent.com/124762147/218664863-c5896643-f770-4f0e-9920-bc3530d68c17.png">
+
+
+
+- 상세화면 (오디오북)
+
+<img width="1023" alt="스크린샷 2023-02-14 오후 3 24 12" src="https://user-images.githubusercontent.com/124762147/218665000-76c0f13f-c6b0-4ffb-92a5-f9aac06c8f61.png">
+
+
+
+- 기타화면
+
+<img width="1022" alt="스크린샷 2023-02-14 오후 3 24 21" src="https://user-images.githubusercontent.com/124762147/218665073-1ebfe3bb-3bfb-496a-ab64-bfb581207c81.png">
+
+
 
 
 ## :open_file_folder: 사용한 API
