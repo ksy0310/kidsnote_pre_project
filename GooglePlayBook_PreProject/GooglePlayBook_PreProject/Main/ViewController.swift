@@ -1,4 +1,4 @@
-//
+//  메인 뷰 컨트롤러.
 //  ViewController.swift
 //  GooglePlayBook_PreProject
 //
@@ -30,6 +30,7 @@ class ViewController: UIViewController {
     
     // 처음 검색 string
     var baseSearchString = "Harry Potter"
+    
     // 메뉴 탭 데이터
     private let menudata = MenuBarCollectionViewData.menuList
     var isEBook:Bool = true
@@ -54,6 +55,7 @@ class ViewController: UIViewController {
         return collectionView
     }()
     
+    //로딩
     let loading = LoadingIndicator.shared
     
     override func viewDidLoad() {
@@ -70,7 +72,6 @@ class ViewController: UIViewController {
         setupcontainerViewLayout()
         setupeBookCollectionViewLayout()
         
-
     }
 
     // 메인화면 구성 - 상단 네비게이션 바
@@ -103,7 +104,6 @@ class ViewController: UIViewController {
             backButton.widthAnchor.constraint(equalToConstant: 44),
         ])
         
-        
         backButton.setImage(UIImage(named: "left_arrow.png"), for: .normal)
         backButton.imageEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         backButton.backgroundColor = .clear
@@ -121,15 +121,12 @@ class ViewController: UIViewController {
             searchField.trailingAnchor.constraint(equalTo: navigationBarView.trailingAnchor, constant: -10),
         ])
         
-        
         searchField.backgroundColor = .clear
         searchField.attributedPlaceholder = NSAttributedString(
             string: "Play 북에서 검색",
             attributes: [NSAttributedString.Key.foregroundColor: UIColor(named: "mainTextColor")!]
         )
         searchField.clearButtonMode = .whileEditing
-//        searchField.clearButtonCustom()
-
         searchField.textColor = UIColor(named: "mainTextColor")
         
         // 키보드 리턴 키 변경
@@ -151,7 +148,6 @@ class ViewController: UIViewController {
         ])
         
         menuBarView.backgroundColor = .clear
-        
         
         // 메뉴바 하단 라인
         menuBarView.addSubview(lineView)
@@ -187,6 +183,7 @@ class ViewController: UIViewController {
     
     // 메인화면 구성 - 하단 컨테이너 뷰
     private func setupcontainerViewLayout() {
+        
         view.addSubview(containerView)
         containerView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -202,12 +199,9 @@ class ViewController: UIViewController {
     
     // action - back Button
     @objc func backButtonAction(sender: UIButton!) {
-        // 이전 페이지가 없다.
-        // 알럿 띄우기
+        // 이전 페이지가 없다 - 알럿
         let alert = UIAlertController(title: "알림", message: "이전 페이지가 없습니다.", preferredStyle: UIAlertController.Style.alert)
-        let okAction = UIAlertAction(title: "확인", style: .default) { (action) in
-
-        }
+        let okAction = UIAlertAction(title: "확인", style: .default)
         alert.addAction(okAction)
         present(alert, animated: false, completion: nil)
     }
@@ -216,12 +210,14 @@ class ViewController: UIViewController {
     func setNetwork(searchText: String) {
         //로딩
         self.loading.showIndicator()
+        
         var string = ""
         if searchText == "" {
             string = baseSearchString
         }else{
             string = searchText
         }
+        
             if isEBook {
                 // ebook 검색
                 bookIndex = 0
@@ -232,9 +228,9 @@ class ViewController: UIViewController {
                         self.loading.hideIndicator()
                         if let decodedData = data as? ApiResponse {
                             self.bookInfo = decodedData.items
-                            print("!!!bookInfo!!!",decodedData.items)
                             DispatchQueue.main.async {
-                                self.eBookCollectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+                                // collectionview 제일 위로 이동
+                                self.eBookCollectionView.scrollToItem(at: IndexPath(row: -1, section: 0), at: .top, animated: true)
                                 self.eBookCollectionView.reloadData()
                             }
                             return
@@ -253,9 +249,9 @@ class ViewController: UIViewController {
                         self.loading.hideIndicator()
                         if let decodedData = data as? YouTubeApiResponse {
                             self.videoInfo = decodedData.items
-                            print("!!!videoInfo!!!",decodedData.items)
                             DispatchQueue.main.async {
-                                self.eBookCollectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+                                // collectionview 제일 위로 이동
+                                self.eBookCollectionView.scrollToItem(at: IndexPath(row: -1, section: 0), at: .top, animated: true)
                                 self.eBookCollectionView.reloadData()
                             }
                             return
@@ -267,6 +263,7 @@ class ViewController: UIViewController {
         }
     }
     
+    // eBook 데이터 더 불러오기 - 20개
     func loadMoreBookData(index:Int) {
         let searchText = searchField.text
         var string = ""
@@ -292,6 +289,7 @@ class ViewController: UIViewController {
             }
         }
     
+    // video 데이터 더 불러오기 - 20개
     func loadMoreVideoData(index:Int) {
         let searchText = searchField.text
         var string = ""
@@ -411,8 +409,11 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
             let cell = eBookCollectionView.dequeueReusableCell(withReuseIdentifier: EBookCollectionViewCell.id, for: indexPath) as! EBookCollectionViewCell
             
             if isEBook {
-                cell.eBookTitleLabel.text = self.bookInfo[indexPath.row].volumeInfo.title
+                //eBook 데이터
                 
+                // 책제목
+                cell.eBookTitleLabel.text = self.bookInfo[indexPath.row].volumeInfo.title
+                // 작가
                 let authors = self.bookInfo[indexPath.row].volumeInfo.authors ?? ["..."]
                 var author = ""
                 
@@ -421,7 +422,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
                 }
                 cell.eBookAuthorsLabel.text = author
                 
-                
+                // 책 이미지
                 let thumbnailImg = self.bookInfo[indexPath.row].volumeInfo.imageLinks?.thumbnail
                 let smallImg = self.bookInfo[indexPath.row].volumeInfo.imageLinks?.smallThumbnail
                 if thumbnailImg != nil {
@@ -437,19 +438,29 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
                     }
                 }
                 
+                // 분류
                 cell.eBookKindLabel.text = "eBook"
                 
+                // 평점 및 리뷰
                 let averageRating = self.bookInfo[indexPath.row].volumeInfo.averageRating ?? nil
                 if averageRating != nil {
                     cell.eBookAverageRatingLabel.text = String(averageRating!) + "★"
                 }else{
                     cell.eBookAverageRatingLabel.text = " "
                 }
+                
             } else {
+                //video 데이터
+                
+                // 비디오 제목
                 cell.eBookTitleLabel.text = self.videoInfo[indexPath.row].snippet.title
+                // 비디오 채널명
                 cell.eBookAuthorsLabel.text = self.videoInfo[indexPath.row].snippet.channelTitle
+                // 분류
                 cell.eBookKindLabel.text = "youTube"
+                // 평점 및 리뷰 없음.
                 cell.eBookAverageRatingLabel.text = " "
+                // 비디오 썸네일 이미지
                 let thumbnailImg = self.videoInfo[indexPath.row].snippet.thumbnails?.medium?.url
                 let highImg = self.videoInfo[indexPath.row].snippet.thumbnails?.high?.url
                 cell.eBookThumbnailImageView.contentMode = .scaleAspectFill
@@ -517,34 +528,32 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
         
         if (collectionView == menuBarCollectionView){
             if indexPath.row == 0 {
-                // eBook 위치로 이동, 사이즈 줄이기
+                // 메뉴바 하단 view - eBook 위치로 이동, 사이즈 줄이기
                 isEBook = true
-                
                 UIView.animate(withDuration: 0.5, animations: {
                     self.selectBarView.transform = CGAffineTransform.init(translationX: 0, y: 0).concatenating(CGAffineTransform.init(scaleX: 1, y: 1))
                 })
-
                 setNetwork(searchText: searchText ?? "")
                 
             } else {
-                // 오디오북 위치로 이동, 사이즈 늘리기
+                // 메뉴바 하단 view -오디오북 위치로 이동, 사이즈 늘리기
                 isEBook = false
-                
                 UIView.animate(withDuration: 0.5, animations: {
                     self.selectBarView.transform = CGAffineTransform.init(translationX: 125, y: 0).concatenating(CGAffineTransform.init(scaleX: 1.5, y: 1))
                 })
-
                 setNetwork(searchText: searchText ?? "")
             }
             
         } else {
             if isEBook {
+                // eBook 상세화면으로 이동
                 let detailViewController: DetailViewController = DetailViewController()
                 detailViewController.modalPresentationStyle = UIModalPresentationStyle.fullScreen
                 detailViewController.isEBook = true
                 detailViewController.ebookInfo = self.bookInfo[indexPath.row]
                 self.presentDetail(detailViewController)
             } else {
+                // video 상세화면으로 이동
                 let detailViewController: DetailViewController = DetailViewController()
                 detailViewController.modalPresentationStyle = UIModalPresentationStyle.fullScreen
                 detailViewController.isEBook = false
@@ -557,18 +566,17 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
 
     }
     
+    // 마지막 cell일경우 데이터 더 불러오기
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if (collectionView == menuBarCollectionView) {
-            
+            //
         }else{
             if indexPath.row == collectionView.numberOfItems(inSection: indexPath.section) - 1 {
                 if isEBook {
                     bookIndex += 1
-                    print("!!bookIndex",bookIndex)
                     loadMoreBookData(index: bookIndex)
                 } else {
                     videoIndex += 1
-                    print("!!videoIndex",videoIndex)
                     loadMoreVideoData(index: videoIndex)
                 }
             }
@@ -579,26 +587,22 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
 // textField -> 검색
 extension ViewController: UITextFieldDelegate {
     
-    
     func configuereSearch() {
         searchField.delegate = self
     }
-    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        // 검색
+        textField.resignFirstResponder()
         
-    textField.resignFirstResponder()
-        
-    if textField.text != nil {
-        setNetwork(searchText: textField.text!)
-    }else{
-        let alert = UIAlertController(title: "알림", message: "검색어를 입력하세요.", preferredStyle: UIAlertController.Style.alert)
-        let okAction = UIAlertAction(title: "확인", style: .default) { (action) in
-
+        if textField.text != nil {
+            setNetwork(searchText: textField.text!)
+        }else{
+            // 검색어가 없을때 알럿
+            let alert = UIAlertController(title: "알림", message: "검색어를 입력하세요.", preferredStyle: UIAlertController.Style.alert)
+            let okAction = UIAlertAction(title: "확인", style: .default)
+            alert.addAction(okAction)
+            present(alert, animated: false, completion: nil)
         }
-        alert.addAction(okAction)
-        present(alert, animated: false, completion: nil)
-    }
-        
-    return true
+        return true
     }
 }

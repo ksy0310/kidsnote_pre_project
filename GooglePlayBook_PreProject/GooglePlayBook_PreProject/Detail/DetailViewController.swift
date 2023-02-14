@@ -890,8 +890,7 @@ class DetailViewController: UIViewController {
             }
 
         }
-        let okAction = UIAlertAction(title: "확인", style: .default) { (action) in
-        }
+        let okAction = UIAlertAction(title: "확인", style: .default)
 
         actionsheetController.addAction(detailAction)
         actionsheetController.addAction(okAction)
