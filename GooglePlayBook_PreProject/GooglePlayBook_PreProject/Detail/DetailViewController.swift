@@ -1095,99 +1095,98 @@ class DetailViewController: UIViewController {
     private func setDataRatingGraphView() {
         let count = ebookInfo.volumeInfo.averageRating ?? 0.0
         
-        if count != nil {
-            switch Int(count) {
-                case 5:
-                    //5점
-                    //별
-                    one_starImageView.image = UIImage(named: "star_blue")
-                    two_starImageView.image = UIImage(named: "star_blue")
-                    three_starImageView.image = UIImage(named: "star_blue")
-                    four_starImageView.image = UIImage(named: "star_blue")
-                    five_starImageView.image = UIImage(named: "star_blue")
-                    //그래프
-                    oneGraphView.backgroundColor = UIColor(named: "pointBlueColor")
-                    twoGraphView.backgroundColor = .darkGray
-                    threeGraphView.backgroundColor = .darkGray
-                    fourGraphView.backgroundColor = .darkGray
-                    fiveGraphView.backgroundColor = .darkGray
+        switch Int(count) {
+            case 5:
+                //5점
+                //별
+                one_starImageView.image = UIImage(named: "star_blue")
+                two_starImageView.image = UIImage(named: "star_blue")
+                three_starImageView.image = UIImage(named: "star_blue")
+                four_starImageView.image = UIImage(named: "star_blue")
+                five_starImageView.image = UIImage(named: "star_blue")
+                //그래프
+                oneGraphView.backgroundColor = UIColor(named: "pointBlueColor")
+                twoGraphView.backgroundColor = .darkGray
+                threeGraphView.backgroundColor = .darkGray
+                fourGraphView.backgroundColor = .darkGray
+                fiveGraphView.backgroundColor = .darkGray
                     
-                case 4:
-                    //4점
-                    //별
-                    one_starImageView.image = UIImage(named: "star_blue")
-                    two_starImageView.image = UIImage(named: "star_blue")
-                    three_starImageView.image = UIImage(named: "star_blue")
-                    four_starImageView.image = UIImage(named: "star_blue")
-                    five_starImageView.image = UIImage(named: "star")
-                    //그래프
-                    oneGraphView.backgroundColor = .darkGray
-                    twoGraphView.backgroundColor = UIColor(named: "pointBlueColor")
-                    threeGraphView.backgroundColor = .darkGray
-                    fourGraphView.backgroundColor = .darkGray
-                    fiveGraphView.backgroundColor = .darkGray
+            case 4:
+                //4점
+                //별
+                one_starImageView.image = UIImage(named: "star_blue")
+                two_starImageView.image = UIImage(named: "star_blue")
+                three_starImageView.image = UIImage(named: "star_blue")
+                four_starImageView.image = UIImage(named: "star_blue")
+                five_starImageView.image = UIImage(named: "star")
+                //그래프
+                oneGraphView.backgroundColor = .darkGray
+                twoGraphView.backgroundColor = UIColor(named: "pointBlueColor")
+                threeGraphView.backgroundColor = .darkGray
+                fourGraphView.backgroundColor = .darkGray
+                fiveGraphView.backgroundColor = .darkGray
                     
-                case 3:
-                    //3점
-                    //별
-                    one_starImageView.image = UIImage(named: "star_blue")
-                    two_starImageView.image = UIImage(named: "star_blue")
-                    three_starImageView.image = UIImage(named: "star_blue")
-                    four_starImageView.image = UIImage(named: "star")
-                    five_starImageView.image = UIImage(named: "star")
-                    //그래프
-                    oneGraphView.backgroundColor = .darkGray
-                    twoGraphView.backgroundColor = .darkGray
-                    threeGraphView.backgroundColor = UIColor(named: "pointBlueColor")
-                    fourGraphView.backgroundColor = .darkGray
-                    fiveGraphView.backgroundColor = .darkGray
+            case 3:
+                //3점
+                //별
+                one_starImageView.image = UIImage(named: "star_blue")
+                two_starImageView.image = UIImage(named: "star_blue")
+                three_starImageView.image = UIImage(named: "star_blue")
+                four_starImageView.image = UIImage(named: "star")
+                five_starImageView.image = UIImage(named: "star")
+                //그래프
+                oneGraphView.backgroundColor = .darkGray
+                twoGraphView.backgroundColor = .darkGray
+                threeGraphView.backgroundColor = UIColor(named: "pointBlueColor")
+                fourGraphView.backgroundColor = .darkGray
+                fiveGraphView.backgroundColor = .darkGray
                     
-                case 2:
-                    //2점
-                    //별
-                    one_starImageView.image = UIImage(named: "star_blue")
-                    two_starImageView.image = UIImage(named: "star_blue")
-                    three_starImageView.image = UIImage(named: "star")
-                    four_starImageView.image = UIImage(named: "star")
-                    five_starImageView.image = UIImage(named: "star")
-                    //그래프
-                    oneGraphView.backgroundColor = .darkGray
-                    twoGraphView.backgroundColor = .darkGray
-                    threeGraphView.backgroundColor = .darkGray
-                    fourGraphView.backgroundColor = UIColor(named: "pointBlueColor")
-                    fiveGraphView.backgroundColor = .darkGray
+            case 2:
+                //2점
+                //별
+                one_starImageView.image = UIImage(named: "star_blue")
+                two_starImageView.image = UIImage(named: "star_blue")
+                three_starImageView.image = UIImage(named: "star")
+                four_starImageView.image = UIImage(named: "star")
+                five_starImageView.image = UIImage(named: "star")
+                //그래프
+                oneGraphView.backgroundColor = .darkGray
+                twoGraphView.backgroundColor = .darkGray
+                threeGraphView.backgroundColor = .darkGray
+                fourGraphView.backgroundColor = UIColor(named: "pointBlueColor")
+                fiveGraphView.backgroundColor = .darkGray
                     
-                case 1:
-                    //1점
-                    //별
-                    one_starImageView.image = UIImage(named: "star_blue")
-                    two_starImageView.image = UIImage(named: "star")
-                    three_starImageView.image = UIImage(named: "star")
-                    four_starImageView.image = UIImage(named: "star")
-                    five_starImageView.image = UIImage(named: "star")
-                    //그래프
-                    oneGraphView.backgroundColor = .darkGray
-                    twoGraphView.backgroundColor = .darkGray
-                    threeGraphView.backgroundColor = .darkGray
-                    fourGraphView.backgroundColor = .darkGray
-                    fiveGraphView.backgroundColor = UIColor(named: "pointBlueColor")
+            case 1:
+                //1점
+                //별
+                one_starImageView.image = UIImage(named: "star_blue")
+                two_starImageView.image = UIImage(named: "star")
+                three_starImageView.image = UIImage(named: "star")
+                four_starImageView.image = UIImage(named: "star")
+                five_starImageView.image = UIImage(named: "star")
+                //그래프
+                oneGraphView.backgroundColor = .darkGray
+                twoGraphView.backgroundColor = .darkGray
+                threeGraphView.backgroundColor = .darkGray
+                fourGraphView.backgroundColor = .darkGray
+                fiveGraphView.backgroundColor = UIColor(named: "pointBlueColor")
                     
-                default:
-                    //0점,점수없음
-                    //별
-                    one_starImageView.image = UIImage(named: "star")
-                    two_starImageView.image = UIImage(named: "star")
-                    three_starImageView.image = UIImage(named: "star")
-                    four_starImageView.image = UIImage(named: "star")
-                    five_starImageView.image = UIImage(named: "star")
-                    //그래프
-                    oneGraphView.backgroundColor = .darkGray
-                    twoGraphView.backgroundColor = .darkGray
-                    threeGraphView.backgroundColor = .darkGray
-                    fourGraphView.backgroundColor = .darkGray
-                    fiveGraphView.backgroundColor = .darkGray
-            }
+            default:
+                //0점,점수없음
+                //별
+                one_starImageView.image = UIImage(named: "star")
+                two_starImageView.image = UIImage(named: "star")
+                three_starImageView.image = UIImage(named: "star")
+                four_starImageView.image = UIImage(named: "star")
+                five_starImageView.image = UIImage(named: "star")
+                //그래프
+                oneGraphView.backgroundColor = .darkGray
+                twoGraphView.backgroundColor = .darkGray
+                threeGraphView.backgroundColor = .darkGray
+                fourGraphView.backgroundColor = .darkGray
+                fiveGraphView.backgroundColor = .darkGray
         }
+        
     }
     
     // action - back Button
@@ -1198,7 +1197,7 @@ class DetailViewController: UIViewController {
     // action - share Button
     @objc func shareButtonAction(sender: UIButton!) {
         if isEBook {
-            let bookLink: String = ebookInfo.volumeInfo.infoLink!
+            let bookLink: String = ebookInfo.volumeInfo.infoLink ?? " "
             var shareObject = [Any]()
 
             shareObject.append(bookLink)

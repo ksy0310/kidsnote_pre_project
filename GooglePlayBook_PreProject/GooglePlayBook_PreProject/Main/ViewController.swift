@@ -54,9 +54,11 @@ class ViewController: UIViewController {
         return collectionView
     }()
     
+    let loading = LoadingIndicator.shared
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        checkDeviceNetworkStatus()
         setNetwork(searchText: baseSearchString)
         
         setupNavigationBarLayout()
@@ -68,6 +70,7 @@ class ViewController: UIViewController {
         setupcontainerViewLayout()
         setupeBookCollectionViewLayout()
         
+
     }
 
     // 메인화면 구성 - 상단 네비게이션 바
@@ -211,6 +214,8 @@ class ViewController: UIViewController {
     
     // 통신 - get BookInfo
     func setNetwork(searchText: String) {
+        //로딩
+        self.loading.showIndicator()
         var string = ""
         if searchText == "" {
             string = baseSearchString
@@ -224,6 +229,7 @@ class ViewController: UIViewController {
                 EBookNetworkManager.shared.getEBookData(searchText: string, index: 0) { (response) in
                     switch response {
                     case .success(let data):
+                        self.loading.hideIndicator()
                         if let decodedData = data as? ApiResponse {
                             self.bookInfo = decodedData.items
                             print("!!!bookInfo!!!",decodedData.items)
@@ -244,6 +250,7 @@ class ViewController: UIViewController {
                 YouTubeNetworkManager.shared.getVideoData(searchText: string,index: 0) { (response) in
                     switch response {
                     case .success(let data):
+                        self.loading.hideIndicator()
                         if let decodedData = data as? YouTubeApiResponse {
                             self.videoInfo = decodedData.items
                             print("!!!videoInfo!!!",decodedData.items)
@@ -307,6 +314,18 @@ class ViewController: UIViewController {
                 case .failure(let data):
                     print("Network fail", data)
             }
+        }
+    }
+    
+    // 네트워크 연결 상태 확인
+    func checkDeviceNetworkStatus() {
+        if !(DeviceManager.shared.networkStatus) {
+            let alert: UIAlertController = UIAlertController(title: "네트워크 상태 확인", message: "네트워크가 불안정 합니다.", preferredStyle: .alert)
+            let action: UIAlertAction = UIAlertAction(title: "다시 시도", style: .default, handler: { (action) in
+                self.checkDeviceNetworkStatus()
+            })
+            alert.addAction(action)
+            present(alert,animated: true, completion: nil)
         }
     }
     
